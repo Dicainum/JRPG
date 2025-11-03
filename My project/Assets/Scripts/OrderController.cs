@@ -1,0 +1,236 @@
+using System.Collections.Generic;
+using UnityEngine;
+
+[System.Serializable]
+public class TurnUnit
+{
+    public CharacterStats stats;
+    public bool IsAlive => stats != null && stats.isAlive;
+}
+
+public class OrderController : MonoBehaviour
+{
+    private readonly List<TurnUnit> units = new();
+    public readonly Queue<TurnUnit> turnQueue = new();
+    private readonly Dictionary<TurnUnit, float> timeToAct = new();
+
+    private TurnUnit currentUnit;
+    private bool isProcessingTurn;
+
+    public System.Action<TurnUnit> OnTurnStarted;
+    public System.Action<TurnUnit> OnTurnEnded;
+    public System.Action<List<TurnUnit>> OnOrderUpdated;
+    [SerializeField] private ShowOrder showOrder;
+
+    [Header("Settings")]
+    [SerializeField] private int previewLength = 10;
+    [SerializeField] private float turnThreshold = 100f;
+
+    private void Start()
+    {
+        CacheAllUnits();
+        InitializeTimeToAct();
+        RecalculateTurnOrder();
+        StartNextTurn();
+    }
+
+    public void CacheAllUnits()
+    {
+        units.Clear();
+
+        var allObjects = new List<GameObject>();
+        allObjects.AddRange(GameObject.FindGameObjectsWithTag("Character"));
+        allObjects.AddRange(GameObject.FindGameObjectsWithTag("Enemy"));
+
+        foreach (var obj in allObjects)
+        {
+            if (obj.TryGetComponent<CharacterStats>(out var stats))
+                units.Add(new TurnUnit { stats = stats });
+        }
+
+        OnOrderUpdated?.Invoke(GetTurnOrderPreview());
+    }
+
+    private void InitializeTimeToAct()
+    {
+        timeToAct.Clear();
+        const float MIN_SPEED = 0.0001f;
+
+        foreach (var u in units)
+        {
+            if (!u.IsAlive) continue;
+            float sp = Mathf.Max(u.stats.speed, MIN_SPEED);
+            timeToAct[u] = turnThreshold / sp;
+        }
+    }
+    
+    private void RecalculateTurnOrder()
+    {
+        const float MIN_SPEED = 0.0001f;
+
+        var toRemove = new List<TurnUnit>();
+        foreach (var kv in timeToAct)
+        {
+            if (!kv.Key.IsAlive)
+                toRemove.Add(kv.Key);
+        }
+        foreach (var d in toRemove)
+            timeToAct.Remove(d);
+
+        foreach (var u in units)
+        {
+            if (!u.IsAlive) continue;
+            if (!timeToAct.ContainsKey(u))
+            {
+                float sp = Mathf.Max(u.stats.speed, MIN_SPEED);
+                // если юнит новый — ставим его "в очередь" как будто он должен ждать полный интервал
+                timeToAct[u] = turnThreshold / sp;
+            }
+        }
+
+        var simTime = new Dictionary<TurnUnit, float>(timeToAct);
+
+        turnQueue.Clear();
+
+        for (int i = 0; i < previewLength; i++)
+        {
+            TurnUnit next = null;
+            float bestTime = float.MaxValue;
+
+            foreach (var kv in simTime)
+            {
+                var u = kv.Key;
+                var t = kv.Value;
+
+                if (!u.IsAlive) continue;
+
+                if (t < bestTime)
+                {
+                    bestTime = t;
+                    next = u;
+                }
+                else if (Mathf.Approximately(t, bestTime))
+                {
+                    if (next == null || u.stats.speed > next.stats.speed)
+                        next = u;
+                }
+            }
+
+            if (next == null)
+                break;
+
+            turnQueue.Enqueue(next);
+
+            float spNext = Mathf.Max(next.stats.speed, MIN_SPEED);
+            simTime[next] += turnThreshold / spNext;
+        }
+
+        Debug.Log("<color=cyan>===== Новый прогноз очереди =====</color>");
+        int idx = 1;
+        foreach (var u in turnQueue)
+        {
+            Debug.Log($"{idx++}. {u.stats.characterName} (Speed: {u.stats.speed})");
+        }
+        Debug.Log("<color=cyan>==============================</color>");
+
+        OnOrderUpdated?.Invoke(GetTurnOrderPreview());
+    }
+
+    private void StartNextTurn()
+    {
+        if (turnQueue.Count == 0)
+        {
+            RecalculateTurnOrder();
+        }
+
+        if (turnQueue.Count == 0)
+        {
+            Debug.LogWarning("Нет активных юнитов для хода!");
+            return;
+        }
+
+        currentUnit = turnQueue.Dequeue();
+
+        if (!currentUnit.IsAlive)
+        {
+            StartNextTurn();
+            return;
+        }
+
+        isProcessingTurn = true;
+
+        Debug.Log($"<color=yellow>Сейчас ходит:</color> {currentUnit.stats.characterName}");
+        OnTurnStarted?.Invoke(currentUnit);
+
+        if (turnQueue.Count > 0)
+        {
+            string nextNames = "";
+            foreach (var u in turnQueue)
+                nextNames += $"{u.stats.characterName} > ";
+            nextNames = nextNames.TrimEnd(' ', '>');
+            Debug.Log($"<color=red>Следующие:</color> {nextNames}");
+        }
+        else
+        {
+            Debug.Log("<color=red>Очередь пуста — пересчет после завершения хода</color>");
+        }
+    }
+
+    public void NextTurn()
+    {
+        if (currentUnit == null)
+            return;
+
+        OnTurnEnded?.Invoke(currentUnit);
+        isProcessingTurn = false;
+
+        Debug.Log($"<color=green>Ход завершен:</color> {currentUnit.stats.characterName}");
+
+
+        const float MIN_SPEED = 0.0001f;
+        if (currentUnit.IsAlive)
+        {
+            if (!timeToAct.ContainsKey(currentUnit))
+            {
+                timeToAct[currentUnit] = turnThreshold / Mathf.Max(currentUnit.stats.speed, MIN_SPEED);
+            }
+            else
+            {
+                float sp = Mathf.Max(currentUnit.stats.speed, MIN_SPEED);
+                timeToAct[currentUnit] += turnThreshold / sp;
+            }
+        }
+        else
+        {
+            // если умер — удаляем
+            if (timeToAct.ContainsKey(currentUnit))
+                timeToAct.Remove(currentUnit);
+        }
+
+        RecalculateTurnOrder();
+
+        StartNextTurn();
+    }
+
+    public List<TurnUnit> GetTurnOrderPreview()
+    {
+        return new List<TurnUnit>(turnQueue);
+    }
+
+    /// Принудительно обновляет очередь (например, при изменении speed у кого-то).
+    public void ForceRecalculateAndRefresh()
+    {
+        const float MIN_SPEED = 0.0001f;
+        var toAdd = new List<TurnUnit>();
+        foreach (var u in units)
+        {
+            if (!u.IsAlive) continue;
+            if (!timeToAct.ContainsKey(u))
+                toAdd.Add(u);
+        }
+        foreach (var u in toAdd)
+            timeToAct[u] = turnThreshold / Mathf.Max(u.stats.speed, MIN_SPEED);
+
+        RecalculateTurnOrder();
+    }
+}
