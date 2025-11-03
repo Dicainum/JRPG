@@ -18,5 +18,7 @@ MonoBehaviour:
   maxHealth: 100
   baseSpeed: 100
   baseDamage: 10
-  characterName: 
+  characterName: Player
   characterIcon: {fileID: -722868662, guid: 1b1cf99d4f0c4bc48bfa6cc26e78bae8, type: 3}
+  isEnemy: 0
+  index: 0

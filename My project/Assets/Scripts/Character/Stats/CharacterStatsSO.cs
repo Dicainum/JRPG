@@ -11,5 +11,6 @@ public class CharacterStatsSO : ScriptableObject
     public int baseDamage = -1;
     public string characterName = "";
     public Sprite characterIcon;
-
+    public bool isEnemy = false;
+    public int index = 0;
 }

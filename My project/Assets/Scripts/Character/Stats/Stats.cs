@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class Stats : MonoBehaviour
@@ -12,6 +13,8 @@ public class Stats : MonoBehaviour
     public bool isStunned = false;
     public string characterName = "";
     public Sprite characterIcon;
+    public bool isEnemy = false;
+    public int index = 0;
 
     protected virtual void OnAwake()
     {

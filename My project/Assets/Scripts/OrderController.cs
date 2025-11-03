@@ -14,7 +14,7 @@ public class OrderController : MonoBehaviour
     public readonly Queue<TurnUnit> turnQueue = new();
     private readonly Dictionary<TurnUnit, float> timeToAct = new();
 
-    private TurnUnit currentUnit;
+    public TurnUnit currentUnit;
     private bool isProcessingTurn;
 
     public System.Action<TurnUnit> OnTurnStarted;

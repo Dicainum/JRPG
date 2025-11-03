@@ -20,3 +20,5 @@ MonoBehaviour:
   baseDamage: 10
   characterName: Player2
   characterIcon: {fileID: -1823214581, guid: be23c9953067e57459262ab21db968c4, type: 3}
+  isEnemy: 0
+  index: 1
