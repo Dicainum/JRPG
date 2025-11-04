@@ -6,6 +6,8 @@ public class TurnUnit
 {
     public CharacterStats stats;
     public bool IsAlive => stats != null && stats.isAlive;
+
+    public GameObject gObject;
 }
 
 public class OrderController : MonoBehaviour
@@ -45,7 +47,8 @@ public class OrderController : MonoBehaviour
         foreach (var obj in allObjects)
         {
             if (obj.TryGetComponent<CharacterStats>(out var stats))
-                units.Add(new TurnUnit { stats = stats });
+                units.Add(new TurnUnit { stats = stats, gObject = obj });
+            
         }
 
         OnOrderUpdated?.Invoke(GetTurnOrderPreview());
