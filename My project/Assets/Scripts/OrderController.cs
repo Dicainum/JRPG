@@ -12,6 +12,7 @@ public class TurnUnit
 
 public class OrderController : MonoBehaviour
 {
+    public static OrderController Order { get; private set; }
     private readonly List<TurnUnit> units = new();
     public readonly Queue<TurnUnit> turnQueue = new();
     private readonly Dictionary<TurnUnit, float> timeToAct = new();
@@ -28,6 +29,18 @@ public class OrderController : MonoBehaviour
     [SerializeField] private int previewLength = 10;
     [SerializeField] private float turnThreshold = 100f;
 
+    private void Awake()
+    {
+        // Assign this instance as the singleton
+        if (Order != null && Order != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Order = this;
+        }
+    }
     private void Start()
     {
         CacheAllUnits();

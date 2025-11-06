@@ -3,7 +3,7 @@ using UnityEngine;
 public class CharacterStats : Stats
 {
     [SerializeField] private CharacterStatsSO _stats;
-
+    
     protected override void OnAwake()
     {
         base.OnAwake();

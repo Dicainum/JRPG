@@ -15,6 +15,7 @@ public class Stats : MonoBehaviour
     public Sprite characterIcon;
     public bool isEnemy = false;
     public int index = 0;
+    public BattleAttack baseAttack;
 
     protected virtual void OnAwake()
     {
