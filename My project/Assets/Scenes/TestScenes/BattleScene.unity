@@ -5221,6 +5221,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   orderController: {fileID: 841006431}
   moveInput: {fileID: -7453625389703101634, guid: 63ce64dd5917e7443a020099b03b2b12, type: 3}
+  confirmInput: {fileID: -7909633419024738582, guid: 63ce64dd5917e7443a020099b03b2b12, type: 3}
   cam: {fileID: 2083785875}
   aim: {fileID: 127785150}
 --- !u!1 &910658468
