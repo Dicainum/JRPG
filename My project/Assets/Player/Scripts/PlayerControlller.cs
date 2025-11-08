@@ -1,13 +1,10 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-
-public class PlayerControlller : MonoBehaviour
+public class PlayerControlller : MonoBehaviour, ICharacter
 {
-    [SerializeField] private InputActionReference moveAction;
     [SerializeField] private PlayerSettings playerSettings;
-
-    CharacterController controller;
-    Transform cam;
+    private CharacterController controller;
+    private Transform cam;
 
     void Awake()
     {
@@ -15,9 +12,8 @@ public class PlayerControlller : MonoBehaviour
         cam = Camera.main.transform;
     }
 
-    void Update()
+    public void HandleMove(Vector2 input)
     {
-        Vector2 input = moveAction.action.ReadValue<Vector2>();
         Vector3 moveDir = new Vector3(input.x, 0, input.y);
 
         if (moveDir.sqrMagnitude > 0.001f)
@@ -34,5 +30,12 @@ public class PlayerControlller : MonoBehaviour
             Quaternion targetRot = Quaternion.LookRotation(move);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, playerSettings.rotationSpeed * Time.deltaTime);
         }
+    }
+
+    public void HandleAttack()
+    {
+        var attack = GetComponent<PlayerAttack>();
+        if (attack != null)
+            attack.HandleAttack();
     }
 }

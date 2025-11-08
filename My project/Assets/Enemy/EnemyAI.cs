@@ -1,0 +1,155 @@
+using UnityEngine;
+using UnityEngine.AI;
+
+public class EnemyAI : MonoBehaviour
+{
+    [SerializeField] private EnemyStats enemyStats;
+    [SerializeField] private NavMeshAgent agent;
+    [SerializeField] private Transform target;
+    [SerializeField] private LayerMask Ground, Player;
+
+    [Header("Patroling")]
+    [SerializeField] private Vector3 walkPoint;
+    private bool walkPointSet;
+    [SerializeField] private float walkPointRange;
+
+    [Header("Attacking")]
+    [SerializeField] private float timeBetweenAttacks;
+    private bool alreadyAttacked;
+
+    [Header("Ranges")]
+    [SerializeField] private float sightRange, attackRange;
+    [SerializeField] private bool playerInSightRange, playerInAttackRange;
+
+    [Header("Chasing")]
+    [SerializeField] private GameObject alertIcon;
+
+    private void Awake()
+    {
+        target = GameObject.Find("Player").transform;
+        agent = GetComponent<NavMeshAgent>();
+    }
+
+    private void Update()
+    {
+        playerInSightRange = Physics.CheckSphere(transform.position, sightRange, Player);
+        playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, Player);
+
+        if (!playerInSightRange && !playerInAttackRange)
+        {
+            Patroling();
+        }
+
+        if (playerInSightRange && !playerInAttackRange)
+        {
+            if (PlayerInFOV())
+                ChaseTarget();
+            else
+                Patroling();
+        }
+
+        if (playerInSightRange && playerInAttackRange)
+        {
+            AttackTarget();
+        }
+    }
+
+    private bool PlayerInFOV()
+    {
+        if (target == null) return false;
+
+        Vector3 origin = transform.position + Vector3.up * enemyStats.eyeHeight + transform.forward * enemyStats.forwardOffset;
+        Vector3 dirToPlayer = (target.position - origin).normalized;
+
+        float angle = Vector3.Angle(transform.forward, dirToPlayer);
+        if (angle > enemyStats.fovAngle / 2f)
+            return false;
+
+        if (Physics.Raycast(origin, dirToPlayer, out RaycastHit hit, sightRange))
+        {
+            Debug.DrawRay(origin, dirToPlayer * sightRange, Color.red);
+            if (hit.transform.root == target.root)
+                return true;
+        }
+
+        return false;
+    }
+
+    private void Patroling()
+    {
+        if (alertIcon) alertIcon.SetActive(false);
+        agent.speed = enemyStats.patrolingSpeed;
+
+        if (!walkPointSet)
+            SearchWalkPoint();
+
+        if (walkPointSet)
+            agent.SetDestination(walkPoint);
+
+        Vector3 flatDistance = new Vector3(
+          transform.position.x - walkPoint.x,
+          0,
+          transform.position.z - walkPoint.z
+        );
+
+        if (flatDistance.magnitude < 1.5f || agent.remainingDistance < 1.5f)
+            walkPointSet = false;
+    }
+
+    private void SearchWalkPoint()
+    {
+        float randomZ = Random.Range(-walkPointRange, walkPointRange);
+        float randomX = Random.Range(-walkPointRange, walkPointRange);
+
+        Vector3 randomPoint = transform.position + new Vector3(randomX, 0, randomZ);
+
+        if (NavMesh.SamplePosition(randomPoint, out NavMeshHit hit, 2f, NavMesh.AllAreas))
+        {
+            walkPoint = hit.position;
+            walkPointSet = true;
+        }
+    }
+
+    private void ChaseTarget()
+    {
+        if (alertIcon) alertIcon.SetActive(true);
+        agent.SetDestination(target.position);
+        agent.speed = enemyStats.chasingSpeed;
+    }
+
+    private void AttackTarget()
+    {
+        agent.SetDestination(transform.position);
+        transform.LookAt(target);
+
+        if (!alreadyAttacked)
+        {
+            alreadyAttacked = true;
+            Invoke(nameof(ResetAttack), timeBetweenAttacks);
+        }
+    }
+
+    private void ResetAttack()
+    {
+        Debug.Log("player attacked");
+        alreadyAttacked = false;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, sightRange);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
+
+        if (target != null && playerInSightRange)
+        {
+            Gizmos.color = Color.blue;
+            Vector3 origin = transform.position + Vector3.up * enemyStats.eyeHeight + transform.forward * enemyStats.forwardOffset;
+            Vector3 leftDir = Quaternion.Euler(0, -enemyStats.fovAngle / 2f, 0) * transform.forward;
+            Vector3 rightDir = Quaternion.Euler(0, enemyStats.fovAngle / 2f, 0) * transform.forward;
+            Gizmos.DrawRay(origin, leftDir * sightRange);
+            Gizmos.DrawRay(origin, rightDir * sightRange);
+        }
+    }
+}
