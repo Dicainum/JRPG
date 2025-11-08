@@ -7,6 +7,7 @@ public class SkillTargetSystem : MonoBehaviour
     public static SkillTargetSystem SkillTarget{ get; private set; }
     [SerializeField] private OrderController orderController;
     [SerializeField] private InputActionReference moveInput;
+    [SerializeField] private InputActionReference confirmInput;
     [SerializeField] private Camera cam;
     [SerializeField] private GameObject aim;
 
@@ -25,12 +26,16 @@ public class SkillTargetSystem : MonoBehaviour
     {
         orderController.OnOrderUpdated += UpdateCharacters;
         moveInput.action.Enable();
+        confirmInput.action.Enable();
+        confirmInput.action.performed += OnConfirmPressed;
     }
 
     private void OnDisable()
     {
         orderController.OnOrderUpdated -= UpdateCharacters;
         moveInput.action.Disable();
+        confirmInput.action.performed -= OnConfirmPressed;
+        confirmInput.action.Disable();
     }
     
     private void Awake()
@@ -73,8 +78,8 @@ public class SkillTargetSystem : MonoBehaviour
 
         if (_target != null)
             cam.transform.LookAt(_target.gObject.transform.position);
-        
-        if (Keyboard.current.spaceKey.wasPressedThisFrame) //TODO: CRITICAL!!!! REMAKE TO INPUT ACTION!!
+
+        if (confirmInput.action.WasPressedThisFrame())
         {
             TargetSelected?.Invoke(_target);
             StopTargeting();
@@ -96,6 +101,13 @@ public class SkillTargetSystem : MonoBehaviour
 
         _enemyTargets.Sort((a, b) => a.stats.index.CompareTo(b.stats.index));
         _allyTargets.Sort((a, b) => a.stats.index.CompareTo(b.stats.index));
+    }
+    private void OnConfirmPressed(InputAction.CallbackContext ctx)
+    {
+        if (!_isTargeting) return;
+
+        TargetSelected?.Invoke(_target);
+        StopTargeting();
     }
 
     public void StartTargeting()
