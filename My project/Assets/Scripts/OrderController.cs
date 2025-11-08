@@ -22,9 +22,10 @@ public class OrderController : MonoBehaviour
     public BattleAttack battleAttack;
     private bool isProcessingTurn;
 
-    public System.Action<TurnUnit> OnTurnStarted;
-    public System.Action<TurnUnit> OnTurnEnded;
-    public System.Action<List<TurnUnit>> OnOrderUpdated;
+    public Action<TurnUnit> OnTurnStarted;
+    public Action<TurnUnit> OnTurnEnded;
+    public Action<TurnUnit> OnActionPerformed;
+    public Action<List<TurnUnit>> OnOrderUpdated;
     [SerializeField] private ShowOrder showOrder;
     [SerializeField] private LoadingUIController _loadingUIController;
 
@@ -270,7 +271,7 @@ public class OrderController : MonoBehaviour
     {
         Debug.Log(unit);
         unit.stats.actions -= 1;
-        Debug.Log("Minus action");
+        OnActionPerformed?.Invoke(unit);
         if (unit.stats.actions >= 1) return;
         Debug.Log(unit.stats.characterName + " ended turn by attack");
         unit.stats.actions = unit.stats.baseActions;

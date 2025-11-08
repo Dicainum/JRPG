@@ -8,6 +8,7 @@ TagManager:
   - Character
   - Enemy
   - BattleManager
+  - MeleeAttackPositions
   layers:
   - Default
   - TransparentFX

@@ -1,4 +1,5 @@
 using System;
+using DG.Tweening;
 using UnityEngine;
 
 public class BaseBattleAttack : BattleAttack
@@ -26,13 +27,19 @@ public class BaseBattleAttack : BattleAttack
     {
         if (!attackApplied)
         {
+            MoveToAttackPosition(target.stats.index);
+            StartAttackAnimation();
             baseAttackTarget = target;
-            CalculateDamage();
-            target.stats.TakeDamage(_damage);
-            Debug.Log("Attack applied by " + gameObject.name + " with " + _damage + " damage");
-            base.ApplyAttack(target);
-            EndBaseAttack();
         }
+    }
+
+    public void ApplyDamage()
+    {
+        CalculateDamage();
+        baseAttackTarget.stats.TakeDamage(_damage);
+        Debug.Log("Attack applied by " + gameObject.name + " with " + _damage + " damage");
+        base.ApplyAttack(baseAttackTarget);
+        EndBaseAttack();
     }
 
     public void EndBaseAttack()
@@ -40,5 +47,11 @@ public class BaseBattleAttack : BattleAttack
         baseAttackTarget = null;
         _skillTargetSystem.StopTargeting();
         attackApplied = true;
+    }
+
+    public void MoveBackToPosition()
+    {
+        transform.DOMove(_currentUnitPosition.position, timeToMoveBack)
+            .SetEase(Ease.Linear);
     }
 }

@@ -10,11 +10,13 @@ public class BattleSkillsCanvasController : MonoBehaviour
     private void OnEnable()
     {
         orderController.OnTurnStarted += ShowCharacterCanvas;
+        orderController.OnActionPerformed += PastActionUIUpdate;
     }
 
     private void OnDisable()
     {
         orderController.OnTurnStarted -= ShowCharacterCanvas;
+        orderController.OnActionPerformed -= PastActionUIUpdate;
     }
     
     private void ShowCharacterCanvas(TurnUnit currentUnit)
@@ -47,6 +49,14 @@ public class BattleSkillsCanvasController : MonoBehaviour
         foreach (var bs in battleSkills)
         {
             bs.SetActive(false);
+        }
+    }
+
+    private void PastActionUIUpdate(TurnUnit unit)
+    {
+        if (unit.stats.actions > 0)
+        {
+            EnableCanvas(unit.stats.index);
         }
     }
     

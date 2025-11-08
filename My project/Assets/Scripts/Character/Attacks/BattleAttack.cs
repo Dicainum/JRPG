@@ -1,23 +1,31 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using DG.Tweening;
 using UnityEngine;
 
 public class BattleAttack : MonoBehaviour
 {
     [SerializeField] protected int damageMultiplier = 1;
+    [SerializeField] protected float timeToMove = 0.5f;
+    [SerializeField] protected float timeToMoveBack = 0.5f;
+    protected Transform[] _targetPositions;
+    protected MeleePositionsReference _targetPositionsParent;
     protected int _damage;
     public TurnUnit baseAttackTarget;
     protected OrderController _orderController;
     public bool attackApplied = true;
     public Action<TurnUnit> Attacked;
     private TurnUnit _currentUnit;
+    private Animator _anim;
+    private CharacterPositions _characterPositions;
+    protected Transform _currentUnitPosition;
     
 
     protected virtual void OnEnable()
     {
         _orderController = FindFirstObjectByType<OrderController>();
-        //_orderController.OnOrderUpdated += FindThisUnit;
     }
     
     private void Awake()
@@ -26,6 +34,27 @@ public class BattleAttack : MonoBehaviour
     }
     protected virtual void OnAwake()
     {
+        CalculateTargetPositions();
+        _anim = gameObject.GetComponent<Animator>();
+        _characterPositions = FindFirstObjectByType<CharacterPositions>();
+        Debug.Log(_characterPositions.charPositions.Count()); 
+    }
+
+    protected virtual void MoveToAttackPosition(int index)
+    {
+        transform.DOMove(_targetPositions[index].position, timeToMove)
+            .SetEase(Ease.Linear);
+    }
+
+    protected virtual void StartAttackAnimation()
+    {
+        _anim.SetTrigger("Attack");
+    }
+
+    private void CalculateTargetPositions()
+    {
+        _targetPositionsParent = FindFirstObjectByType<MeleePositionsReference>();
+        _targetPositions = _targetPositionsParent.MeleePositions;
     }
 
     protected virtual void OnDisable()
@@ -82,6 +111,10 @@ public class BattleAttack : MonoBehaviour
     protected virtual void ApplyAttack(TurnUnit target)
     {
         FindThisUnit(_orderController.units);
+        if (_currentUnitPosition == null)
+        {
+            _currentUnitPosition = _characterPositions.charPositions[_currentUnit.stats.index];
+        }
         Debug.Log(_currentUnit);
         Attacked?.Invoke(_currentUnit);
     }

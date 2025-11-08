@@ -1647,7 +1647,7 @@ MonoBehaviour:
   characterName: Enemy3
   characterIcon: {fileID: 200943876, guid: 36386aab32451ff4a95194b28db10aba, type: 3}
   isEnemy: 1
-  index: 3
+  index: 2
   baseActions: 1
   actions: 0
   baseAttack: {fileID: 0}
@@ -1661,6 +1661,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 322030485}
+  - component: {fileID: 322030486}
   m_Layer: 0
   m_Name: CharactersPositions
   m_TagString: Untagged
@@ -1686,6 +1687,22 @@ Transform:
   - {fileID: 730271957}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &322030486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 322030484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9552f63c61e9eb14eb718582526209b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  charPositions:
+  - {fileID: 923371110}
+  - {fileID: 44704594}
+  - {fileID: 730271957}
 --- !u!1 &325000314
 GameObject:
   m_ObjectHideFlags: 0
@@ -2604,6 +2621,7 @@ GameObject:
   - component: {fileID: 482100431}
   - component: {fileID: 482100435}
   - component: {fileID: 482100436}
+  - component: {fileID: 482100437}
   m_Layer: 0
   m_Name: Player (1)
   m_TagString: Character
@@ -2778,10 +2796,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageMultiplier: 1
+  timeToMove: 1
+  timeToMoveBack: 0.5
   baseAttackTarget:
     stats: {fileID: 0}
     gObject: {fileID: 0}
   attackApplied: 0
+--- !u!95 &482100437
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 482100429}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9493ff79788f5b44c93304218794792e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 1
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &520389215
 GameObject:
   m_ObjectHideFlags: 0
@@ -3082,6 +3124,7 @@ GameObject:
   - component: {fileID: 546199355}
   - component: {fileID: 546199358}
   - component: {fileID: 546199359}
+  - component: {fileID: 546199360}
   m_Layer: 0
   m_Name: Player
   m_TagString: Character
@@ -3194,7 +3237,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
-  speed: 1001
+  speed: 100
   damage: 10
   maxHealth: 0
   baseSpeed: 0
@@ -3222,10 +3265,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageMultiplier: 1
+  timeToMove: 1
+  timeToMoveBack: 0.5
   baseAttackTarget:
     stats: {fileID: 0}
     gObject: {fileID: 0}
   attackApplied: 0
+--- !u!95 &546199360
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 546199352}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9493ff79788f5b44c93304218794792e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 1
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &566212194
 GameObject:
   m_ObjectHideFlags: 0
@@ -3400,6 +3467,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 736911567}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &580579759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3557,6 +3636,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: AssignPlayerIndex, Assembly-CSharp
         m_MethodName: PerformBasicAttack
         m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 49260080}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -6981,7 +7072,7 @@ GameObject:
   - component: {fileID: 1196211389}
   m_Layer: 0
   m_Name: MeleeAttackPositions
-  m_TagString: Untagged
+  m_TagString: MeleeAttackPositions
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7016,6 +7107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a76de9e8f60c6e43ba3e6845752a87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MeleePositions: []
 --- !u!1 &1220421414
 GameObject:
   m_ObjectHideFlags: 0
@@ -7568,6 +7660,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: AssignPlayerIndex, Assembly-CSharp
         m_MethodName: PerformBasicAttack
         m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 346660975}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -8262,7 +8366,7 @@ MonoBehaviour:
   characterName: Enemy2
   characterIcon: {fileID: -1115877963, guid: 0d14b123c64936943975195cf4f1fac6, type: 3}
   isEnemy: 1
-  index: 2
+  index: 1
   baseActions: 1
   actions: 0
   baseAttack: {fileID: 0}
@@ -9163,7 +9267,7 @@ MonoBehaviour:
   characterName: Enemy1
   characterIcon: {fileID: -295365357, guid: 7abfb42bbb417594f9b6351ba820ce7a, type: 3}
   isEnemy: 1
-  index: 1
+  index: 0
   baseActions: 1
   actions: 0
   baseAttack: {fileID: 0}
@@ -10072,6 +10176,7 @@ GameObject:
   - component: {fileID: 1855615286}
   - component: {fileID: 1855615290}
   - component: {fileID: 1855615291}
+  - component: {fileID: 1855615292}
   m_Layer: 0
   m_Name: Player
   m_TagString: Character
@@ -10246,10 +10351,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageMultiplier: 1
+  timeToMove: 1
+  timeToMoveBack: 0.5
   baseAttackTarget:
     stats: {fileID: 0}
     gObject: {fileID: 0}
   attackApplied: 0
+--- !u!95 &1855615292
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1855615284}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9493ff79788f5b44c93304218794792e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 1
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1874893735
 GameObject:
   m_ObjectHideFlags: 0
