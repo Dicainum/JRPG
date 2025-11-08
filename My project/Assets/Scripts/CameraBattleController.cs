@@ -80,4 +80,15 @@ public class CameraBattleController : MonoBehaviour
             .DORotateQuaternion(lookRot, lookAtSpeed)
             .SetEase(Ease.InOutSine);
     }
+
+    public void BattleCameraChangeRotation(Transform rotateTarget)
+    {
+        if (rotateTarget == null) return;
+
+        cam.transform.DOKill();
+
+        cam.transform
+            .DORotateQuaternion(rotateTarget.rotation, lookAtSpeed)
+            .SetEase(Ease.Linear);    
+    }
 }

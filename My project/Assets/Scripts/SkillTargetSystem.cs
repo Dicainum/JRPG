@@ -79,17 +79,14 @@ public class SkillTargetSystem : MonoBehaviour
         _wasRightHeld = rightHeld;
         _wasLeftHeld = leftHeld;
 
-        if (_target != null)
-            cam.transform.LookAt(_target.gObject.transform.position);
-
-        if (confirmInput.action.WasPressedThisFrame())
         if (_target != null && _lastTarget != _target)
         {
             Debug.Log("Moving camera");
             _lastTarget = _target;
             cameraController.BattleCameraLookAtTarget(_target.gObject);
         }
-        
+
+        if (confirmInput.action.WasPressedThisFrame())
         {
             TargetSelected?.Invoke(_target);
             StopTargeting();
@@ -122,14 +119,14 @@ public class SkillTargetSystem : MonoBehaviour
 
     public void StartTargeting()
     {
-        _originalCamTransform = cam.transform; //TODO: make a camera controller to smooth camera transitions
+        _originalCamTransform = cam.transform; 
         _isTargeting = true;
 
         if (_enemyTargets.Count > 0)
         {
             _currentTargetIndex = 0;
             _target = _enemyTargets[_currentTargetIndex];
-            cam.transform.LookAt(_target.gObject.transform.position); //TODO: make a camera controller to smooth camera transitions
+            cameraController.BattleCameraLookAtTarget(_target.gObject);
             aim.SetActive(true);
         }
     }
@@ -142,6 +139,6 @@ public class SkillTargetSystem : MonoBehaviour
 
     public void ReturnCameraRotation()
     {
-        cam.transform.rotation = _originalCamTransform.rotation; //TODO: make a camera controller to smooth camera transitions
+        cameraController.BattleCameraChangeRotation(_originalCamTransform);
     }
 }
