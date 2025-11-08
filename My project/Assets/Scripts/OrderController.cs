@@ -283,6 +283,7 @@ public class OrderController : MonoBehaviour
         battleAttack = unit.gObject.GetComponent<BattleAttack>();
 
         if (battleAttack == null) return;
+        battleAttack.Attacked -= UseAction;
         battleAttack.Attacked += UseAction;
         Debug.Log($"Initialized BattleAttack for {unit.stats.characterName}");
     }
