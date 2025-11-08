@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 
 public class CameraBattleController : MonoBehaviour
@@ -7,6 +8,7 @@ public class CameraBattleController : MonoBehaviour
     [SerializeField] private Transform[] defencePositions;
     [SerializeField] private OrderController orderController;
     [SerializeField] private float timeToMove = 1f;
+    [SerializeField] private float lookAtSpeed = 1f;
 
     private bool isMoving = false;
     private float moveTimer = 0f;
@@ -17,12 +19,12 @@ public class CameraBattleController : MonoBehaviour
 
     private void OnEnable()
     {
-        orderController.OnTurnStarted += ChangeCameraPosition;
+        orderController.OnTurnStarted += ChangeToUnitCameraPos;
     }
 
     private void OnDisable()
     {
-        orderController.OnTurnStarted -= ChangeCameraPosition;
+        orderController.OnTurnStarted -= ChangeToUnitCameraPos;
     }
 
     private void FixedUpdate()
@@ -42,7 +44,7 @@ public class CameraBattleController : MonoBehaviour
         }
     }
 
-    private void ChangeCameraPosition(TurnUnit currentUnit)
+    private void ChangeToUnitCameraPos(TurnUnit currentUnit)
     {
         if (currentUnit.stats.isEnemy)
         {
@@ -64,5 +66,18 @@ public class CameraBattleController : MonoBehaviour
 
         moveTimer = 0f;
         isMoving = true;
+    }
+
+    public void BattleCameraLookAtTarget(GameObject target)
+    {
+        if (target == null) return;
+        cam.transform.DOKill();
+
+        Vector3 dir = target.transform.position - cam.transform.position;
+        Quaternion lookRot = Quaternion.LookRotation(dir);
+
+        cam.transform
+            .DORotateQuaternion(lookRot, lookAtSpeed)
+            .SetEase(Ease.InOutSine);
     }
 }

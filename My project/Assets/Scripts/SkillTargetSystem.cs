@@ -11,12 +11,15 @@ public class SkillTargetSystem : MonoBehaviour
     [SerializeField] private Camera cam;
     [SerializeField] private GameObject aim;
 
+    [SerializeField] private CameraBattleController cameraController;
+    
     private bool _isTargeting = false;
     private Transform _originalCamTransform;
     private List<TurnUnit> _enemyTargets = new();
     private List<TurnUnit> _allyTargets = new();
 
     private TurnUnit _target;
+    private TurnUnit _lastTarget;
     private int _currentTargetIndex = 0;
     private bool _wasLeftHeld = false;
     private bool _wasRightHeld = false;
@@ -80,6 +83,13 @@ public class SkillTargetSystem : MonoBehaviour
             cam.transform.LookAt(_target.gObject.transform.position);
 
         if (confirmInput.action.WasPressedThisFrame())
+        if (_target != null && _lastTarget != _target)
+        {
+            Debug.Log("Moving camera");
+            _lastTarget = _target;
+            cameraController.BattleCameraLookAtTarget(_target.gObject);
+        }
+        
         {
             TargetSelected?.Invoke(_target);
             StopTargeting();

@@ -5207,6 +5207,7 @@ MonoBehaviour:
   - {fileID: 1687864729}
   orderController: {fileID: 841006431}
   timeToMove: 0.2
+  lookAtSpeed: 0.1
 --- !u!114 &841006434
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5224,6 +5225,7 @@ MonoBehaviour:
   confirmInput: {fileID: -7909633419024738582, guid: 63ce64dd5917e7443a020099b03b2b12, type: 3}
   cam: {fileID: 2083785875}
   aim: {fileID: 127785150}
+  cameraController: {fileID: 841006433}
 --- !u!1 &910658468
 GameObject:
   m_ObjectHideFlags: 0
