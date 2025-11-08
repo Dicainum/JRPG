@@ -13,4 +13,6 @@ public class CharacterStatsSO : ScriptableObject
     public Sprite characterIcon;
     public bool isEnemy = false;
     public int index = 0;
+    public int actions = 1;
+    public int baseActions = 1;
 }

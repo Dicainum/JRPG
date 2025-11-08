@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,22 +14,23 @@ public class TurnUnit
 public class OrderController : MonoBehaviour
 {
     public static OrderController Order { get; private set; }
-    private readonly List<TurnUnit> units = new();
+    public readonly List<TurnUnit> units = new();
     public readonly Queue<TurnUnit> turnQueue = new();
     private readonly Dictionary<TurnUnit, float> timeToAct = new();
 
     public TurnUnit currentUnit;
+    public BattleAttack battleAttack;
     private bool isProcessingTurn;
 
     public System.Action<TurnUnit> OnTurnStarted;
     public System.Action<TurnUnit> OnTurnEnded;
     public System.Action<List<TurnUnit>> OnOrderUpdated;
     [SerializeField] private ShowOrder showOrder;
+    [SerializeField] private LoadingUIController _loadingUIController;
 
-    [Header("Settings")]
-    [SerializeField] private int previewLength = 10;
+    [Header("Settings")] [SerializeField] private int previewLength = 10;
     [SerializeField] private float turnThreshold = 100f;
-
+    
     private void Awake()
     {
         // Assign this instance as the singleton
@@ -41,14 +43,23 @@ public class OrderController : MonoBehaviour
             Order = this;
         }
     }
+
+    private void OnDisable()
+    {
+        if (battleAttack != null)
+        {
+            battleAttack.Attacked -= UseAction;
+        }
+    }
+
     private void Start()
     {
         CacheAllUnits();
         InitializeTimeToAct();
         RecalculateTurnOrder();
-        StartNextTurn();
+        _loadingUIController.StartAnimation();
     }
-
+    
     public void CacheAllUnits()
     {
         units.Clear();
@@ -61,7 +72,7 @@ public class OrderController : MonoBehaviour
         {
             if (obj.TryGetComponent<CharacterStats>(out var stats))
                 units.Add(new TurnUnit { stats = stats, gObject = obj });
-            
+
         }
 
         OnOrderUpdated?.Invoke(GetTurnOrderPreview());
@@ -79,7 +90,7 @@ public class OrderController : MonoBehaviour
             timeToAct[u] = turnThreshold / sp;
         }
     }
-    
+
     private void RecalculateTurnOrder()
     {
         const float MIN_SPEED = 0.0001f;
@@ -90,6 +101,7 @@ public class OrderController : MonoBehaviour
             if (!kv.Key.IsAlive)
                 toRemove.Add(kv.Key);
         }
+
         foreach (var d in toRemove)
             timeToAct.Remove(d);
 
@@ -99,7 +111,7 @@ public class OrderController : MonoBehaviour
             if (!timeToAct.ContainsKey(u))
             {
                 float sp = Mathf.Max(u.stats.speed, MIN_SPEED);
-                // если юнит новый — ставим его "в очередь" как будто он должен ждать полный интервал
+                // если юнит новый — ставим его в очередь как будто он должен ждать полный интервал. Нужно для механики реса
                 timeToAct[u] = turnThreshold / sp;
             }
         }
@@ -147,12 +159,14 @@ public class OrderController : MonoBehaviour
         {
             Debug.Log($"{idx++}. {u.stats.characterName} (Speed: {u.stats.speed})");
         }
-        Debug.Log("<color=cyan>==============================</color>");
 
+        Debug.Log("<color=cyan>==============================</color>");
+        currentUnit = turnQueue.Dequeue();
+        
         OnOrderUpdated?.Invoke(GetTurnOrderPreview());
     }
 
-    private void StartNextTurn()
+    public void StartNextTurn()
     {
         if (turnQueue.Count == 0)
         {
@@ -177,6 +191,7 @@ public class OrderController : MonoBehaviour
 
         Debug.Log($"<color=yellow>Сейчас ходит:</color> {currentUnit.stats.characterName}");
         OnTurnStarted?.Invoke(currentUnit);
+        InitializeAllUnitDependencies(currentUnit);
 
         if (turnQueue.Count > 0)
         {
@@ -233,7 +248,7 @@ public class OrderController : MonoBehaviour
         return new List<TurnUnit>(turnQueue);
     }
 
-    /// Принудительно обновляет очередь (например, при изменении speed у кого-то).
+    /// Принудительно обновляет очередь например, при изменении speed у кого-то
     public void ForceRecalculateAndRefresh()
     {
         const float MIN_SPEED = 0.0001f;
@@ -244,9 +259,31 @@ public class OrderController : MonoBehaviour
             if (!timeToAct.ContainsKey(u))
                 toAdd.Add(u);
         }
+
         foreach (var u in toAdd)
             timeToAct[u] = turnThreshold / Mathf.Max(u.stats.speed, MIN_SPEED);
 
         RecalculateTurnOrder();
     }
+
+    public void UseAction(TurnUnit unit)
+    {
+        Debug.Log(unit);
+        unit.stats.actions -= 1;
+        Debug.Log("Minus action");
+        if (unit.stats.actions >= 1) return;
+        Debug.Log(unit.stats.characterName + " ended turn by attack");
+        unit.stats.actions = unit.stats.baseActions;
+        NextTurn();
+    }
+
+    private void InitializeAllUnitDependencies(TurnUnit unit)
+    {
+        battleAttack = unit.gObject.GetComponent<BattleAttack>();
+
+        if (battleAttack == null) return;
+        battleAttack.Attacked += UseAction;
+        Debug.Log($"Initialized BattleAttack for {unit.stats.characterName}");
+    }
+
 }

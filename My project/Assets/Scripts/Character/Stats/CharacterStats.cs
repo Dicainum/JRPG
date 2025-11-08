@@ -16,6 +16,10 @@ public class CharacterStats : Stats
         {
             isEnemy = _stats.isEnemy;
             
+            baseActions = _stats.baseActions;
+            
+            actions = _stats.actions;
+            
             index = _stats.index;
             
             if (_stats.health > 0)

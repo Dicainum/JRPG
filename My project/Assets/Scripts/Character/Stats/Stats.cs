@@ -15,12 +15,15 @@ public class Stats : MonoBehaviour
     public Sprite characterIcon;
     public bool isEnemy = false;
     public int index = 0;
+    public int baseActions = 1;
+    public int actions = 1;
     public BattleAttack baseAttack;
 
     protected virtual void OnAwake()
     {
         RecalculateStats();
         UpdateUI();
+        baseAttack = gameObject.GetComponent<BattleAttack>();
     }
 
     protected virtual void RecalculateStats()
@@ -30,6 +33,10 @@ public class Stats : MonoBehaviour
         baseDamage = damage;
     }
 
+    public virtual void ResetActions()
+    {
+        actions = baseActions;
+    }
     private void Awake()
     {
         OnAwake();
