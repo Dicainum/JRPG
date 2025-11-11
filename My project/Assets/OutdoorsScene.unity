@@ -2133,7 +2133,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!136 &1837317216
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2341,6 +2341,10 @@ MonoBehaviour:
   - {fileID: 864282194}
   - {fileID: 596048690}
   - {fileID: 74450550}
+  characterStats:
+  - {fileID: 11400000, guid: a27d8f73078500e42812411c440b5b1c, type: 2}
+  - {fileID: 11400000, guid: 03b0f1b6590598b48af9648513413f86, type: 2}
+  - {fileID: 11400000, guid: 7390e95d3309ef54787ecd87aa7a9048, type: 2}
   freeLookCamera: {fileID: 1041359734}
 --- !u!114 &1949055639
 MonoBehaviour:
