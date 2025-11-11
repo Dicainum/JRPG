@@ -2133,7 +2133,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!136 &1837317216
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2272,9 +2272,9 @@ MonoBehaviour:
     m_Bits: 64
   walkPoint: {x: 0, y: 0, z: 0}
   walkPointRange: 10
-  timeBetweenAttacks: 0
+  timeBetweenAttacks: 3
   sightRange: 15
-  attackRange: 0.5
+  attackRange: 1
   playerInSightRange: 0
   playerInAttackRange: 0
   alertIcon: {fileID: 2128510267}

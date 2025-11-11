@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -27,8 +28,12 @@ public class EnemyAI : MonoBehaviour
 
     [Header("AttackOptions")]
     private bool isStunned;
+    private bool lostEnemyInAggro = false;
+    private bool rememberEnemy = false;
     private bool isPreparingAttack;
     private float attackPrepareStartTime;
+    private Coroutine aggroTimer;
+    private bool attackCorutineStarted = false;
 
     private void Awake()
     {
@@ -49,9 +54,23 @@ public class EnemyAI : MonoBehaviour
 
         bool inFOV = playerInSightRange && PlayerInFOV();
         if (inFOV)
-            lastTimePlayerSeen = Time.time;
+        {
+            if(aggroTimer != null)
+            {
+                StopCoroutine(aggroTimer);
+            }
+            lostEnemyInAggro = false;
+            rememberEnemy = true;
+        }
+        else
+        {
+            if (!lostEnemyInAggro && rememberEnemy)
+            {
+                aggroTimer = StartCoroutine(AggroMemory());
+            }
+        }
 
-        bool canSeePlayer = inFOV || Time.time - lastTimePlayerSeen < enemyStats.visionMemoryTime;
+            bool canSeePlayer = inFOV || lostEnemyInAggro;
 
         if (!canSeePlayer && !playerInAttackRange)
         {
@@ -66,18 +85,29 @@ public class EnemyAI : MonoBehaviour
 
         if (canSeePlayer && playerInAttackRange)
         {
-            if (!isPreparingAttack && !alreadyAttacked)
+            if (!isPreparingAttack && !alreadyAttacked && !attackCorutineStarted)
             {
+                Debug.Log("Attack delay started");
                 isPreparingAttack = true;
-                attackPrepareStartTime = Time.time;
-            }
-
-            if (isPreparingAttack && Time.time - attackPrepareStartTime >= enemyStats.reactionDelay)
-            {
-                AttackTarget();
-                isPreparingAttack = false;
+                StartCoroutine(AttackDelay());
             }
         }
+    }
+
+    private IEnumerator AggroMemory()
+    {
+        lostEnemyInAggro = true;
+        yield return new WaitForSeconds (enemyStats.visionMemoryTime);
+        lostEnemyInAggro = false;
+        rememberEnemy = false;
+    }
+
+    private IEnumerator AttackDelay()
+    {
+        attackCorutineStarted = true;
+        yield return new WaitForSeconds(enemyStats.reactionDelay);
+        AttackTarget();
+        attackCorutineStarted = false;
     }
 
     private bool PlayerInFOV()
@@ -145,6 +175,7 @@ public class EnemyAI : MonoBehaviour
 
     private void AttackTarget()
     {
+        Debug.Log("Attacked");
         agent.SetDestination(transform.position);
         transform.LookAt(target);
 
