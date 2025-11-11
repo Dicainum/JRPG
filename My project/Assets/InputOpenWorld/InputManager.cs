@@ -8,7 +8,6 @@ public class InputManager : MonoBehaviour
 
     [Header("Links")]
     public CharacterSwitcher switcher;
-
     private PlayerInput inputActions;
     private Vector2 moveInput;
 
@@ -24,6 +23,17 @@ public class InputManager : MonoBehaviour
 
         inputActions.Player.Attack.performed += ctx => HandleAttack();
         inputActions.Player.SwitchCharacter.performed += ctx => switcher.SwitchCharacter();
+
+        inputActions.Player.SpeedBoost.performed += ctx =>
+        {
+            if (switcher != null && switcher.ActiveCharacter != null)
+                switcher.ActiveCharacter.SetSpeedBoost(true);
+        };
+        inputActions.Player.SpeedBoost.canceled += ctx =>
+        {
+            if (switcher != null && switcher.ActiveCharacter != null)
+                switcher.ActiveCharacter.SetSpeedBoost(false);
+        };
     }
 
     void OnEnable() => inputActions.Player.Enable();

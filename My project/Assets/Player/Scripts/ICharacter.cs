@@ -4,4 +4,5 @@ public interface ICharacter
 {
     void HandleMove(UnityEngine.Vector2 input);
     void HandleAttack();
+    void SetSpeedBoost(bool active);
 }

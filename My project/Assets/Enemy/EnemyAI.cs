@@ -23,6 +23,12 @@ public class EnemyAI : MonoBehaviour
 
     [Header("Chasing")]
     [SerializeField] private GameObject alertIcon;
+    private float lastTimePlayerSeen;
+
+    [Header("AttackOptions")]
+    private bool isStunned;
+    private bool isPreparingAttack;
+    private float attackPrepareStartTime;
 
     private void Awake()
     {
@@ -32,25 +38,45 @@ public class EnemyAI : MonoBehaviour
 
     private void Update()
     {
+        if (isStunned)
+        {
+            agent.SetDestination(transform.position);
+            return;
+        }
+
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, Player);
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, Player);
 
-        if (!playerInSightRange && !playerInAttackRange)
+        bool inFOV = playerInSightRange && PlayerInFOV();
+        if (inFOV)
+            lastTimePlayerSeen = Time.time;
+
+        bool canSeePlayer = inFOV || Time.time - lastTimePlayerSeen < enemyStats.visionMemoryTime;
+
+        if (!canSeePlayer && !playerInAttackRange)
         {
             Patroling();
         }
 
-        if (playerInSightRange && !playerInAttackRange)
+        if (canSeePlayer && !playerInAttackRange)
         {
-            if (PlayerInFOV())
-                ChaseTarget();
-            else
-                Patroling();
+            ChaseTarget();
+            isPreparingAttack = false;
         }
 
-        if (playerInSightRange && playerInAttackRange)
+        if (canSeePlayer && playerInAttackRange)
         {
-            AttackTarget();
+            if (!isPreparingAttack && !alreadyAttacked)
+            {
+                isPreparingAttack = true;
+                attackPrepareStartTime = Time.time;
+            }
+
+            if (isPreparingAttack && Time.time - attackPrepareStartTime >= enemyStats.reactionDelay)
+            {
+                AttackTarget();
+                isPreparingAttack = false;
+            }
         }
     }
 
@@ -132,6 +158,18 @@ public class EnemyAI : MonoBehaviour
     private void ResetAttack()
     {
         Debug.Log("player attacked");
+        alreadyAttacked = false;
+    }
+    public void OnAttacked()
+    {
+        if (isStunned) return;
+
+        Debug.Log($"{name} stunned by player attack");
+        isStunned = true;
+        agent.isStopped = true;
+
+        if (alertIcon) alertIcon.SetActive(false);
+
         alreadyAttacked = false;
     }
 

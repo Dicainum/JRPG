@@ -2,9 +2,12 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 public class PlayerControlller : MonoBehaviour, ICharacter
 {
+    [Header("Links")]
     [SerializeField] private PlayerSettings playerSettings;
     private CharacterController controller;
     private Transform cam;
+
+    private bool isSpeedBoosted = false;
 
     void Awake()
     {
@@ -25,7 +28,8 @@ public class PlayerControlller : MonoBehaviour, ICharacter
             camRight.Normalize();
 
             Vector3 move = camForward * moveDir.z + camRight * moveDir.x;
-            controller.Move(move * playerSettings.moveSpeed * Time.deltaTime);
+            float currentSpeed = playerSettings.moveSpeed * (isSpeedBoosted ? playerSettings.speedBoostMultiplier : 1f);
+            controller.Move(move * currentSpeed * Time.deltaTime);
 
             Quaternion targetRot = Quaternion.LookRotation(move);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, playerSettings.rotationSpeed * Time.deltaTime);
@@ -37,5 +41,10 @@ public class PlayerControlller : MonoBehaviour, ICharacter
         var attack = GetComponent<PlayerAttack>();
         if (attack != null)
             attack.HandleAttack();
+    }
+
+    public void SetSpeedBoost(bool active)
+    {
+        isSpeedBoosted = active;
     }
 }
