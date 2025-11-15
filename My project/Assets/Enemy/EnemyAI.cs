@@ -13,6 +13,8 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private Vector3 walkPoint;
     private bool walkPointSet;
     [SerializeField] private float walkPointRange;
+    private bool isWaiting = false;
+    private Coroutine waitCoroutine;
 
     [Header("Attacking")]
     [SerializeField] private float timeBetweenAttacks;
@@ -133,6 +135,8 @@ public class EnemyAI : MonoBehaviour
 
     private void Patroling()
     {
+        if (isWaiting) return;
+
         if (alertIcon) alertIcon.SetActive(false);
         agent.speed = enemyStats.patrolingSpeed;
 
@@ -148,8 +152,13 @@ public class EnemyAI : MonoBehaviour
           transform.position.z - walkPoint.z
         );
 
+        // Если достигли точки — начинаем паузу
         if (flatDistance.magnitude < 1.5f || agent.remainingDistance < 1.5f)
+        {
             walkPointSet = false;
+            if (!isWaiting)
+                waitCoroutine = StartCoroutine(PatrolPause());
+        }
     }
 
     private void SearchWalkPoint()
@@ -164,6 +173,16 @@ public class EnemyAI : MonoBehaviour
             walkPoint = hit.position;
             walkPointSet = true;
         }
+    }
+    private IEnumerator PatrolPause()
+    {
+        isWaiting = true;
+        agent.isStopped = true;
+
+        yield return new WaitForSeconds(enemyStats.patrolPauseTime);
+
+        agent.isStopped = false;
+        isWaiting = false;
     }
 
     private void ChaseTarget()

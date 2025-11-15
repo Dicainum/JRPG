@@ -12,5 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7cd2575875d20649882e662c99d2823, type: 3}
   m_Name: EnemyStats
   m_EditorClassIdentifier: 
-  patrolingSpeed: 2
   chasingSpeed: 10
+  eyeHeight: 0.5
+  forwardOffset: 0.5
+  fovAngle: 45
+  visionMemoryTime: 1.5
+  reactionDelay: 0.4
+  patrolingSpeed: 1.5
+  patrolPauseTime: 1.5
