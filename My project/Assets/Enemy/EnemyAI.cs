@@ -10,9 +10,9 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private LayerMask Ground, Player;
 
     [Header("Patroling")]
-    [SerializeField] private Vector3 walkPoint;
-    private bool walkPointSet;
-    [SerializeField] private float walkPointRange;
+    [SerializeField] private Transform[] waypoints;
+    private int currentWaypointIndex = 0;
+    private int patrolDirection = 1;
     private bool isWaiting = false;
     private Coroutine waitCoroutine;
 
@@ -135,54 +135,40 @@ public class EnemyAI : MonoBehaviour
 
     private void Patroling()
     {
+        if (waypoints.Length == 0) return;
         if (isWaiting) return;
 
-        if (alertIcon) alertIcon.SetActive(false);
         agent.speed = enemyStats.patrolingSpeed;
+        Transform targetPoint = waypoints[currentWaypointIndex];
+        agent.SetDestination(targetPoint.position);
 
-        if (!walkPointSet)
-            SearchWalkPoint();
-
-        if (walkPointSet)
-            agent.SetDestination(walkPoint);
-
-        Vector3 flatDistance = new Vector3(
-          transform.position.x - walkPoint.x,
-          0,
-          transform.position.z - walkPoint.z
-        );
-
-        // Если достигли точки — начинаем паузу
-        if (flatDistance.magnitude < 1.5f || agent.remainingDistance < 1.5f)
+        if (!agent.pathPending && agent.remainingDistance < 0.5f)
         {
-            walkPointSet = false;
             if (!isWaiting)
                 waitCoroutine = StartCoroutine(PatrolPause());
         }
     }
 
-    private void SearchWalkPoint()
-    {
-        float randomZ = Random.Range(-walkPointRange, walkPointRange);
-        float randomX = Random.Range(-walkPointRange, walkPointRange);
-
-        Vector3 randomPoint = transform.position + new Vector3(randomX, 0, randomZ);
-
-        if (NavMesh.SamplePosition(randomPoint, out NavMeshHit hit, 2f, NavMesh.AllAreas))
-        {
-            walkPoint = hit.position;
-            walkPointSet = true;
-        }
-    }
     private IEnumerator PatrolPause()
     {
         isWaiting = true;
-        agent.isStopped = true;
 
         yield return new WaitForSeconds(enemyStats.patrolPauseTime);
 
-        agent.isStopped = false;
         isWaiting = false;
+
+        currentWaypointIndex += patrolDirection;
+
+        if (currentWaypointIndex >= waypoints.Length)
+        {
+            patrolDirection = -1;
+            currentWaypointIndex = waypoints.Length - 2;
+        }
+        else if (currentWaypointIndex < 0)
+        {
+            patrolDirection = 1;
+            currentWaypointIndex = 1;
+        }
     }
 
     private void ChaseTarget()
@@ -194,7 +180,7 @@ public class EnemyAI : MonoBehaviour
 
     private void AttackTarget()
     {
-        Debug.Log("Attacked");
+        Debug.Log("Player attacked");
         agent.SetDestination(transform.position);
         transform.LookAt(target);
 
@@ -207,7 +193,6 @@ public class EnemyAI : MonoBehaviour
 
     private void ResetAttack()
     {
-        Debug.Log("player attacked");
         alreadyAttacked = false;
     }
     public void OnAttacked()

@@ -19,4 +19,4 @@ MonoBehaviour:
   visionMemoryTime: 1.5
   reactionDelay: 0.4
   patrolingSpeed: 1.5
-  patrolPauseTime: 1.5
+  patrolPauseTime: 3
