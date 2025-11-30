@@ -6,6 +6,8 @@ public class BattleSkillsCanvasController : MonoBehaviour
     [SerializeField] private GameObject[] battleSkills;
     [SerializeField] private GameObject activatedCanvas;
     [SerializeField] private GameObject[] firstPages;
+    public GameObject[] skillPages;
+    public GameObject[] descriptions;
 
     private void OnEnable()
     {
