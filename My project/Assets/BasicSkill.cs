@@ -22,7 +22,7 @@ public class BasicSkill : MonoBehaviour
     
     [SerializeField] private DamageType _damageType;
     [SerializeField] protected int _cooldownTime = 0; //in turns
-    private int _turnsLeft = 0;
+    protected int _turnsLeft = 0;
     public Action<TurnUnit> skillUsed;
     protected bool _inCooldown = false;
     private OrderController _orderController;
@@ -58,7 +58,7 @@ public class BasicSkill : MonoBehaviour
         OnStart();
     }
 
-    protected virtual void TryCast()
+    public virtual void TryCast()
     {
         if (!_inCooldown)
         {
@@ -93,7 +93,7 @@ public class BasicSkill : MonoBehaviour
         Debug.Log(_currentUnit.gObject);
         Debug.Log(_orderController.currentUnit == _currentUnit);
 
-        if (_turnsLeft > 0 && _inCooldown && _orderController.currentUnit == _currentUnit)
+        if (_turnsLeft <= 0 && _inCooldown && _orderController.currentUnit == _currentUnit)
         {
             _turnsLeft--;
             if(_turnsLeft < 1)

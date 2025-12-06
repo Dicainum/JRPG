@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SkillsUIExporter : MonoBehaviour
 {
@@ -30,6 +31,16 @@ public class SkillsUIExporter : MonoBehaviour
 
             if (tmp != null)
                 tmp.text = skill.skillName;
+
+            Button button = buttonObj.GetComponent<Button>();
+            if (button != null)
+            {
+                button.onClick.AddListener(() => skill.TryCast());
+            }
+            else
+            {
+                Debug.LogWarning($"Button component not found on {buttonObj.name}");
+            }
         }
     }
 }
