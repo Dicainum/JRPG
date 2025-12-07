@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 9066795016446466651}
   - component: {fileID: 4572523343335271385}
   - component: {fileID: 5101925857901274121}
+  - component: {fileID: 1836179861874519162}
   m_Layer: 0
   m_Name: U_SmallStone_A_01
   m_TagString: Untagged
@@ -86,3 +87,24 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &1836179861874519162
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5268940026281267908}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.984237, y: 1.0931228, z: 3.7994418}
+  m_Center: {x: -0.00023782253, y: 0.546954, z: -0.0014156699}

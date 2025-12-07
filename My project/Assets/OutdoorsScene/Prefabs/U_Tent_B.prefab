@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8077704313232604619}
   - component: {fileID: 2078781813442026215}
   - component: {fileID: 2147311214029901499}
+  - component: {fileID: 3975371497209610424}
   m_Layer: 0
   m_Name: U_Tent_B
   m_TagString: Untagged
@@ -86,3 +87,24 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &3975371497209610424
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5590636324108320520}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3.1190848, y: 4.2554793, z: 6.4244494}
+  m_Center: {x: 0.07454234, y: -0.9747453, z: -0.2931857}
