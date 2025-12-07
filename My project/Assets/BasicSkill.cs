@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 public class BasicSkill : MonoBehaviour
 {
-    private TurnUnit _currentUnit;
+    protected TurnUnit _currentUnit;
+    protected SkillTargetSystem _skillTargetSystem;
+    protected OrderController _myOrderController;
     public string skillName;
     public string skillDescription;
     [SerializeField] protected int _damage = 1;
@@ -30,7 +32,8 @@ public class BasicSkill : MonoBehaviour
 
     protected virtual void OnAwake()
     {
-        
+        _skillTargetSystem = FindFirstObjectByType<SkillTargetSystem>();
+        _myOrderController = FindFirstObjectByType<OrderController>();
     }
     protected virtual void OnEnable()
     { 
@@ -43,7 +46,7 @@ public class BasicSkill : MonoBehaviour
 
     private void Awake()
     {
-        _orderController = FindFirstObjectByType<OrderController>();
+        //_orderController = FindFirstObjectByType<OrderController>();
         OnAwake();
     }
 
@@ -72,6 +75,19 @@ public class BasicSkill : MonoBehaviour
         
     }
 
+    protected void UseAction()
+    {
+        _currentUnit.stats.actions -= 1;
+        OrderController orderController = OrderController.Order ?? _myOrderController;
+        orderController?.OnActionPerformed?.Invoke(_currentUnit);
+
+        if (_currentUnit.stats.actions <= 0)
+        {
+            _currentUnit.stats.actions = _currentUnit.stats.baseActions;
+            orderController?.NextTurn();
+        }
+    }
+
     private void StartCooldown()
     {
         _inCooldown = true;
@@ -83,7 +99,7 @@ public class BasicSkill : MonoBehaviour
         
         if (_currentUnit == null || _currentUnit.gObject == null)
         {
-            FindThisUnit(_orderController.units);
+            _currentUnit = GetCurrentUnit();
             Debug.Log("Findinig Unit");
         }
         
@@ -104,24 +120,27 @@ public class BasicSkill : MonoBehaviour
         }
 
     }
-    
-    protected virtual void FindThisUnit(List<TurnUnit> units)
-    {
-        Debug.Log(units.Count + " units count");
 
-        if (_orderController != null && units.Count > 0)
+    protected virtual TurnUnit GetCurrentUnit()
+    {
+        if (_currentUnit != null && _currentUnit.gObject == gameObject)
+            return _currentUnit;
+
+        OrderController orderController = OrderController.Order;
+        if (orderController == null)
         {
-            foreach (var u in units)
-            {
-                Debug.Log($"Unit: {u.stats.name}, GameObject: {u.gObject.name}");
-            }
-            _currentUnit = units.Find(u => u.gObject == gameObject);
-            Debug.Log(_currentUnit);
-            Debug.Log(_currentUnit.stats.name + " is currently attacking");
+            orderController = FindFirstObjectByType<OrderController>();
+            if (orderController == null)
+                return null;
         }
-        else
+
+        if (orderController.currentUnit != null && orderController.currentUnit.gObject == gameObject)
         {
-            Debug.LogError("Cant find order controller");
+            _currentUnit = orderController.currentUnit;
+            return _currentUnit;
         }
+
+        _currentUnit = orderController.units.Find(u => u.gObject == gameObject);
+        return _currentUnit;
     }
 }

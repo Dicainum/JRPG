@@ -4,12 +4,10 @@ using UnityEngine;
 public class WindSliceSkill : BasicSkill
 {
     private const int BaseDamage = 20;
-    private SkillTargetSystem _skillTargetSystem;
     private TurnUnit _currentTarget;
     private WindBoost _windBoost;
     private List<TurnUnit> _damagedTargets = new List<TurnUnit>();
     private TurnUnit _myCurrentUnit;
-    private OrderController _myOrderController;
 
     protected override void OnAwake()
     {
@@ -17,9 +15,6 @@ public class WindSliceSkill : BasicSkill
         skillName = "Wind Slice";
         skillDescription = "Наносит малый ветряной урон цели. Каждое применение увеличивает урон последующих применений на 5%.";
         _damage = BaseDamage;
-        
-        _skillTargetSystem = SkillTargetSystem.SkillTarget;
-        _myOrderController = OrderController.Order;
         
         _windBoost = GetComponent<WindBoost>();
         if (_windBoost == null)
@@ -31,10 +26,6 @@ public class WindSliceSkill : BasicSkill
     protected override void OnEnable()
     {
         base.OnEnable();
-        if (_skillTargetSystem != null)
-        {
-            _skillTargetSystem.TargetSelected += OnTargetSelected;
-        }
     }
 
     protected override void OnDisable()
@@ -66,12 +57,16 @@ public class WindSliceSkill : BasicSkill
             Debug.Log("No actions left");
             return;
         }
-
+        Debug.Log("wind slice");
         Cast();
     }
 
     protected override void Cast()
     {
+        if (_skillTargetSystem != null)
+        {
+            _skillTargetSystem.TargetSelected += OnTargetSelected;
+        }
         if (_skillTargetSystem != null)
         {
             _skillTargetSystem.StartTargeting();
@@ -97,6 +92,7 @@ public class WindSliceSkill : BasicSkill
 
     private void ApplyWindSlice()
     {
+        Debug.Log("Wind Slice applied");
         TurnUnit currentUnit = GetCurrentUnit();
         if (currentUnit == null || _currentTarget == null)
             return;
@@ -126,16 +122,6 @@ public class WindSliceSkill : BasicSkill
             }
         }
 
-        currentUnit.stats.actions -= 1;
-        OrderController orderController = OrderController.Order ?? _myOrderController;
-        orderController?.OnActionPerformed?.Invoke(currentUnit);
-
-        if (currentUnit.stats.actions <= 0)
-        {
-            currentUnit.stats.actions = currentUnit.stats.baseActions;
-            orderController?.NextTurn();
-        }
-
         if (_skillTargetSystem != null)
         {
             _skillTargetSystem.StopTargeting();
@@ -145,29 +131,11 @@ public class WindSliceSkill : BasicSkill
         
         _inCooldown = true;
         _turnsLeft = _cooldownTime;
-    }
-
-    private TurnUnit GetCurrentUnit()
-    {
-        if (_myCurrentUnit != null && _myCurrentUnit.gObject == gameObject)
-            return _myCurrentUnit;
-
-        OrderController orderController = OrderController.Order;
-        if (orderController == null)
+        if (_skillTargetSystem != null)
         {
-            orderController = FindFirstObjectByType<OrderController>();
-            if (orderController == null)
-                return null;
+            _skillTargetSystem.TargetSelected -= OnTargetSelected;
         }
 
-        if (orderController.currentUnit != null && orderController.currentUnit.gObject == gameObject)
-        {
-            _myCurrentUnit = orderController.currentUnit;
-            return _myCurrentUnit;
-        }
-        
-        _myCurrentUnit = orderController.units.Find(u => u.gObject == gameObject);
-        return _myCurrentUnit;
-    }
-    
+        UseAction();
+    } 
 }
