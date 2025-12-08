@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3962568774143025652}
   - component: {fileID: 9071776544563425992}
   - component: {fileID: 3221134370737493703}
-  - component: {fileID: 6649943366896269569}
+  - component: {fileID: 2021315411834168792}
   m_Layer: 0
   m_Name: U_Terrain_A_01
   m_TagString: Untagged
@@ -87,8 +87,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &6649943366896269569
-BoxCollider:
+--- !u!64 &2021315411834168792
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -105,6 +105,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 26.037395, y: 32.995205, z: 26.574884}
-  m_Center: {x: -0.48931313, y: 11.942051, z: 0.634799}
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: e3c3c3c9575717947b518649de4423a3, type: 2}

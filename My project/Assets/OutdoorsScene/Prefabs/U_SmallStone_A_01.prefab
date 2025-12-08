@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9066795016446466651}
   - component: {fileID: 4572523343335271385}
   - component: {fileID: 5101925857901274121}
-  - component: {fileID: 1836179861874519162}
+  - component: {fileID: 4029023857921725413}
   m_Layer: 0
   m_Name: U_SmallStone_A_01
   m_TagString: Untagged
@@ -87,8 +87,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &1836179861874519162
-BoxCollider:
+--- !u!64 &4029023857921725413
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -105,6 +105,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2.984237, y: 1.0931228, z: 3.7994418}
-  m_Center: {x: -0.00023782253, y: 0.546954, z: -0.0014156699}
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 53caaf0a8dbdfd2409e9b331d87050fe, type: 2}
