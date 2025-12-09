@@ -62,7 +62,7 @@ MeshRenderer:
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
-  m_MotionVectors: 1
+  m_MotionVectors: 2
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
@@ -326,6 +326,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2185354959216774179, guid: 6f6b71dc949ef9940a160ef04aee951c, type: 3}
+      propertyPath: m_MotionVectors
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2185354959216774179, guid: 6f6b71dc949ef9940a160ef04aee951c, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 418fd15aee7136a43b90621edc33d243, type: 2}
@@ -351,6 +355,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2548126795380404916}
     m_Modifications:
+    - target: {fileID: 680118674779091130, guid: 4256b3997fcb8ac4ebf8faf115ba299d, type: 3}
+      propertyPath: m_MotionVectors
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2961137805039922611, guid: 4256b3997fcb8ac4ebf8faf115ba299d, type: 3}
       propertyPath: m_Name
       value: WIndowRightFirst
@@ -526,6 +534,10 @@ PrefabInstance:
     - target: {fileID: 8101836050659757686, guid: 0a69d1df877ca464b837e1654460d528, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8101836050659757686, guid: 0a69d1df877ca464b837e1654460d528, type: 3}
+      propertyPath: m_MotionVectors
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -803,6 +815,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WindowUp
       objectReference: {fileID: 0}
+    - target: {fileID: 8511555957023595497, guid: cca1fc968ea516d44af9243fab432f9e, type: 3}
+      propertyPath: m_MotionVectors
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -827,7 +843,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7708462952481886914, guid: 4256b3997fcb8ac4ebf8faf115ba299d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.74
+      value: -1.36
       objectReference: {fileID: 0}
     - target: {fileID: 7708462952481886914, guid: 4256b3997fcb8ac4ebf8faf115ba299d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -883,13 +899,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2548126795380404916}
     m_Modifications:
+    - target: {fileID: 680118674779091130, guid: 4256b3997fcb8ac4ebf8faf115ba299d, type: 3}
+      propertyPath: m_MotionVectors
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2961137805039922611, guid: 4256b3997fcb8ac4ebf8faf115ba299d, type: 3}
       propertyPath: m_Name
       value: WindowLeftSecond
       objectReference: {fileID: 0}
     - target: {fileID: 7708462952481886914, guid: 4256b3997fcb8ac4ebf8faf115ba299d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.82
+      value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: 7708462952481886914, guid: 4256b3997fcb8ac4ebf8faf115ba299d, type: 3}
       propertyPath: m_LocalPosition.y

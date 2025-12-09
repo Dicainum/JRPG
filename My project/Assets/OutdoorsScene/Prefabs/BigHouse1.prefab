@@ -1002,6 +1002,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: section_06
       objectReference: {fileID: 0}
+    - target: {fileID: 1304057512862805482, guid: b5143ad07080ff841b5a6b60c1c0e1db, type: 3}
+      propertyPath: m_MotionVectors
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

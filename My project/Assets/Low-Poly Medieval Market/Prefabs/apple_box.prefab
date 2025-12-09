@@ -51,6 +51,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 5676185872430324613}
     m_Modifications:
     - target: {fileID: 4768477893615931869, guid: 10e1618a04997b9449183bad8d969464, type: 3}
+      propertyPath: m_MotionVectors
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4768477893615931869, guid: 10e1618a04997b9449183bad8d969464, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: d53d6f610c9f60a4f81fc83bd57b4ce3, type: 2}
@@ -120,6 +124,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5676185872430324613}
     m_Modifications:
+    - target: {fileID: 721176850507468066, guid: ec69acfba609a0f4a931eb6ac24f3d4f, type: 3}
+      propertyPath: m_MotionVectors
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 721176850507468066, guid: ec69acfba609a0f4a931eb6ac24f3d4f, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -191,6 +199,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 5676185872430324613}
     m_Modifications:
     - target: {fileID: 721176850507468066, guid: ec69acfba609a0f4a931eb6ac24f3d4f, type: 3}
+      propertyPath: m_MotionVectors
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 721176850507468066, guid: ec69acfba609a0f4a931eb6ac24f3d4f, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: d53d6f610c9f60a4f81fc83bd57b4ce3, type: 2}
@@ -260,6 +272,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5676185872430324613}
     m_Modifications:
+    - target: {fileID: 2442311604635858378, guid: a35ab8eacfb174a40b2af243118029b2, type: 3}
+      propertyPath: m_MotionVectors
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2442311604635858378, guid: a35ab8eacfb174a40b2af243118029b2, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -348,6 +364,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 5676185872430324613}
     m_Modifications:
     - target: {fileID: 214339900796492315, guid: 43556b5539144a845b5edfb031914765, type: 3}
+      propertyPath: m_MotionVectors
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 214339900796492315, guid: 43556b5539144a845b5edfb031914765, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: d53d6f610c9f60a4f81fc83bd57b4ce3, type: 2}
@@ -417,6 +437,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5676185872430324613}
     m_Modifications:
+    - target: {fileID: 4768477893615931869, guid: 10e1618a04997b9449183bad8d969464, type: 3}
+      propertyPath: m_MotionVectors
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4768477893615931869, guid: 10e1618a04997b9449183bad8d969464, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -488,6 +512,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 5676185872430324613}
     m_Modifications:
     - target: {fileID: 721176850507468066, guid: ec69acfba609a0f4a931eb6ac24f3d4f, type: 3}
+      propertyPath: m_MotionVectors
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 721176850507468066, guid: ec69acfba609a0f4a931eb6ac24f3d4f, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: d53d6f610c9f60a4f81fc83bd57b4ce3, type: 2}
@@ -557,6 +585,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5676185872430324613}
     m_Modifications:
+    - target: {fileID: 4768477893615931869, guid: 10e1618a04997b9449183bad8d969464, type: 3}
+      propertyPath: m_MotionVectors
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4768477893615931869, guid: 10e1618a04997b9449183bad8d969464, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -628,6 +660,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 5676185872430324613}
     m_Modifications:
     - target: {fileID: 214339900796492315, guid: 43556b5539144a845b5edfb031914765, type: 3}
+      propertyPath: m_MotionVectors
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 214339900796492315, guid: 43556b5539144a845b5edfb031914765, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: d53d6f610c9f60a4f81fc83bd57b4ce3, type: 2}
@@ -698,6 +734,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 5676185872430324613}
     m_Modifications:
     - target: {fileID: 214339900796492315, guid: 43556b5539144a845b5edfb031914765, type: 3}
+      propertyPath: m_MotionVectors
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 214339900796492315, guid: 43556b5539144a845b5edfb031914765, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: d53d6f610c9f60a4f81fc83bd57b4ce3, type: 2}
@@ -767,6 +807,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5676185872430324613}
     m_Modifications:
+    - target: {fileID: 4768477893615931869, guid: 10e1618a04997b9449183bad8d969464, type: 3}
+      propertyPath: m_MotionVectors
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4768477893615931869, guid: 10e1618a04997b9449183bad8d969464, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
