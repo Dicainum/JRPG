@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
-using UnityEditor;
 using System.Collections.Generic;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace VFX
 {
@@ -36,15 +39,18 @@ namespace VFX
 
         void FixedUpdate()
         {
+            // 2. This runs in the Build/Play Mode.
+            // We must use Time.time here because EditorApplication does not exist in a build.
             if (Application.isPlaying)
             {
-                UpdateShader((float)EditorApplication.timeSinceStartup);
+                UpdateShader(Time.time);
             }
         }
 
 #if UNITY_EDITOR
         void UpdateInEditor()
         {
+            // This runs only in the Editor (Edit Mode)
             if (!Application.isPlaying)
             {
                 UpdateShader((float)EditorApplication.timeSinceStartup);

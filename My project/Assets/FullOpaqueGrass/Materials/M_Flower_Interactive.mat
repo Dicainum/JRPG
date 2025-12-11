@@ -8,8 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: M_Flower_Interactive
-  m_Shader: {fileID: -6465566751694194690, guid: 27494de7a07f7bd408c9ee8bb8a6b70d,
-    type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 27494de7a07f7bd408c9ee8bb8a6b70d, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
@@ -18,7 +17,7 @@ Material:
   m_LightmapFlags: 1
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2000
+  m_CustomRenderQueue: 2225
   stringTagMap:
     MotionVector: User
   disabledShaderPasses:
@@ -124,6 +123,7 @@ Material:
     - _DoubleSidedGIMode: 0
     - _DoubleSidedNormalMode: 2
     - _DstBlend: 0
+    - _DstBlend2: 0
     - _DstBlendAlpha: 0
     - _EnableBlendModePreserveSpecularLighting: 1
     - _EnableFogOnTransparent: 1
@@ -139,12 +139,15 @@ Material:
     - _Grass_BlendHeight: 13.6
     - _Grass_BlendHeightSmooth: 6
     - _Hue: 1
+    - _MaterialID: 1
+    - _MaterialTypeMask: 2
     - _Metallic: 0
     - _Mountain_ProceduralHeight: 180
     - _Mountain_ProceduralSmooth: 10
     - _OcclusionStrength: 1
     - _OpaqueCullMode: 2
     - _Parallax: 0.005
+    - _PerPixelSorting: 0
     - _QueueControl: 0
     - _QueueOffset: 0
     - _RayTracing: 0
@@ -176,6 +179,7 @@ Material:
     - _Surface: 0
     - _SurfaceType: 0
     - _TargetTurbulenceSize: 1
+    - _TransmissionEnable: 1
     - _TransparentBackfaceEnable: 0
     - _TransparentCullMode: 2
     - _TransparentDepthPostpassEnable: 0
@@ -219,6 +223,7 @@ Material:
     - _Wind_Direction: {r: 1, g: 2, b: 0, a: 0}
     - _test: {r: 1, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
+  m_AllowLocking: 1
 --- !u!114 &5289996196915935016
 MonoBehaviour:
   m_ObjectHideFlags: 11
