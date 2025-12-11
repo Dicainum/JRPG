@@ -407,7 +407,7 @@ MonoBehaviour:
     m_Value: 1
   intensity:
     m_OverrideState: 1
-    m_Value: 0.5
+    m_Value: 0
   maximumVelocity:
     m_OverrideState: 1
     m_Value: 200
@@ -416,7 +416,7 @@ MonoBehaviour:
     m_Value: 2
   cameraMotionBlur:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0
   specialCameraClampMode:
     m_OverrideState: 1
     m_Value: 0
@@ -895,6 +895,62 @@ MonoBehaviour:
   reflectionProbeIntensityMultiplier:
     m_OverrideState: 1
     m_Value: 1
+--- !u!114 &-2064869550341700282
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89f83259d497a7e4c97631aa6e417541, type: 3}
+  m_Name: DeNorSobOutline
+  m_EditorClassIdentifier: 
+  active: 1
+  OutlineWidth:
+    m_OverrideState: 1
+    m_Value: 0
+  DepthThreshold:
+    m_OverrideState: 1
+    m_Value: 900
+  NormalThreshold:
+    m_OverrideState: 1
+    m_Value: 1.3
+  NormalMin:
+    m_OverrideState: 1
+    m_Value: 1
+  NormalMax:
+    m_OverrideState: 1
+    m_Value: 1
+  SobelOutline:
+    m_OverrideState: 1
+    m_Value: 0
+  SobelOutlineThreshold:
+    m_OverrideState: 1
+    m_Value: 0
+  WhiteThreshold:
+    m_OverrideState: 1
+    m_Value: 0
+  BlackThreshold:
+    m_OverrideState: 1
+    m_Value: 0
+  OutlineColor:
+    m_OverrideState: 1
+    m_Value: {r: 0, g: 0, b: 0, a: 1}
+  ColorIntensity:
+    m_OverrideState: 1
+    m_Value: 1
+  MixFullScreenColor:
+    m_OverrideState: 1
+    m_Value: 0
+  ShowOutlineOnly:
+    m_OverrideState: 1
+    m_Value: 0
+  MixDephNormalAndSobelOutline:
+    m_OverrideState: 1
+    m_Value: 0
+  m_Material: {fileID: 0}
 --- !u!114 &-1282397376526594603
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -1234,6 +1290,7 @@ MonoBehaviour:
   - {fileID: -7408932743015234403}
   - {fileID: -8085864265883638981}
   - {fileID: 3559740533745447752}
+  - {fileID: -2064869550341700282}
 --- !u!114 &448115243408767295
 MonoBehaviour:
   m_ObjectHideFlags: 3
