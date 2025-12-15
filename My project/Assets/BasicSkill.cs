@@ -9,6 +9,7 @@ public class BasicSkill : MonoBehaviour
     public string skillName;
     public string skillDescription;
     [SerializeField] protected int _damage = 1;
+    [SerializeField] protected int _boost = 1;
     [System.Flags]
     public enum DamageType
     {
@@ -27,7 +28,6 @@ public class BasicSkill : MonoBehaviour
     protected int _turnsLeft = 0;
     public Action<TurnUnit> skillUsed;
     protected bool _inCooldown = false;
-    private OrderController _orderController;
     
 
     protected virtual void OnAwake()
@@ -36,12 +36,12 @@ public class BasicSkill : MonoBehaviour
         _myOrderController = FindFirstObjectByType<OrderController>();
     }
     protected virtual void OnEnable()
-    { 
-        _orderController.OnTurnStarted += TurnStarted;
+    {
+        _myOrderController.OnTurnStarted += TurnStarted;
     }
     protected virtual void OnDisable()
-    { 
-        _orderController.OnTurnStarted -= TurnStarted;
+    {
+        _myOrderController.OnTurnStarted -= TurnStarted;
     }
 
     private void Awake()
@@ -105,11 +105,11 @@ public class BasicSkill : MonoBehaviour
         
         Debug.Log(_turnsLeft);
         Debug.Log(_inCooldown);
-        Debug.Log(_orderController.currentUnit.gObject);
+        Debug.Log(_myOrderController.currentUnit.gObject);
         Debug.Log(_currentUnit.gObject);
-        Debug.Log(_orderController.currentUnit == _currentUnit);
+        Debug.Log(_myOrderController.currentUnit == _currentUnit);
 
-        if (_turnsLeft <= 0 && _inCooldown && _orderController.currentUnit == _currentUnit)
+        if (_turnsLeft <= 0 && _inCooldown && _myOrderController.currentUnit == _currentUnit)
         {
             _turnsLeft--;
             if(_turnsLeft < 1)

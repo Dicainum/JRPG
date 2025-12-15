@@ -22,3 +22,5 @@ MonoBehaviour:
   characterIcon: {fileID: -34883558, guid: 02cd05db92814024e96f0ac756cb04e7, type: 3}
   isEnemy: 0
   index: 2
+  actions: 1
+  baseActions: 1

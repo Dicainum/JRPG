@@ -1,22 +1,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HailOfStonesSkill : BasicSkill
+public class WindForceSkill : BasicSkill
 {
-    private const int _baseDamage = 35;
+    private const int _baseBoost = 20;
     private TurnUnit _currentTarget;
 
     protected override void OnAwake()
     {
         base.OnAwake();
-        skillName = "Heil of Stones";
-        skillDescription = "Наносит $_damage$ физического урона по одной цели.";
-        _damage = _baseDamage;
+        skillName = "Wind Force";
+        skillDescription = "Повышает скорость союзника на $_boost$.";
+        _boost = _baseBoost;
     }
     protected override void OnEnable()
     {
         base.OnEnable();
-
     }
 
     protected override void OnDisable()
@@ -45,7 +44,7 @@ public class HailOfStonesSkill : BasicSkill
         {
             return;
         }
-        Debug.Log("HailOfStones");
+        Debug.Log("Wind Force");
         Cast();
     }
 
@@ -57,7 +56,7 @@ public class HailOfStonesSkill : BasicSkill
         }
         if (_skillTargetSystem != null)
         {
-            _skillTargetSystem.StartTargeting(); //
+            _skillTargetSystem.StartTargetingAlly(); //
         }
         else
         {
@@ -75,16 +74,17 @@ public class HailOfStonesSkill : BasicSkill
             return;
 
         _currentTarget = target;
-        ApplyHailOfStones();
+        ApplyWindForce();
     }
-    private void ApplyHailOfStones()
+
+    private void ApplyWindForce()
     {
-        Debug.Log("HailApplied");
+        Debug.Log("SpeedBoostApplied");
         TurnUnit currentUnit = GetCurrentUnit();
         if (currentUnit == null || _currentTarget == null)
             return;
 
-        _currentTarget.stats.TakeDamage(_damage);
+        _currentTarget.stats.ChangeSpeed(_boost);
         if (_skillTargetSystem != null)
         {
             _skillTargetSystem.TargetSelected -= OnTargetSelected;
