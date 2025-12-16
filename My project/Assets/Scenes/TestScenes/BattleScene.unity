@@ -2744,10 +2744,12 @@ GameObject:
   - component: {fileID: 482100434}
   - component: {fileID: 482100433}
   - component: {fileID: 482100432}
+  - component: {fileID: 482100439}
   - component: {fileID: 482100431}
   - component: {fileID: 482100435}
   - component: {fileID: 482100436}
   - component: {fileID: 482100437}
+  - component: {fileID: 482100438}
   m_Layer: 0
   m_Name: Player (1)
   m_TagString: Character
@@ -2950,6 +2952,38 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &482100438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 482100429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b515c85f1bf9a324cb8e5ce16ad6783f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillName: Water Flow
+  skillDescription: "\u041D\u0430\u043D\u043E\u0441\u0438\u0442 $_damage$ \u0432\u043E\u0434\u044F\u043D\u043E\u0433\u043E
+    \u0443\u0440\u043E\u043D\u0430 \u043F\u043E \u043E\u0434\u043D\u043E\u0439 \u0446\u0435\u043B\u0438."
+  _damage: 40
+  _boost: 0
+  _damageType: 32
+  _cooldownTime: 2
+--- !u!114 &482100439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 482100429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b87a6cad7d41efc47bcc3fab2008469a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _skillButtonPrefab: {fileID: 7662497040983744764, guid: 501d468bcbfc3dd4aa8b78cb5327563a, type: 3}
 --- !u!1 &520389215
 GameObject:
   m_ObjectHideFlags: 0
@@ -11397,7 +11431,7 @@ MonoBehaviour:
     \u043D\u0430 \u0432\u0440\u0430\u0433\u043E\u0432 \u0441\u0442\u0430\u0442\u0443\u0441
     \u201C\u041F\u043E\u0440\u0435\u0437\u044B \u0432\u0435\u0442\u0440\u0430\"."
   _damage: 12
-  _boost: 1
+  _boost: 0
   _damageType: 2
   _cooldownTime: 0
 --- !u!114 &1855615295
@@ -11428,8 +11462,8 @@ MonoBehaviour:
   skillName: Hail of Stones
   skillDescription: "\u041D\u0430\u043D\u043E\u0441\u0438\u0442 $_damage$ \u0444\u0438\u0437\u0438\u0447\u0435\u0441\u043A\u043E\u0433\u043E
     \u0443\u0440\u043E\u043D\u0430 \u043F\u043E \u043E\u0434\u043D\u043E\u0439 \u0446\u0435\u043B\u0438."
-  _damage: 1
-  _boost: 1
+  _damage: 35
+  _boost: 0
   _damageType: 1
   _cooldownTime: 0
 --- !u!114 &1855615297

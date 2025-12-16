@@ -8,7 +8,9 @@ public class BasicDebuff : MonoBehaviour
     protected TurnUnit _debuffTarget;
     protected bool _isActive = false;
     protected OrderController _orderController;
-
+    public bool isPeriodicDamage = false;
+    public int basicDamage;
+    public int DamagePerTurn;
     protected virtual void OnAwake()
     {
         

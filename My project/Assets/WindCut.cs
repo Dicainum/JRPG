@@ -3,13 +3,15 @@ using UnityEngine;
 
 public class WindCut : BasicDebuff
 {
-    private const int DamagePerTurn = 5;
     private TurnUnit _caster;
 
     protected override void OnAwake()
     {
+        DamagePerTurn = 5;
+        basicDamage = DamagePerTurn;
         base.OnAwake();
         _duration = 2;
+        isPeriodicDamage = true;
     }
 
     protected override void OnStart()
