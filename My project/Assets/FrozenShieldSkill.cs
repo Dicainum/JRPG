@@ -1,23 +1,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WaterFlowSkill : BasicSkill
+//TODO: проверить логику работы когда враги будут дамажить и написать логику накладывания "охлаждения"
+public class FrozenShieldSkill : BasicSkill
 {
-    private const int _baseDamage = 40;
-    private TurnUnit _currentTarget;
     private List<TurnUnit> _damagedTargets = new List<TurnUnit>();
+    private const int _baseShield = 20;
+    private TurnUnit _currentTarget;
 
     protected override void OnAwake()
     {
         base.OnAwake();
-        skillName = "Water Flow";
-        skillDescription = "Наносит $_damage$ водяного урона по одной цели и накладывает статус 'мокрый'.";
-        _damage = _baseDamage;
+        skillName = "Frozen Shield";
+        skillDescription = "Вешает на союзника щит на $_boost$. Накладывает дебафф 'Охлаждение'.";
+        _boost = _baseShield;
     }
     protected override void OnEnable()
     {
         base.OnEnable();
-
     }
 
     protected override void OnDisable()
@@ -46,7 +46,7 @@ public class WaterFlowSkill : BasicSkill
         {
             return;
         }
-        Debug.Log("WaterFlow");
+        Debug.Log("Wind Force");
         Cast();
     }
 
@@ -58,7 +58,7 @@ public class WaterFlowSkill : BasicSkill
         }
         if (_skillTargetSystem != null)
         {
-            _skillTargetSystem.StartTargeting();
+            _skillTargetSystem.StartTargetingAlly(); //
         }
         else
         {
@@ -76,48 +76,31 @@ public class WaterFlowSkill : BasicSkill
             return;
 
         _currentTarget = target;
-        ApplyWaterFlow();
+        ApplyFrozenShield();
     }
 
-    private void ApplyWaterFlow()
+    private void ApplyFrozenShield()
     {
-        Debug.Log("Water Applied");
+        Debug.Log("ShieldApplied");
         TurnUnit currentUnit = GetCurrentUnit();
         if (currentUnit == null || _currentTarget == null)
             return;
 
-        _currentTarget.stats.TakeDamage(_damage);
-        _damagedTargets.Clear();
-        _damagedTargets.Add(_currentTarget);
+        _currentTarget.stats.ChangeShield(_boost);
 
         foreach (var damagedTarget in _damagedTargets)
         {
             if (damagedTarget != null && damagedTarget.IsAlive)
             {
-                WetEffect waterEffect = damagedTarget.gObject.GetComponent<WetEffect>();
-                if (waterEffect == null)
+                WindCut windCut = damagedTarget.gObject.GetComponent<WindCut>();
+                if (windCut == null)
                 {
-                    waterEffect = damagedTarget.gObject.AddComponent<WetEffect>();
+                    windCut = damagedTarget.gObject.AddComponent<WindCut>();
                 }
-                waterEffect.ApplyWaterDebuff(damagedTarget);
-                //
-                //FreezingDebuff freeze = damagedTarget.gObject.GetComponent<FreezingDebuff>();
-                //if (freeze == null)
-                //{
-                //    freeze = damagedTarget.gObject.AddComponent<FreezingDebuff>();
-                //}
-                //freeze.ApplyFreezeDebuff(damagedTarget);
+                windCut.ApplyDebuff(damagedTarget, currentUnit);
             }
         }
 
-        if (_skillTargetSystem != null)
-        {
-            _skillTargetSystem.StopTargeting();
-        }
-
-        skillUsed?.Invoke(currentUnit);
-
-        _turnsLeft = _cooldownTime;
         if (_skillTargetSystem != null)
         {
             _skillTargetSystem.TargetSelected -= OnTargetSelected;

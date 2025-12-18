@@ -5,10 +5,12 @@ public class Stats : MonoBehaviour
 {
     public int health = 100;
     public int speed = 100;
+    public int shield = 0;
     public int damage = 10;
     public int maxHealth;
     public int baseSpeed;
     public int baseDamage;
+    public int startShield;
     public bool isAlive = true;
     public bool isStunned = false;
     public string characterName = "";
@@ -31,6 +33,7 @@ public class Stats : MonoBehaviour
         maxHealth = health;
         baseSpeed = speed;
         baseDamage = damage;
+        startShield = shield;
     }
 
     public virtual void ResetActions()
@@ -45,10 +48,12 @@ public class Stats : MonoBehaviour
     public void TakeDamage (int damageTaken)
     {
         health -= damageTaken;
+
         if (health <= 0)
         {
             Death();
         }
+
         UpdateUI();
     }
 
@@ -59,6 +64,17 @@ public class Stats : MonoBehaviour
         {
             speed = 0;
         }
+    }
+    public void ChangeShield(int shieldChange)
+    {
+        shield += shieldChange;
+
+        if (shield < 0)
+        {
+            shield = 0;
+        }
+
+        UpdateUI();
     }
 
     public void Heal (int heal)

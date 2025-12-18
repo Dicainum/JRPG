@@ -1701,10 +1701,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   speed: 110
+  shield: 0
   damage: 10
   maxHealth: 0
   baseSpeed: 0
   baseDamage: 0
+  startShield: 0
   isAlive: 1
   isStunned: 0
   characterName: Enemy3
@@ -2750,6 +2752,7 @@ GameObject:
   - component: {fileID: 482100436}
   - component: {fileID: 482100437}
   - component: {fileID: 482100438}
+  - component: {fileID: 482100440}
   m_Layer: 0
   m_Name: Player (1)
   m_TagString: Character
@@ -2897,10 +2900,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   speed: 180
+  shield: 0
   damage: 10
   maxHealth: 0
   baseSpeed: 0
   baseDamage: 0
+  startShield: 0
   isAlive: 1
   isStunned: 0
   characterName: Player3
@@ -2984,6 +2989,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _skillButtonPrefab: {fileID: 7662497040983744764, guid: 501d468bcbfc3dd4aa8b78cb5327563a, type: 3}
+--- !u!114 &482100440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 482100429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba4642d5eec3ed24ea731f8f766be79c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillName: 
+  skillDescription: 
+  _damage: 1
+  _boost: 20
+  _damageType: 0
+  _cooldownTime: 0
 --- !u!1 &520389215
 GameObject:
   m_ObjectHideFlags: 0
@@ -3398,10 +3421,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   speed: 100
+  shield: 0
   damage: 10
   maxHealth: 0
   baseSpeed: 0
   baseDamage: 0
+  startShield: 0
   isAlive: 1
   isStunned: 0
   characterName: Player
@@ -9384,10 +9409,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   speed: 111
+  shield: 0
   damage: 10
   maxHealth: 0
   baseSpeed: 0
   baseDamage: 0
+  startShield: 0
   isAlive: 1
   isStunned: 0
   characterName: Enemy2
@@ -10285,10 +10312,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   speed: 112
+  shield: 0
   damage: 10
   maxHealth: 0
   baseSpeed: 0
   baseDamage: 0
+  startShield: 0
   isAlive: 1
   isStunned: 0
   characterName: Enemy1
@@ -11355,10 +11384,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   speed: 200
+  shield: 0
   damage: 10
   maxHealth: 0
   baseSpeed: 0
   baseDamage: 0
+  startShield: 0
   isAlive: 1
   isStunned: 0
   characterName: Player2
