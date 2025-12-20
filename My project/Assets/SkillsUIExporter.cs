@@ -23,23 +23,22 @@ public class SkillsUIExporter : MonoBehaviour
         {
             GameObject buttonObj = Instantiate(_skillButtonPrefab, parentPage);
 
-            TextMeshProUGUI tmp = buttonObj.GetComponentInChildren<TextMeshProUGUI>();
-            
-            var skillUIButton = buttonObj.GetComponent<SkillUIButton>();
-            skillUIButton.skillDescription = skill.skillDescription;
-            skillUIButton.skillDescriptionGO = _battleSkillsCanvasController.descriptions[_stats.index];
+            // Устанавливаем имя на самой кнопке
+            TextMeshProUGUI buttonLabel = buttonObj.GetComponentInChildren<TextMeshProUGUI>();
+            if (buttonLabel != null) buttonLabel.text = skill.skillName;
 
-            if (tmp != null)
-                tmp.text = skill.skillName;
+            // Инициализируем логику описания
+            var skillUIButton = buttonObj.GetComponent<SkillUIButton>();
+            if (skillUIButton != null)
+            {
+                // Передаем ссылку на панель и сам текст
+                skillUIButton.Init(_battleSkillsCanvasController.descriptions[_stats.index], skill.skillDescription);
+            }
 
             Button button = buttonObj.GetComponent<Button>();
             if (button != null)
             {
                 button.onClick.AddListener(() => skill.TryCast());
-            }
-            else
-            {
-                Debug.LogWarning($"Button component not found on {buttonObj.name}");
             }
         }
     }

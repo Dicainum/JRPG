@@ -7,30 +7,27 @@ public class SkillUIButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     [TextArea]
     public string skillDescription;
     public GameObject skillDescriptionGO;
-
     private TextMeshProUGUI _descriptionText;
 
-    private void OnEnable()
+    public void Init(GameObject descriptionPanel, string description)
     {
+        skillDescriptionGO = descriptionPanel;
+        skillDescription = description;
+
         if (skillDescriptionGO != null)
         {
+            _descriptionText = skillDescriptionGO.GetComponentInChildren<TextMeshProUGUI>(true);
             skillDescriptionGO.SetActive(false);
-
-            _descriptionText = skillDescriptionGO.GetComponentInChildren<TextMeshProUGUI>();
-
-            if (_descriptionText != null)
-                _descriptionText.text = skillDescription;
-        }
-        else
-        {
-            Debug.LogWarning($"{name}: skillDescriptionGO is not assigned!");
         }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (skillDescriptionGO != null)
+        if (skillDescriptionGO != null && _descriptionText != null)
+        {
+            _descriptionText.text = skillDescription;
             skillDescriptionGO.SetActive(true);
+        }
     }
 
     public void OnPointerExit(PointerEventData eventData)
