@@ -129,6 +129,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""GoBack"",
+                    ""type"": ""Button"",
+                    ""id"": ""9cd0ffb6-f982-4564-abf8-1e5ecd0145fe"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""SpeedBoost"",
                     ""type"": ""Button"",
                     ""id"": ""b27976e5-a88c-44a9-a0f4-f443a851f127"",
@@ -229,6 +238,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""9e950d32-b196-4e3f-9eed-eac6eaaaf502"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GoBack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""61957bd4-110e-4bdb-ab1f-ccfb91beb479"",
                     ""path"": ""<Keyboard>/leftShift"",
                     ""interactions"": """",
@@ -249,6 +269,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         m_Player_SwitchCharacter = m_Player.FindAction("SwitchCharacter", throwIfNotFound: true);
         m_Player_Confirm = m_Player.FindAction("Confirm", throwIfNotFound: true);
+        m_Player_GoBack = m_Player.FindAction("GoBack", throwIfNotFound: true);
         m_Player_SpeedBoost = m_Player.FindAction("SpeedBoost", throwIfNotFound: true);
     }
 
@@ -334,6 +355,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Attack;
     private readonly InputAction m_Player_SwitchCharacter;
     private readonly InputAction m_Player_Confirm;
+    private readonly InputAction m_Player_GoBack;
     private readonly InputAction m_Player_SpeedBoost;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
@@ -362,6 +384,10 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/Confirm".
         /// </summary>
         public InputAction @Confirm => m_Wrapper.m_Player_Confirm;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/GoBack".
+        /// </summary>
+        public InputAction @GoBack => m_Wrapper.m_Player_GoBack;
         /// <summary>
         /// Provides access to the underlying input action "Player/SpeedBoost".
         /// </summary>
@@ -404,6 +430,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Confirm.started += instance.OnConfirm;
             @Confirm.performed += instance.OnConfirm;
             @Confirm.canceled += instance.OnConfirm;
+            @GoBack.started += instance.OnGoBack;
+            @GoBack.performed += instance.OnGoBack;
+            @GoBack.canceled += instance.OnGoBack;
             @SpeedBoost.started += instance.OnSpeedBoost;
             @SpeedBoost.performed += instance.OnSpeedBoost;
             @SpeedBoost.canceled += instance.OnSpeedBoost;
@@ -430,6 +459,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Confirm.started -= instance.OnConfirm;
             @Confirm.performed -= instance.OnConfirm;
             @Confirm.canceled -= instance.OnConfirm;
+            @GoBack.started -= instance.OnGoBack;
+            @GoBack.performed -= instance.OnGoBack;
+            @GoBack.canceled -= instance.OnGoBack;
             @SpeedBoost.started -= instance.OnSpeedBoost;
             @SpeedBoost.performed -= instance.OnSpeedBoost;
             @SpeedBoost.canceled -= instance.OnSpeedBoost;
@@ -501,6 +533,13 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnConfirm(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "GoBack" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnGoBack(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "SpeedBoost" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>

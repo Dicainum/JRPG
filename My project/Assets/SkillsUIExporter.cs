@@ -22,16 +22,13 @@ public class SkillsUIExporter : MonoBehaviour
         foreach (BasicSkill skill in _skills)
         {
             GameObject buttonObj = Instantiate(_skillButtonPrefab, parentPage);
-
-            // Устанавливаем имя на самой кнопке
+            
             TextMeshProUGUI buttonLabel = buttonObj.GetComponentInChildren<TextMeshProUGUI>();
             if (buttonLabel != null) buttonLabel.text = skill.skillName;
 
-            // Инициализируем логику описания
             var skillUIButton = buttonObj.GetComponent<SkillUIButton>();
             if (skillUIButton != null)
             {
-                // Передаем ссылку на панель и сам текст
                 skillUIButton.Init(_battleSkillsCanvasController.descriptions[_stats.index], skill.skillDescription);
             }
 

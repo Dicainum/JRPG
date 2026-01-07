@@ -44,7 +44,7 @@ public class CameraBattleController : MonoBehaviour
         }
     }
 
-    private void ChangeToUnitCameraPos(TurnUnit currentUnit)
+    public void ChangeToUnitCameraPos(TurnUnit currentUnit)
     {
         if (currentUnit.stats.isEnemy)
         {
@@ -59,6 +59,8 @@ public class CameraBattleController : MonoBehaviour
 
     private void MoveCamera(Transform target)
     {
+        cam.transform.DOKill();
+
         startPos = cam.transform.position;
         startRot = cam.transform.rotation;
         targetPos = target.position;

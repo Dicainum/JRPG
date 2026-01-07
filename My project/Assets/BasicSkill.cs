@@ -10,6 +10,7 @@ public class BasicSkill : MonoBehaviour
     public string skillDescription;
     [SerializeField] protected int _damage = 1;
     [SerializeField] protected int _boost = 1;
+    private int _defaultBoost;
     [System.Flags]
     public enum DamageType
     {
@@ -34,6 +35,8 @@ public class BasicSkill : MonoBehaviour
     {
         _skillTargetSystem = FindFirstObjectByType<SkillTargetSystem>();
         _myOrderController = FindFirstObjectByType<OrderController>();
+
+        _defaultBoost = _boost;
     }
     protected virtual void OnEnable()
     {
@@ -42,6 +45,7 @@ public class BasicSkill : MonoBehaviour
     protected virtual void OnDisable()
     {
         _myOrderController.OnTurnStarted -= TurnStarted;
+        _boost = _defaultBoost;
     }
 
     private void Awake()
@@ -88,7 +92,7 @@ public class BasicSkill : MonoBehaviour
         }
     }
 
-    private void StartCooldown()
+    protected void StartCooldown()
     {
         _inCooldown = true;
         _turnsLeft = _cooldownTime;
