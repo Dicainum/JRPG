@@ -10,7 +10,7 @@ public class HailOfStonesSkill : BasicSkill
     {
         base.OnAwake();
         skillName = "Heil of Stones";
-        skillDescription = "Наносит $_damage$ физического урона по одной цели.";
+        skillDescription = "РќР°РЅРѕСЃРёС‚ $_damage$ С„РёР·РёС‡РµСЃРєРѕРіРѕ СѓСЂРѕРЅР° РїРѕ РѕРґРЅРѕР№ С†РµР»Рё.";
         _damage = _baseDamage;
     }
     protected override void OnEnable()
@@ -25,6 +25,7 @@ public class HailOfStonesSkill : BasicSkill
         if (_skillTargetSystem != null)
         {
             _skillTargetSystem.TargetSelected -= OnTargetSelected;
+            _skillTargetSystem.TargetCanceled -= OnTargetCanceled;
         }
     }
     public override void TryCast()
@@ -54,6 +55,7 @@ public class HailOfStonesSkill : BasicSkill
         if (_skillTargetSystem != null)
         {
             _skillTargetSystem.TargetSelected += OnTargetSelected;
+            _skillTargetSystem.TargetCanceled += OnTargetCanceled;
         }
         if (_skillTargetSystem != null)
         {
@@ -62,6 +64,15 @@ public class HailOfStonesSkill : BasicSkill
         else
         {
             Debug.LogError("SkillTargetSystem not found");
+        }
+    }
+
+    private void OnTargetCanceled()
+    {
+        if (_skillTargetSystem != null)
+        {
+            _skillTargetSystem.TargetSelected -= OnTargetSelected;
+            _skillTargetSystem.TargetCanceled -= OnTargetCanceled;
         }
     }
 
@@ -88,6 +99,7 @@ public class HailOfStonesSkill : BasicSkill
         if (_skillTargetSystem != null)
         {
             _skillTargetSystem.TargetSelected -= OnTargetSelected;
+            _skillTargetSystem.TargetCanceled -= OnTargetCanceled;
         }
 
         UseAction();

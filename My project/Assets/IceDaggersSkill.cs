@@ -11,7 +11,7 @@ public class IceDaggersSkill : BasicSkill
     {
         base.OnAwake();
         skillName = "Ice Daggers";
-        skillDescription = "Наносит $_damage$ урона льдом. Накладывает дебафф 'Охлаждение'.";
+        skillDescription = "РќР°РЅРѕСЃРёС‚ $_damage$ СѓСЂРѕРЅР° Р»СЊРґРѕРј. РќР°РєР»Р°РґС‹РІР°РµС‚ СЌС„С„РµРєС‚ 'Р—Р°РјРѕСЂРѕР·РєР°'.";
         _damage = _baseDamage;
     }
     protected override void OnEnable()
@@ -26,6 +26,7 @@ public class IceDaggersSkill : BasicSkill
         if (_skillTargetSystem != null)
         {
             _skillTargetSystem.TargetSelected -= OnTargetSelected;
+            _skillTargetSystem.TargetCanceled -= OnTargetCanceled;
         }
     }
     public override void TryCast()
@@ -55,6 +56,7 @@ public class IceDaggersSkill : BasicSkill
         if (_skillTargetSystem != null)
         {
             _skillTargetSystem.TargetSelected += OnTargetSelected;
+            _skillTargetSystem.TargetCanceled += OnTargetCanceled;
         }
         if (_skillTargetSystem != null)
         {
@@ -63,6 +65,15 @@ public class IceDaggersSkill : BasicSkill
         else
         {
             Debug.LogError("SkillTargetSystem not found");
+        }
+    }
+
+    private void OnTargetCanceled()
+    {
+        if (_skillTargetSystem != null)
+        {
+            _skillTargetSystem.TargetSelected -= OnTargetSelected;
+            _skillTargetSystem.TargetCanceled -= OnTargetCanceled;
         }
     }
 
@@ -114,6 +125,7 @@ public class IceDaggersSkill : BasicSkill
         if (_skillTargetSystem != null)
         {
             _skillTargetSystem.TargetSelected -= OnTargetSelected;
+            _skillTargetSystem.TargetCanceled -= OnTargetCanceled;
         }
 
         UseAction();

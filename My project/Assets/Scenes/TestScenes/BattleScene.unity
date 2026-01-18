@@ -4455,6 +4455,7 @@ MonoBehaviour:
   orderController: {fileID: 841006431}
   moveInput: {fileID: -7453625389703101634, guid: 63ce64dd5917e7443a020099b03b2b12, type: 3}
   confirmInput: {fileID: -7909633419024738582, guid: 63ce64dd5917e7443a020099b03b2b12, type: 3}
+  cancelInput: {fileID: 543465503175434375, guid: 63ce64dd5917e7443a020099b03b2b12, type: 3}
   cam: {fileID: 2083785875}
   aim: {fileID: 127785150}
   cameraController: {fileID: 841006433}
@@ -4911,8 +4912,6 @@ MonoBehaviour:
   - {fileID: 1017350382}
   - {fileID: 690278088}
   - {fileID: 1820371030}
-  goBackInput: {fileID: 543465503175434375, guid: 63ce64dd5917e7443a020099b03b2b12, type: 3}
-  skillTargetSystem: {fileID: 0}
   skillPages:
   - {fileID: 154109033}
   - {fileID: 219840330}
@@ -4921,6 +4920,10 @@ MonoBehaviour:
   - {fileID: 1324394327}
   - {fileID: 237203229}
   - {fileID: 769199875}
+  goBackInput: {fileID: 543465503175434375, guid: 63ce64dd5917e7443a020099b03b2b12, type: 3}
+  skillTargetSystem: {fileID: 0}
+  cameraBattleController: {fileID: 0}
+  currentState: 0
 --- !u!1 &1002480253
 GameObject:
   m_ObjectHideFlags: 0

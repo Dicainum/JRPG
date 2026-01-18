@@ -11,7 +11,7 @@ public class WaterFlowSkill : BasicSkill
     {
         base.OnAwake();
         skillName = "Water Flow";
-        skillDescription = "Наносит $_damage$ водяного урона по одной цели и накладывает статус 'мокрый'.";
+        skillDescription = "РќР°РЅРѕСЃРёС‚ $_damage$ РІРѕРґСЏРЅРѕРіРѕ СѓСЂРѕРЅР° РїРѕ РѕРґРЅРѕР№ С†РµР»Рё Рё РЅР°РєР»Р°РґС‹РІР°РµС‚ СЌС„С„РµРєС‚ 'РњРѕРєСЂС‹Р№'.";
         _damage = _baseDamage;
     }
     protected override void OnEnable()
@@ -26,6 +26,7 @@ public class WaterFlowSkill : BasicSkill
         if (_skillTargetSystem != null)
         {
             _skillTargetSystem.TargetSelected -= OnTargetSelected;
+            _skillTargetSystem.TargetCanceled -= OnTargetCanceled;
         }
     }
     public override void TryCast()
@@ -55,6 +56,7 @@ public class WaterFlowSkill : BasicSkill
         if (_skillTargetSystem != null)
         {
             _skillTargetSystem.TargetSelected += OnTargetSelected;
+            _skillTargetSystem.TargetCanceled += OnTargetCanceled;
         }
         if (_skillTargetSystem != null)
         {
@@ -63,6 +65,15 @@ public class WaterFlowSkill : BasicSkill
         else
         {
             Debug.LogError("SkillTargetSystem not found");
+        }
+    }
+
+    private void OnTargetCanceled()
+    {
+        if (_skillTargetSystem != null)
+        {
+            _skillTargetSystem.TargetSelected -= OnTargetSelected;
+            _skillTargetSystem.TargetCanceled -= OnTargetCanceled;
         }
     }
 
@@ -121,6 +132,7 @@ public class WaterFlowSkill : BasicSkill
         if (_skillTargetSystem != null)
         {
             _skillTargetSystem.TargetSelected -= OnTargetSelected;
+            _skillTargetSystem.TargetCanceled -= OnTargetCanceled;
         }
 
         UseAction();

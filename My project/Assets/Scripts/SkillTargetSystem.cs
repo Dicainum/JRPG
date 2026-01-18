@@ -8,6 +8,7 @@ public class SkillTargetSystem : MonoBehaviour
     [SerializeField] private OrderController orderController;
     [SerializeField] private InputActionReference moveInput;
     [SerializeField] private InputActionReference confirmInput;
+    [SerializeField] private InputActionReference cancelInput;
     [SerializeField] private Camera cam;
     [SerializeField] private GameObject aim;
 
@@ -26,6 +27,7 @@ public class SkillTargetSystem : MonoBehaviour
     private bool _wasLeftHeld = false;
     private bool _wasRightHeld = false;
     public System.Action<TurnUnit> TargetSelected;
+    public System.Action TargetCanceled;
 
     private void OnEnable()
     {
@@ -33,6 +35,11 @@ public class SkillTargetSystem : MonoBehaviour
         moveInput.action.Enable();
         confirmInput.action.Enable();
         confirmInput.action.performed += OnConfirmPressed;
+        if (cancelInput != null)
+        {
+            cancelInput.action.Enable();
+            cancelInput.action.performed += OnCancelPressed;
+        }
     }
 
     private void OnDisable()
@@ -41,6 +48,11 @@ public class SkillTargetSystem : MonoBehaviour
         moveInput.action.Disable();
         confirmInput.action.performed -= OnConfirmPressed;
         confirmInput.action.Disable();
+        if (cancelInput != null)
+        {
+            cancelInput.action.performed -= OnCancelPressed;
+            cancelInput.action.Disable();
+        }
     }
     
     private void Awake()
@@ -65,8 +77,18 @@ public class SkillTargetSystem : MonoBehaviour
         {
             _targeting = false;
         }
-        if (!_targeting || _enemyTargets.Count == 0 || _allyTargets.Count == 0)
+        if (!_targeting)
             return;
+
+        if (Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
+        {
+            CancelTargeting();
+            return;
+        }
+
+        if (_enemyTargets.Count == 0 && _allyTargets.Count == 0)
+            return;
+
         //TODO: Optimize this 
         if (_isTargetingEnemy)
         {
@@ -166,9 +188,23 @@ public class SkillTargetSystem : MonoBehaviour
     }
     private void OnConfirmPressed(InputAction.CallbackContext ctx)
     {
-        if (!_isTargetingEnemy) return;
+        if (!_isTargetingEnemy && !_isTargetingAlly) return;
 
         TargetSelected?.Invoke(_target);
+        StopTargeting();
+    }
+
+    private void OnCancelPressed(InputAction.CallbackContext ctx)
+    {
+        if (_targeting)
+        {
+            CancelTargeting();
+        }
+    }
+
+    public void CancelTargeting()
+    {
+        TargetCanceled?.Invoke();
         StopTargeting();
     }
 

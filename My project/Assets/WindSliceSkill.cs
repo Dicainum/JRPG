@@ -34,6 +34,7 @@ public class WindSliceSkill : BasicSkill
         if (_skillTargetSystem != null)
         {
             _skillTargetSystem.TargetSelected -= OnTargetSelected;
+            _skillTargetSystem.TargetCanceled -= OnTargetCanceled;
         }
     }
 
@@ -66,6 +67,7 @@ public class WindSliceSkill : BasicSkill
         if (_skillTargetSystem != null)
         {
             _skillTargetSystem.TargetSelected += OnTargetSelected;
+            _skillTargetSystem.TargetCanceled += OnTargetCanceled;
         }
         if (_skillTargetSystem != null)
         {
@@ -74,6 +76,15 @@ public class WindSliceSkill : BasicSkill
         else
         {
             Debug.LogError("SkillTargetSystem not found");
+        }
+    }
+
+    private void OnTargetCanceled()
+    {
+        if (_skillTargetSystem != null)
+        {
+            _skillTargetSystem.TargetSelected -= OnTargetSelected;
+            _skillTargetSystem.TargetCanceled -= OnTargetCanceled;
         }
     }
 
@@ -134,6 +145,7 @@ public class WindSliceSkill : BasicSkill
         if (_skillTargetSystem != null)
         {
             _skillTargetSystem.TargetSelected -= OnTargetSelected;
+            _skillTargetSystem.TargetCanceled -= OnTargetCanceled;
         }
 
         UseAction();

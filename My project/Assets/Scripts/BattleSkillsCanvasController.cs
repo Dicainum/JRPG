@@ -28,14 +28,30 @@ public class BattleSkillsCanvasController : MonoBehaviour
 
     [SerializeField] private BattleUIState currentState = BattleUIState.None;
 
+    private void Awake()
+    {
+        if (skillTargetSystem == null)
+        {
+            skillTargetSystem = FindFirstObjectByType<SkillTargetSystem>();
+        }
+    }
+
     private void OnEnable()
     {
         orderController.OnTurnStarted += ShowCharacterCanvas;
         orderController.OnActionPerformed += PastActionUIUpdate;
         orderController.OnTurnEnded += EndAction;
 
-        goBackInput.action.Enable();
-        goBackInput.action.performed += OnGoBackAction;
+        if (goBackInput != null && goBackInput.action != null)
+        {
+            goBackInput.action.Enable();
+            goBackInput.action.performed += OnGoBackAction;
+        }
+
+        if (skillTargetSystem != null)
+        {
+            skillTargetSystem.TargetCanceled += OnTargetCanceled;
+        }
     }
 
     private void OnDisable()
@@ -44,8 +60,16 @@ public class BattleSkillsCanvasController : MonoBehaviour
         orderController.OnActionPerformed -= PastActionUIUpdate;
         orderController.OnTurnEnded -= EndAction;
 
-        goBackInput.action.performed -= OnGoBackAction;
-        goBackInput.action.Disable();
+        if (goBackInput != null && goBackInput.action != null)
+        {
+            goBackInput.action.performed -= OnGoBackAction;
+            goBackInput.action.Disable();
+        }
+
+        if (skillTargetSystem != null)
+        {
+            skillTargetSystem.TargetCanceled -= OnTargetCanceled;
+        }
     }
 
     private void ShowCharacterCanvas(TurnUnit currentUnit)
@@ -71,7 +95,10 @@ public class BattleSkillsCanvasController : MonoBehaviour
         switch (currentState)
         {
             case BattleUIState.TargetSelection:
-                CancelTargeting();
+                if (skillTargetSystem != null)
+                {
+                    skillTargetSystem.CancelTargeting();
+                }
                 break;
 
             case BattleUIState.SkillSelection:
@@ -84,10 +111,8 @@ public class BattleSkillsCanvasController : MonoBehaviour
         }
     }
 
-    private void CancelTargeting()
+    private void OnTargetCanceled()
     {
-        skillTargetSystem.StopTargeting();
-
         if (cameraBattleController != null && currentActiveUnit != null)
         {
             cameraBattleController.ChangeToUnitCameraPos(currentActiveUnit);

@@ -10,7 +10,7 @@ public class WindForceSkill : BasicSkill
     {
         base.OnAwake();
         skillName = "Wind Force";
-        skillDescription = "Повышает скорость союзника на $_boost$.";
+        skillDescription = "РЈРІРµР»РёС‡РёРІР°РµС‚ СЃРєРѕСЂРѕСЃС‚СЊ СЃРѕСЋР·РЅРёРєР° РЅР° $_boost$.";
         _boost = _baseBoost;
     }
     protected override void OnEnable()
@@ -24,6 +24,7 @@ public class WindForceSkill : BasicSkill
         if (_skillTargetSystem != null)
         {
             _skillTargetSystem.TargetSelected -= OnTargetSelected;
+            _skillTargetSystem.TargetCanceled -= OnTargetCanceled;
         }
     }
     public override void TryCast()
@@ -53,6 +54,7 @@ public class WindForceSkill : BasicSkill
         if (_skillTargetSystem != null)
         {
             _skillTargetSystem.TargetSelected += OnTargetSelected;
+            _skillTargetSystem.TargetCanceled += OnTargetCanceled;
         }
         if (_skillTargetSystem != null)
         {
@@ -61,6 +63,15 @@ public class WindForceSkill : BasicSkill
         else
         {
             Debug.LogError("SkillTargetSystem not found");
+        }
+    }
+
+    private void OnTargetCanceled()
+    {
+        if (_skillTargetSystem != null)
+        {
+            _skillTargetSystem.TargetSelected -= OnTargetSelected;
+            _skillTargetSystem.TargetCanceled -= OnTargetCanceled;
         }
     }
 
@@ -88,6 +99,7 @@ public class WindForceSkill : BasicSkill
         if (_skillTargetSystem != null)
         {
             _skillTargetSystem.TargetSelected -= OnTargetSelected;
+            _skillTargetSystem.TargetCanceled -= OnTargetCanceled;
         }
 
         UseAction();
