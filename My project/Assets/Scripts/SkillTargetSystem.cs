@@ -16,7 +16,10 @@ public class SkillTargetSystem : MonoBehaviour
     
     private bool _isTargetingEnemy = false;
     private bool _isTargetingAlly = false;
-    private Transform _originalCamTransform;
+    
+    private Vector3 _originalCamPos;
+    private Quaternion _originalCamRot;
+
     private List<TurnUnit> _enemyTargets = new();
     private List<TurnUnit> _allyTargets = new();
 
@@ -92,78 +95,48 @@ public class SkillTargetSystem : MonoBehaviour
         //TODO: Optimize this 
         if (_isTargetingEnemy)
         {
-            //Debug.Log("targeting enemy");
-            Vector2 move = moveInput.action.ReadValue<Vector2>();
-
-            bool rightHeld = move.x > 0.5f;
-            bool leftHeld = move.x < -0.5f;
-
-            if (rightHeld && !_wasRightHeld)
-            {
-                _currentTargetIndex = (_currentTargetIndex + 1) % _enemyTargets.Count;
-                _target = _enemyTargets[_currentTargetIndex];
-            }
-            else if (leftHeld && !_wasLeftHeld)
-            {
-                _currentTargetIndex--;
-                if (_currentTargetIndex < 0)
-                    _currentTargetIndex = _enemyTargets.Count - 1;
-                _target = _enemyTargets[_currentTargetIndex];
-            }
-
-            _wasRightHeld = rightHeld;
-            _wasLeftHeld = leftHeld;
-
-            if (_target != null && _lastTarget != _target)
-            {
-                Debug.Log("Moving camera");
-                _lastTarget = _target;
-                cameraController.BattleCameraLookAtTarget(_target.gObject);
-            }
-
-            if (confirmInput.action.WasPressedThisFrame())
-            {
-                TargetSelected?.Invoke(_target);
-                StopTargeting();
-            }
+            HandleTargetSelection(_enemyTargets);
         }
-        if (_isTargetingAlly)
+        else if (_isTargetingAlly)
         {
-            //Debug.Log("targ al");
-            //Debug.Log(_allyTargets);
-            Vector2 move = moveInput.action.ReadValue<Vector2>();
+            HandleTargetSelection(_allyTargets);
+        }
+    }
 
-            bool rightHeld = move.x > 0.5f;
-            bool leftHeld = move.x < -0.5f;
+    private void HandleTargetSelection(List<TurnUnit> targets)
+    {
+        Vector2 move = moveInput.action.ReadValue<Vector2>();
 
-            if (rightHeld && !_wasRightHeld)
-            {
-                _currentTargetIndex = (_currentTargetIndex + 1) % _allyTargets.Count;
-                _target = _allyTargets[_currentTargetIndex];
-            }
-            else if (leftHeld && !_wasLeftHeld)
-            {
-                _currentTargetIndex--;
-                if (_currentTargetIndex < 0)
-                    _currentTargetIndex = _allyTargets.Count - 1;
-                _target = _allyTargets[_currentTargetIndex];
-            }
+        bool rightHeld = move.x > 0.5f;
+        bool leftHeld = move.x < -0.5f;
 
-            _wasRightHeld = rightHeld;
-            _wasLeftHeld = leftHeld;
+        if (rightHeld && !_wasRightHeld)
+        {
+            _currentTargetIndex = (_currentTargetIndex + 1) % targets.Count;
+            _target = targets[_currentTargetIndex];
+        }
+        else if (leftHeld && !_wasLeftHeld)
+        {
+            _currentTargetIndex--;
+            if (_currentTargetIndex < 0)
+                _currentTargetIndex = targets.Count - 1;
+            _target = targets[_currentTargetIndex];
+        }
 
-            if (_target != null && _lastTarget != _target)
-            {
-                Debug.Log("Moving camera");
-                _lastTarget = _target;
-                cameraController.BattleCameraLookAtTarget(_target.gObject);
-            }
+        _wasRightHeld = rightHeld;
+        _wasLeftHeld = leftHeld;
 
-            if (confirmInput.action.WasPressedThisFrame())
-            {
-                TargetSelected?.Invoke(_target);
-                StopTargeting();
-            }
+        if (_target != null && _lastTarget != _target)
+        {
+            //Debug.Log("Moving camera");
+            _lastTarget = _target;
+            cameraController.BattleCameraLookAtTarget(_target.gObject);
+        }
+
+        if (confirmInput.action.WasPressedThisFrame())
+        {
+            TargetSelected?.Invoke(_target);
+            StopTargeting();
         }
     }
 
@@ -205,12 +178,18 @@ public class SkillTargetSystem : MonoBehaviour
     public void CancelTargeting()
     {
         TargetCanceled?.Invoke();
+        
+        if (cameraController != null)
+        {
+            cameraController.ResetCamera(_originalCamPos, _originalCamRot);
+        }
+
         StopTargeting();
     }
 
     public void StartTargeting()
     {
-        _originalCamTransform = cam.transform; 
+        SaveCameraTransform();
         _isTargetingEnemy = true;
         _isTargetingAlly = false;
 
@@ -225,7 +204,7 @@ public class SkillTargetSystem : MonoBehaviour
 
     public void StartTargetingAlly()
     {
-        _originalCamTransform = cam.transform;
+        SaveCameraTransform();
         _isTargetingAlly = true;
         _isTargetingEnemy = false;
 
@@ -238,15 +217,19 @@ public class SkillTargetSystem : MonoBehaviour
         }
     }
 
+    private void SaveCameraTransform()
+    {
+        if (cam != null)
+        {
+            _originalCamPos = cam.transform.position;
+            _originalCamRot = cam.transform.rotation;
+        }
+    }
+
     public void StopTargeting()
     {
         _isTargetingEnemy = false;
         _isTargetingAlly = false;
         aim.SetActive(false);
-    }
-
-    public void ReturnCameraRotation()
-    {
-        cameraController.BattleCameraChangeRotation(_originalCamTransform);
     }
 }

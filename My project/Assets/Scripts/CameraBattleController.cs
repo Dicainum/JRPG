@@ -73,6 +73,7 @@ public class CameraBattleController : MonoBehaviour
     public void BattleCameraLookAtTarget(GameObject target)
     {
         if (target == null) return;
+        isMoving = false;
         cam.transform.DOKill();
 
         Vector3 dir = target.transform.position - cam.transform.position;
@@ -87,10 +88,20 @@ public class CameraBattleController : MonoBehaviour
     {
         if (rotateTarget == null) return;
 
+        isMoving = false;
         cam.transform.DOKill();
 
         cam.transform
             .DORotateQuaternion(rotateTarget.rotation, lookAtSpeed)
             .SetEase(Ease.Linear);    
+    }
+
+    public void ResetCamera(Vector3 position, Quaternion rotation)
+    {
+        isMoving = false;
+        cam.transform.DOKill();
+
+        cam.transform.DOMove(position, timeToMove).SetEase(Ease.InOutSine);
+        cam.transform.DORotateQuaternion(rotation, timeToMove).SetEase(Ease.InOutSine);
     }
 }

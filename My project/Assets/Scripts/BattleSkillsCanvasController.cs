@@ -118,8 +118,7 @@ public class BattleSkillsCanvasController : MonoBehaviour
             cameraBattleController.ChangeToUnitCameraPos(currentActiveUnit);
         }
 
-        currentState = BattleUIState.SkillSelection;
-        Debug.Log("back to skill pages");
+        CloseSkillPage();
     }
 
     private void CloseSkillPage()
