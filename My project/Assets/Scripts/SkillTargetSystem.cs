@@ -31,6 +31,7 @@ public class SkillTargetSystem : MonoBehaviour
     private bool _wasRightHeld = false;
     public System.Action<TurnUnit> TargetSelected;
     public System.Action TargetCanceled;
+    public System.Action TargetStarted;
 
     private void OnEnable()
     {
@@ -189,6 +190,7 @@ public class SkillTargetSystem : MonoBehaviour
 
     public void StartTargeting()
     {
+        TargetStarted?.Invoke();
         SaveCameraTransform();
         _isTargetingEnemy = true;
         _isTargetingAlly = false;
@@ -204,6 +206,7 @@ public class SkillTargetSystem : MonoBehaviour
 
     public void StartTargetingAlly()
     {
+        TargetStarted?.Invoke();
         SaveCameraTransform();
         _isTargetingAlly = true;
         _isTargetingEnemy = false;

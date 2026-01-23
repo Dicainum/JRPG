@@ -51,6 +51,7 @@ public class BattleSkillsCanvasController : MonoBehaviour
         if (skillTargetSystem != null)
         {
             skillTargetSystem.TargetCanceled += OnTargetCanceled;
+            skillTargetSystem.TargetStarted += OnTargetStarted;
         }
     }
 
@@ -69,6 +70,7 @@ public class BattleSkillsCanvasController : MonoBehaviour
         if (skillTargetSystem != null)
         {
             skillTargetSystem.TargetCanceled -= OnTargetCanceled;
+            skillTargetSystem.TargetStarted -= OnTargetStarted;
         }
     }
 
@@ -111,6 +113,14 @@ public class BattleSkillsCanvasController : MonoBehaviour
         }
     }
 
+    private void OnTargetStarted()
+    {
+        if (activatedCanvas != null)
+        {
+            activatedCanvas.SetActive(false);
+        }
+    }
+
     private void OnTargetCanceled()
     {
         if (cameraBattleController != null && currentActiveUnit != null)
@@ -125,15 +135,24 @@ public class BattleSkillsCanvasController : MonoBehaviour
     {
         DisableUnitPages(currentActiveUnit);
 
-        if (currentActiveUnit != null && descriptions != null)
+        if (currentActiveUnit != null)
         {
             int index = currentActiveUnit.stats.index;
 
-            if (index >= 0 && index < descriptions.Length)
+            if (descriptions != null && index >= 0 && index < descriptions.Length)
             {
                 if (descriptions[index] != null)
                 {
                     descriptions[index].SetActive(false);
+                }
+            }
+            EnableCanvas(index);
+            
+            if (firstPages != null && index >= 0 && index < firstPages.Length)
+            {
+                if (firstPages[index] != null)
+                {
+                    firstPages[index].SetActive(true);
                 }
             }
         }
