@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class WindSliceSkill : BasicSkill
 {
-    private const int BaseDamage = 20;
+    [SerializeField] private int _baseDamage = 20;
     private TurnUnit _currentTarget;
     private WindBoost _windBoost;
     private List<TurnUnit> _damagedTargets = new List<TurnUnit>();
@@ -14,7 +14,7 @@ public class WindSliceSkill : BasicSkill
         base.OnAwake();
         skillName = "Wind Slice";
         skillDescription = "Наносит малый ветряной урон цели. Каждое применение увеличивает урон последующих применений на 5%.";
-        _damage = BaseDamage;
+        _damage = _baseDamage;
         
         _windBoost = GetComponent<WindBoost>();
         if (_windBoost == null)
@@ -109,7 +109,7 @@ public class WindSliceSkill : BasicSkill
             return;
 
         float damageMultiplier = _windBoost != null ? _windBoost.GetDamageMultiplier() : 1f;
-        int finalDamage = Mathf.RoundToInt(BaseDamage * damageMultiplier);
+        int finalDamage = Mathf.RoundToInt(_baseDamage * damageMultiplier);
 
         _currentTarget.stats.TakeDamage(finalDamage);
         _damagedTargets.Clear();

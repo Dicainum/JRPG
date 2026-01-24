@@ -33,6 +33,7 @@ public class FrozenShieldSkill : BasicSkill
     {
         if (_inCooldown)
         {
+            Debug.Log($"{skillName} is on cooldown.");
             return;
         }
 
@@ -60,7 +61,7 @@ public class FrozenShieldSkill : BasicSkill
         }
         if (_skillTargetSystem != null)
         {
-            _skillTargetSystem.StartTargetingAlly(); //
+            _skillTargetSystem.StartTargetingAlly();
         }
         else
         {
@@ -119,5 +120,6 @@ public class FrozenShieldSkill : BasicSkill
         }
 
         UseAction();
+        StartCooldown();
     }
 }

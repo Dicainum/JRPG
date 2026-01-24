@@ -21,15 +21,16 @@ public class BasicSkill : MonoBehaviour
         Dark   = 1 << 3,
         Pure   = 1 << 4,
         Water  = 1 << 5,
-        Ice    = 1 << 6
+        Ice    = 1 << 6,
+        Fire    = 1 << 7
     }
     
     [SerializeField] private DamageType _damageType;
-    [SerializeField] protected int _cooldownTime = 0; //in turns
+    [SerializeField] protected int _cooldownTime = 0;
     protected int _turnsLeft = 0;
     public Action<TurnUnit> skillUsed;
     protected bool _inCooldown = false;
-    
+    public bool IsOnCooldown => _inCooldown;
 
     protected virtual void OnAwake()
     {
@@ -40,11 +41,26 @@ public class BasicSkill : MonoBehaviour
     }
     protected virtual void OnEnable()
     {
-        _myOrderController.OnTurnStarted += TurnStarted;
+        if (_myOrderController == null)
+        {
+            _myOrderController = FindFirstObjectByType<OrderController>();
+        }
+
+        if (_myOrderController != null)
+        {
+            _myOrderController.OnTurnStarted += TurnStarted;
+        }
+        else
+        {
+            Debug.LogWarning("OrderController not found on Enable. Skill may not function correctly.", this);
+        }
     }
     protected virtual void OnDisable()
     {
-        _myOrderController.OnTurnStarted -= TurnStarted;
+        if (_myOrderController != null)
+        {
+            _myOrderController.OnTurnStarted -= TurnStarted;
+        }
         _boost = _defaultBoost;
     }
 
@@ -94,8 +110,11 @@ public class BasicSkill : MonoBehaviour
 
     protected void StartCooldown()
     {
-        _inCooldown = true;
-        _turnsLeft = _cooldownTime;
+        if (_cooldownTime > 0)
+        {
+            _inCooldown = true;
+            _turnsLeft = _cooldownTime;
+        }
     }
 
     protected virtual void TurnStarted(TurnUnit turnUnit)
@@ -104,16 +123,16 @@ public class BasicSkill : MonoBehaviour
         if (_currentUnit == null || _currentUnit.gObject == null)
         {
             _currentUnit = GetCurrentUnit();
-            Debug.Log("Findinig Unit");
+            //Debug.Log("Findinig Unit");
         }
         
-        Debug.Log(_turnsLeft);
-        Debug.Log(_inCooldown);
-        Debug.Log(_myOrderController.currentUnit.gObject);
-        Debug.Log(_currentUnit.gObject);
-        Debug.Log(_myOrderController.currentUnit == _currentUnit);
+        //Debug.Log(_turnsLeft);
+        //Debug.Log(_inCooldown);
+        //Debug.Log(_myOrderController.currentUnit.gObject);
+        //Debug.Log(_currentUnit.gObject);
+        //Debug.Log(_myOrderController.currentUnit == _currentUnit);
 
-        if (_turnsLeft <= 0 && _inCooldown && _myOrderController.currentUnit == _currentUnit)
+        if (_turnsLeft > 0 && _inCooldown && _myOrderController.currentUnit == _currentUnit)
         {
             _turnsLeft--;
             if(_turnsLeft < 1)

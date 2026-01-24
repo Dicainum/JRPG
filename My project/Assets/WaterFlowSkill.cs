@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class WaterFlowSkill : BasicSkill
 {
-    private const int _baseDamage = 40;
+    [SerializeField] private int _baseDamage = 40;
     private TurnUnit _currentTarget;
     private List<TurnUnit> _damagedTargets = new List<TurnUnit>();
 

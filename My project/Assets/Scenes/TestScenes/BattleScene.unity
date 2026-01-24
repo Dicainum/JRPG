@@ -2342,23 +2342,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4671531254352608162, guid: 2865f9c9e849510499756ad727371eb2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4671531254352608162, guid: 2865f9c9e849510499756ad727371eb2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 219840330}
+      objectReference: {fileID: 987379627}
     - target: {fileID: 4671531254352608162, guid: 2865f9c9e849510499756ad727371eb2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4671531254352608162, guid: 2865f9c9e849510499756ad727371eb2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetActive
+      value: EnterSkillSelection
       objectReference: {fileID: 0}
     - target: {fileID: 4671531254352608162, guid: 2865f9c9e849510499756ad727371eb2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UnityEngine.GameObject, UnityEngine
+      value: BattleSkillsCanvasController, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4671531254352608162, guid: 2865f9c9e849510499756ad727371eb2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
@@ -2728,6 +2728,7 @@ MonoBehaviour:
   _boost: 0
   _damageType: 32
   _cooldownTime: 2
+  _baseDamage: 40
 --- !u!114 &482100439
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2760,7 +2761,7 @@ MonoBehaviour:
   _damage: 0
   _boost: 20
   _damageType: 64
-  _cooldownTime: 0
+  _cooldownTime: 2
 --- !u!114 &482100441
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2961,6 +2962,11 @@ GameObject:
   - component: {fileID: 546199358}
   - component: {fileID: 546199359}
   - component: {fileID: 546199360}
+  - component: {fileID: 546199361}
+  - component: {fileID: 546199362}
+  - component: {fileID: 546199363}
+  - component: {fileID: 546199365}
+  - component: {fileID: 546199364}
   m_Layer: 0
   m_Name: Player
   m_TagString: Character
@@ -3131,6 +3137,95 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &546199361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 546199352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bc491596b53c734f93bc8f75280a9b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillName: 
+  skillDescription: 
+  _damage: 1
+  _boost: 1
+  _damageType: 0
+  _cooldownTime: 0
+--- !u!114 &546199362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 546199352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b87a6cad7d41efc47bcc3fab2008469a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _skillButtonPrefab: {fileID: 7662497040983744764, guid: 501d468bcbfc3dd4aa8b78cb5327563a, type: 3}
+--- !u!114 &546199363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 546199352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76030f8c2f515d349941e34c4d0cb2a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _duration: 1
+  _currentForm: 1
+  _maxStacks: 3
+  _damageBonusPerStack: 0.1
+--- !u!114 &546199364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 546199352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68459ad52bbcc234bac9d98c778db50c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillName: 
+  skillDescription: 
+  _damage: 1
+  _boost: 1
+  _damageType: 4
+  _cooldownTime: 0
+--- !u!114 &546199365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 546199352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eda729f00c87fba448795cb43b55a2ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillName: 
+  skillDescription: 
+  _damage: 1
+  _boost: 1
+  _damageType: 128
+  _cooldownTime: 0
+  _burnDamage: 10
+  _hellfireDamage: 30
+  _critMultiplier: 1.5
+  _infiniteDarknessDamage: 80
+  _hpCostPercentage: 0.4
+  _attackBuffDuration: 2
 --- !u!1 &566212194
 GameObject:
   m_ObjectHideFlags: 0
@@ -3280,23 +3375,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4671531254352608162, guid: 2865f9c9e849510499756ad727371eb2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4671531254352608162, guid: 2865f9c9e849510499756ad727371eb2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 2001681966}
+      objectReference: {fileID: 987379627}
     - target: {fileID: 4671531254352608162, guid: 2865f9c9e849510499756ad727371eb2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4671531254352608162, guid: 2865f9c9e849510499756ad727371eb2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetActive
+      value: EnterSkillSelection
       objectReference: {fileID: 0}
     - target: {fileID: 4671531254352608162, guid: 2865f9c9e849510499756ad727371eb2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UnityEngine.GameObject, UnityEngine
+      value: BattleSkillsCanvasController, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4671531254352608162, guid: 2865f9c9e849510499756ad727371eb2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
@@ -8277,6 +8372,7 @@ MonoBehaviour:
   _boost: 0
   _damageType: 2
   _cooldownTime: 0
+  _baseDamage: 20
 --- !u!114 &1855615295
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10026,23 +10122,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4671531254352608162, guid: 2865f9c9e849510499756ad727371eb2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4671531254352608162, guid: 2865f9c9e849510499756ad727371eb2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 154109033}
+      objectReference: {fileID: 987379627}
     - target: {fileID: 4671531254352608162, guid: 2865f9c9e849510499756ad727371eb2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4671531254352608162, guid: 2865f9c9e849510499756ad727371eb2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetActive
+      value: EnterSkillSelection
       objectReference: {fileID: 0}
     - target: {fileID: 4671531254352608162, guid: 2865f9c9e849510499756ad727371eb2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UnityEngine.GameObject, UnityEngine
+      value: BattleSkillsCanvasController, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4671531254352608162, guid: 2865f9c9e849510499756ad727371eb2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument

@@ -7,7 +7,7 @@ public class BasicBuff : MonoBehaviour
     protected int _turnsLeft = 0;
     protected TurnUnit _buffTarget;
     protected bool _isActive = false;
-    private OrderController _orderController;
+    protected OrderController _orderController;
 
     protected virtual void OnAwake()
     {
@@ -19,6 +19,7 @@ public class BasicBuff : MonoBehaviour
         if (_orderController != null)
         {
             _orderController.OnTurnStarted += TurnStarted;
+            _orderController.OnTurnEnded += TurnEnded;
         }
     }
 
@@ -27,6 +28,7 @@ public class BasicBuff : MonoBehaviour
         if (_orderController != null)
         {
             _orderController.OnTurnStarted -= TurnStarted;
+            _orderController.OnTurnEnded -= TurnEnded;
         }
     }
 
@@ -45,10 +47,6 @@ public class BasicBuff : MonoBehaviour
     private void Start()
     {
         OnStart();
-        if (_orderController != null)
-        {
-            _orderController.OnTurnStarted += TurnStarted;
-        }
     }
 
     public virtual void ApplyBuff(TurnUnit target)
@@ -82,5 +80,10 @@ public class BasicBuff : MonoBehaviour
                 _buffTarget = null;
             }
         }
+    }
+
+    protected virtual void TurnEnded(TurnUnit turnUnit)
+    {
+        
     }
 }

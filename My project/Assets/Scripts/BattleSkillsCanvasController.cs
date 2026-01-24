@@ -83,6 +83,26 @@ public class BattleSkillsCanvasController : MonoBehaviour
             DisableAllCanvas();
             EnableCanvas(currentUnit.stats.index);
 
+            int index = currentUnit.stats.index;
+
+            // Force enable FirstPage
+            if (firstPages != null && index >= 0 && index < firstPages.Length && firstPages[index] != null)
+            {
+                firstPages[index].SetActive(true);
+            }
+
+            // Force disable SkillPage
+            if (skillPages != null && index >= 0 && index < skillPages.Length && skillPages[index] != null)
+            {
+                skillPages[index].SetActive(false);
+            }
+
+            // Force disable Descriptions
+            if (descriptions != null && index >= 0 && index < descriptions.Length && descriptions[index] != null)
+            {
+                descriptions[index].SetActive(false);
+            }
+
             currentState = BattleUIState.ActionSelection;
         }
         else
@@ -164,6 +184,21 @@ public class BattleSkillsCanvasController : MonoBehaviour
     public void EnterSkillSelection()
     {
         currentState = BattleUIState.SkillSelection;
+
+        if (currentActiveUnit != null)
+        {
+            int index = currentActiveUnit.stats.index;
+
+            if (firstPages != null && index >= 0 && index < firstPages.Length && firstPages[index] != null)
+            {
+                firstPages[index].SetActive(false);
+            }
+
+            if (skillPages != null && index >= 0 && index < skillPages.Length && skillPages[index] != null)
+            {
+                skillPages[index].SetActive(true);
+            }
+        }
     }
 
     public void EnterTargeting()
