@@ -81,9 +81,14 @@ public class BasicSkill : MonoBehaviour
         OnStart();
     }
 
+    public virtual bool CanUse()
+    {
+        return true;
+    }
+
     public virtual void TryCast()
     {
-        if (!_inCooldown)
+        if (!_inCooldown && CanUse())
         {
             Cast();
             StartCooldown();

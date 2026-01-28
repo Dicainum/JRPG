@@ -2967,6 +2967,8 @@ GameObject:
   - component: {fileID: 546199363}
   - component: {fileID: 546199365}
   - component: {fileID: 546199364}
+  - component: {fileID: 546199366}
+  - component: {fileID: 546199367}
   m_Layer: 0
   m_Name: Player
   m_TagString: Character
@@ -3226,6 +3228,46 @@ MonoBehaviour:
   _infiniteDarknessDamage: 80
   _hpCostPercentage: 0.4
   _attackBuffDuration: 2
+--- !u!114 &546199366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 546199352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68ca9c01f3e4d6f48aaf785b1d5eed9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillName: 
+  skillDescription: 
+  _damage: 1
+  _boost: 1
+  _damageType: 4
+  _cooldownTime: 0
+  _damagePerHit: 8
+  _hitCount: 5
+--- !u!114 &546199367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 546199352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d92c3114b9daf44ebffb977d5c130fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillName: 
+  skillDescription: 
+  _damage: 1
+  _boost: 1
+  _damageType: 4
+  _cooldownTime: 0
+  _pureDamage: 20
+  _markDamagePercent: 0.5
 --- !u!1 &566212194
 GameObject:
   m_ObjectHideFlags: 0

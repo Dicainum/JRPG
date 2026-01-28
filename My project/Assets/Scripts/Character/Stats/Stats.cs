@@ -20,6 +20,7 @@ public class Stats : MonoBehaviour
     public int baseActions = 1;
     public int actions = 1;
     public BattleAttack baseAttack;
+    public System.Action<int> OnDamageTaken;
 
     protected virtual void OnAwake()
     {
@@ -48,6 +49,7 @@ public class Stats : MonoBehaviour
     public void TakeDamage (int damageTaken)
     {
         health -= damageTaken;
+        OnDamageTaken?.Invoke(damageTaken);
 
         if (health <= 0)
         {

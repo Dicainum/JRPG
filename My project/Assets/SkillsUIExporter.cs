@@ -68,7 +68,7 @@ public class SkillsUIExporter : MonoBehaviour
         {
             if (pair.Skill != null && pair.Button != null)
             {
-                pair.Button.interactable = !pair.Skill.IsOnCooldown;
+                pair.Button.interactable = !pair.Skill.IsOnCooldown && pair.Skill.CanUse();
             }
         }
     }
