@@ -8,7 +8,7 @@ public class ArrowOfDarknessSkill : BasicSkill
     {
         base.OnAwake();
         skillName = "Dark Arrow";
-        skillDescription = "Deals medium Dark damage to a single target.";
+        skillDescription = "Deals medium Dark damage to a single target and generates 2 dark stacks";
         _damage = BaseDamage;
     }
 
@@ -86,7 +86,7 @@ public class ArrowOfDarknessSkill : BasicSkill
         var buff = GetComponent<DarkAndLightStacksBuff>();
         if (buff != null)
         {
-            buff.AddStacks(2, currentUnit);
+            buff.AddStacks(2, currentUnit, DarkAndLightStacksBuff.StackType.Dark);
         }
 
         UseAction();

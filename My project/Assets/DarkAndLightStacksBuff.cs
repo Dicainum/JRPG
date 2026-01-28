@@ -47,14 +47,22 @@ public class DarkAndLightStacksBuff : BasicBuff
         }
     }
 
-    public void AddStacks(int amount, TurnUnit target)
+    public void AddStacks(int amount, TurnUnit target, StackType? forcedType = null)
     {
         if (target != null && _buffTarget == null)
         {
             _buffTarget = target;
         }
 
-        StackType typeToAdd = (_currentForm == Form.Dark) ? StackType.Dark : StackType.Light;
+        StackType typeToAdd;
+        if (forcedType.HasValue)
+        {
+            typeToAdd = forcedType.Value;
+        }
+        else
+        {
+            typeToAdd = (_currentForm == Form.Dark) ? StackType.Dark : StackType.Light;
+        }
 
         for (int i = 0; i < amount; i++)
         {
