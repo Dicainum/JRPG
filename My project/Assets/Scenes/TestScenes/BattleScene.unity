@@ -2969,6 +2969,7 @@ GameObject:
   - component: {fileID: 546199364}
   - component: {fileID: 546199366}
   - component: {fileID: 546199367}
+  - component: {fileID: 546199368}
   m_Layer: 0
   m_Name: Player
   m_TagString: Character
@@ -3225,9 +3226,6 @@ MonoBehaviour:
   _burnDamage: 10
   _hellfireDamage: 30
   _critMultiplier: 1.5
-  _infiniteDarknessDamage: 80
-  _hpCostPercentage: 0.4
-  _attackBuffDuration: 2
 --- !u!114 &546199366
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3268,6 +3266,27 @@ MonoBehaviour:
   _cooldownTime: 0
   _pureDamage: 20
   _markDamagePercent: 0.5
+--- !u!114 &546199368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 546199352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42a90ee6ef2d36742b5930c398d6c214, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillName: 
+  skillDescription: 
+  _damage: 1
+  _boost: 1
+  _damageType: 8
+  _cooldownTime: 0
+  _damageAmount: 80
+  _hpCostPercentage: 0.4
+  _attackBuffDuration: 2
 --- !u!1 &566212194
 GameObject:
   m_ObjectHideFlags: 0

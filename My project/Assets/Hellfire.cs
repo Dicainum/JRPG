@@ -8,41 +8,17 @@ public class Hellfire : BasicSkill
     [SerializeField] private int _hellfireDamage = 30;
     [SerializeField] private float _critMultiplier = 1.5f;
 
-    [Header("Infinite Darkness Settings")]
-    [SerializeField] private int _infiniteDarknessDamage = 80;
-    [SerializeField] private float _hpCostPercentage = 0.4f;
-    [SerializeField] private int _attackBuffDuration = 2;
-
-    private bool _isInfiniteDarkness = false;
-
     protected override void OnAwake()
     {
         base.OnAwake();
         skillName = "Hellfire";
-        skillDescription = "Deals fire damage. If Frozen, crits and hits all. >50% HP & 3 Light Stacks: Infinite Darkness.";
+        skillDescription = "Deals fire damage. If Frozen, crits and hits all.";
         _damage = _hellfireDamage;
     }
 
     public override void TryCast()
     {
         if (_inCooldown) return;
-
-        TurnUnit caster = GetCurrentUnit();
-        if (caster == null) return;
-
-        _isInfiniteDarkness = false;
-        var stacksBuff = caster.gObject.GetComponent<DarkAndLightStacksBuff>();
-        
-        if (stacksBuff != null)
-        {
-            int lightStacks = stacksBuff.GetStackCount(DarkAndLightStacksBuff.StackType.Light);
-            bool hpCondition = caster.stats.health > (caster.stats.maxHealth * 0.5f);
-
-            if (lightStacks >= 3 && hpCondition)
-            {
-                _isInfiniteDarkness = true;
-            }
-        }
 
         if (_skillTargetSystem != null)
         {
@@ -59,14 +35,7 @@ public class Hellfire : BasicSkill
         TurnUnit caster = GetCurrentUnit();
         if (caster == null) return;
 
-        if (_isInfiniteDarkness)
-        {
-            ExecuteInfiniteDarkness(caster, target);
-        }
-        else
-        {
-            ExecuteHellfire(caster, target);
-        }
+        ExecuteHellfire(caster, target);
 
         UseAction();
         StartCooldown();
@@ -122,32 +91,6 @@ public class Hellfire : BasicSkill
             }
             burn.ApplyBurnDebuff(t);
         }
-    }
-
-    private void ExecuteInfiniteDarkness(TurnUnit caster, TurnUnit target)
-    {
-        int hpCost = Mathf.RoundToInt(caster.stats.maxHealth * _hpCostPercentage);
-        caster.stats.TakeDamage(hpCost);
-
-        var stacksBuff = caster.gObject.GetComponent<DarkAndLightStacksBuff>();
-        if (stacksBuff != null)
-        {
-            stacksBuff.RemoveAllStacksOfType(DarkAndLightStacksBuff.StackType.Light);
-        }
-
-        List<TurnUnit> targets = GetOpponents(caster);
-        foreach (var t in targets)
-        {
-            if (!t.IsAlive) continue;
-            t.stats.TakeDamage(_infiniteDarknessDamage);
-        }
-
-        var atkBuff = caster.gObject.GetComponent<AttackBuff>();
-        if (atkBuff == null)
-        {
-            atkBuff = caster.gObject.AddComponent<AttackBuff>();
-        }
-        atkBuff.ApplyBuff(caster);
     }
 
     private List<TurnUnit> GetOpponents(TurnUnit caster)
