@@ -15,12 +15,15 @@ public class DarkAndLightStacksBuff : BasicBuff
         Dark
     }
 
+    [SerializeField] private BasicSkill[] _lightFormSkills;
+    [SerializeField] private BasicSkill[] _darkFormSkills;
     [SerializeField] private Form _currentForm = Form.Dark;
     [SerializeField] private int _maxStacks = 3;
     [SerializeField] private float _damageBonusPerStack = 0.1f;
 
     private List<StackType> _stacks = new List<StackType>();
     private CharacterStats _myStats;
+    private SkillsUIExporter _skillsUIExporter;
 
     public Form CurrentForm
     {
@@ -34,6 +37,7 @@ public class DarkAndLightStacksBuff : BasicBuff
     {
         base.OnAwake();
         _myStats = GetComponent<CharacterStats>();
+        _skillsUIExporter = GetComponent<SkillsUIExporter>();
     }
 
     protected override void OnStart()
@@ -45,6 +49,8 @@ public class DarkAndLightStacksBuff : BasicBuff
         {
             _buffTarget = _orderController.units.Find(u => u.gObject == gameObject);
         }
+
+        UpdateActiveSkills();
     }
 
     public void AddStacks(int amount, TurnUnit target, StackType? forcedType = null)
@@ -139,6 +145,21 @@ public class DarkAndLightStacksBuff : BasicBuff
             }
             
             Debug.Log($"[DarkAndLightStacksBuff] Switched to {_currentForm}. Stacks: {GetStacksString()}");
+            UpdateActiveSkills();
+        }
+    }
+
+    private void UpdateActiveSkills()
+    {
+        if (_skillsUIExporter == null) return;
+
+        if (_currentForm == Form.Light)
+        {
+            _skillsUIExporter.RefreshSkills(_lightFormSkills);
+        }
+        else
+        {
+            _skillsUIExporter.RefreshSkills(_darkFormSkills);
         }
     }
 

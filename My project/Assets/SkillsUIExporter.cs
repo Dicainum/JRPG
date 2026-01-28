@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class SkillsUIExporter : MonoBehaviour
 {
-    private BasicSkill[] _skills;
     private BattleSkillsCanvasController _battleSkillsCanvasController;
     private Stats _stats;
 
@@ -19,12 +18,28 @@ public class SkillsUIExporter : MonoBehaviour
 
     private List<SkillButtonPair> _skillButtons = new List<SkillButtonPair>();
 
-    private void Start()
+    private void Awake()
     {
-        _skills = GetComponents<BasicSkill>();
         _battleSkillsCanvasController = FindFirstObjectByType<BattleSkillsCanvasController>();
         _stats = GetComponent<Stats>();
-        
+    }
+
+    private void Start()
+    {
+        if (_skillButtons.Count == 0)
+        {
+            RefreshSkills(GetComponents<BasicSkill>());
+        }
+    }
+
+    public void RefreshSkills(IEnumerable<BasicSkill> skills)
+    {
+        foreach (var pair in _skillButtons)
+        {
+            if (pair.Button != null) Destroy(pair.Button.gameObject);
+        }
+        _skillButtons.Clear();
+
         if (_battleSkillsCanvasController == null || _battleSkillsCanvasController.skillPages == null || _stats == null)
         {
             Debug.LogWarning("SkillsUIExporter: Missing dependencies (BattleSkillsCanvasController or Stats).");
@@ -33,14 +48,16 @@ public class SkillsUIExporter : MonoBehaviour
 
         if (_stats.index < 0 || _stats.index >= _battleSkillsCanvasController.skillPages.Length)
         {
-            Debug.LogError($"SkillsUIExporter: Stats index {_stats.index} is out of range for skillPages.");
+            Debug.LogError($"SkillsUIExporter: Stats {_stats.index} is out of range for skillPages.");
             return;
         }
 
         Transform parentPage = _battleSkillsCanvasController.skillPages[_stats.index].transform;
 
-        foreach (BasicSkill skill in _skills)
+        foreach (BasicSkill skill in skills)
         {
+            if (skill == null) continue;
+
             GameObject buttonObj = Instantiate(_skillButtonPrefab, parentPage);
             
             TextMeshProUGUI buttonLabel = buttonObj.GetComponentInChildren<TextMeshProUGUI>();

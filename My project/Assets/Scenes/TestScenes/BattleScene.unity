@@ -3156,7 +3156,7 @@ MonoBehaviour:
   skillDescription: 
   _damage: 1
   _boost: 1
-  _damageType: 0
+  _damageType: 8
   _cooldownTime: 0
 --- !u!114 &546199362
 MonoBehaviour:
@@ -3184,6 +3184,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _duration: 1
+  _lightFormSkills:
+  - {fileID: 546199366}
+  - {fileID: 546199364}
+  - {fileID: 546199367}
+  _darkFormSkills:
+  - {fileID: 546199361}
+  - {fileID: 546199365}
+  - {fileID: 546199368}
   _currentForm: 1
   _maxStacks: 3
   _damageBonusPerStack: 0.1
