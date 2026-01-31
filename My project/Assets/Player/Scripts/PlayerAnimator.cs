@@ -5,23 +5,20 @@ public class PlayerAnimator : MonoBehaviour
     [Header("Components")]
     [SerializeField] private Animator[] animator;
 
-    private int isMovingHash;
+    private int speedHash;
 
     private void Awake()
     {
-        //if (animator == null)
-          //  animator = GetComponent<Animator>();
-
-        isMovingHash = Animator.StringToHash("IsMoving");
+        speedHash = Animator.StringToHash("Speed");
     }
 
-    public void UpdateMovementState(bool isMoving)
+    public void UpdateMovementState(float targetSpeed)
     {
         if (animator != null)
         {
             foreach (var anim in animator)
             {
-                anim.SetBool(isMovingHash, isMoving);
+                anim.SetFloat(speedHash, targetSpeed, 0.1f, Time.deltaTime);
             }
         }
     }

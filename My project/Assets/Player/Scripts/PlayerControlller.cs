@@ -1,15 +1,16 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+
 public class PlayerControlller : MonoBehaviour, ICharacter
 {
     [Header("Links")]
     [SerializeField] private PlayerSettings playerSettings;
-
     [SerializeField] private PlayerAnimator playerAnimator;
 
     private CharacterController controller;
     private Transform cam;
-    private bool isSpeedBoosted = false;
+
+    private bool isSprinting = false;
 
     void Awake()
     {
@@ -20,15 +21,30 @@ public class PlayerControlller : MonoBehaviour, ICharacter
             playerAnimator = GetComponent<PlayerAnimator>();
     }
 
+    public void SetSpeedBoost(bool active)
+    {
+        isSprinting = active;
+    }
+
     public void HandleMove(Vector2 input)
     {
         Vector3 moveDir = new Vector3(input.x, 0, input.y);
-
         bool isMoving = moveDir.sqrMagnitude > 0.001f;
+
+        float targetAnimSpeed = 0f;
+
+        if (isMoving)
+        {
+            targetAnimSpeed = isSprinting ? 1f : 0.5f;
+        }
+        else
+        {
+            targetAnimSpeed = 0f;
+        }
 
         if (playerAnimator != null)
         {
-            playerAnimator.UpdateMovementState(isMoving);
+            playerAnimator.UpdateMovementState(targetAnimSpeed);
         }
 
         if (isMoving)
@@ -40,27 +56,26 @@ public class PlayerControlller : MonoBehaviour, ICharacter
             camRight.Normalize();
 
             Vector3 move = camForward * moveDir.z + camRight * moveDir.x;
-            float currentSpeed = 0 * (isSpeedBoosted ? playerSettings.speedBoostMultiplier : 1f); //playerSettings.Move speed instead of a 0 if want to restore phys. moving
 
-            controller.Move(move * currentSpeed * Time.deltaTime);
-
-            Quaternion targetRot = Quaternion.LookRotation(move);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, playerSettings.rotationSpeed * Time.deltaTime);
+            if (move != Vector3.zero)
+            {
+                Quaternion targetRot = Quaternion.LookRotation(move);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, playerSettings.rotationSpeed * Time.deltaTime);
+            }
         }
+    }
+
+    public void OnRootMotionReceived(Vector3 deltaPos, Quaternion deltaRot)
+    {
+        //float boost = isSprinting ? playerSettings.speedBoostMultiplier : 1f;
+
+        //controller.Move(deltaPos * boost);
+        controller.Move(deltaPos);
     }
 
     public void HandleAttack()
     {
         var attack = GetComponent<PlayerAttack>();
         if (attack != null) attack.HandleAttack();
-    }
-
-    public void SetSpeedBoost(bool active)
-    {
-        isSpeedBoosted = active;
-    }
-    public void OnRootMotionReceived(Vector3 deltaPos, Quaternion deltaRot)
-    {
-        controller.Move(deltaPos);
     }
 }

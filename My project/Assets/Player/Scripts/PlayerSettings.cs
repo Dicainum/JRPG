@@ -7,6 +7,6 @@ public class PlayerSettings : ScriptableObject
     public float moveSpeed = 5f;
     public float rotationSpeed = 10f;
     [Header("SpeedBoost")]
-    public float speedBoostMultiplier = 2f;
+    public float speedBoostMultiplier = 1f;
     public static ColorSpace colorSpace = ColorSpace.Gamma;
 }
