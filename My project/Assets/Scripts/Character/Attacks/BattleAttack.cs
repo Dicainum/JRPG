@@ -42,13 +42,13 @@ public class BattleAttack : MonoBehaviour
 
     protected virtual void MoveToAttackPosition(int index)
     {
-        transform.DOMove(_targetPositions[index].position, timeToMove)
-            .SetEase(Ease.Linear);
+        //transform.DOMove(_targetPositions[index].position, timeToMove)
+         //   .SetEase(Ease.Linear);
     }
 
     protected virtual void StartAttackAnimation()
     {
-        _anim.SetTrigger("Attack");
+        //_anim.SetTrigger("Attack");
     }
 
     private void CalculateTargetPositions()

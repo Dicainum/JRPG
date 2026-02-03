@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 48249b5f36abf0a42a4b8f6fe559a598, type: 3}
-  m_Name: BaseCharacter 2
+  m_Name: IceFairy
   m_EditorClassIdentifier: 
   health: -1
   speed: -1
@@ -24,3 +24,4 @@ MonoBehaviour:
   index: 2
   actions: 1
   baseActions: 1
+  characterPrefab: {fileID: 7372986309711934915, guid: cd9f1d985414f834fa1e4b56bc933a50, type: 3}
