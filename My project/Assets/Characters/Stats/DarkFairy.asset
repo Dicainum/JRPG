@@ -19,9 +19,8 @@ MonoBehaviour:
   baseSpeed: 100
   baseDamage: 10
   characterName: Player2
-  characterIcon: {fileID: -1823214581, guid: be23c9953067e57459262ab21db968c4, type: 3}
+  characterIcon: {fileID: 1324810725, guid: ccf1aeecf42de3540843c999e068f9ce, type: 3}
   isEnemy: 0
   index: 1
   actions: 1
   baseActions: 1
-  characterPrefab: {fileID: 0}
