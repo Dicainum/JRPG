@@ -178,6 +178,15 @@ public class SkillTargetSystem : MonoBehaviour
 
     public void CancelTargeting()
     {
+        if (OrderController.Order.currentUnit.gObject != null)
+        {
+            var animController = OrderController.Order.currentUnit.gObject.GetComponent<CharacterAnimationController>();
+            if (animController != null)
+            {
+                animController.CancelAiming();
+            }
+        }
+        
         TargetCanceled?.Invoke();
         
         if (cameraController != null)

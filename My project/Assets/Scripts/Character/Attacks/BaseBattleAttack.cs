@@ -5,9 +5,12 @@ using UnityEngine;
 public class BaseBattleAttack : BattleAttack
 {
     private SkillTargetSystem _skillTargetSystem;
+    private CharacterAnimationController _animationController;
+
     protected override void OnAwake()
     {
         base.OnAwake();
+        _animationController = GetComponentInChildren<CharacterAnimationController>();
         _skillTargetSystem = FindFirstObjectByType<SkillTargetSystem>();
         _skillTargetSystem.TargetSelected += ApplyAttack;
     }
@@ -20,6 +23,10 @@ public class BaseBattleAttack : BattleAttack
     public override void StartAttacking()
     {
         base.StartAttacking();
+        if (_animationController != null)
+        {
+            _animationController.StartAimingBasicAttack();
+        }
         _skillTargetSystem.StartTargeting();
     }
 
@@ -27,7 +34,7 @@ public class BaseBattleAttack : BattleAttack
     {
         if (!attackApplied)
         {
-            MoveToAttackPosition(target.stats.index);
+            //MoveToAttackPosition(target.stats.index);
             StartAttackAnimation();
             baseAttackTarget = target;
         }

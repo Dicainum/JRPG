@@ -7,6 +7,7 @@ public class SkillsUIExporter : MonoBehaviour
 {
     private BattleSkillsCanvasController _battleSkillsCanvasController;
     private Stats _stats;
+    private CharacterAnimationController _animationController;
 
     [SerializeField] private GameObject _skillButtonPrefab;
 
@@ -22,6 +23,7 @@ public class SkillsUIExporter : MonoBehaviour
     {
         _battleSkillsCanvasController = FindFirstObjectByType<BattleSkillsCanvasController>();
         _stats = GetComponent<Stats>();
+        _animationController = GetComponentInChildren<CharacterAnimationController>();
     }
 
     private void Start()
@@ -54,6 +56,7 @@ public class SkillsUIExporter : MonoBehaviour
 
         Transform parentPage = _battleSkillsCanvasController.skillPages[_stats.index].transform;
 
+        int skillIndex = 0;
         foreach (BasicSkill skill in skills)
         {
             if (skill == null) continue;
@@ -72,10 +75,19 @@ public class SkillsUIExporter : MonoBehaviour
             Button button = buttonObj.GetComponent<Button>();
             if (button != null)
             {
-                button.onClick.AddListener(() => skill.TryCast());
+                int currentSkillIndex = skillIndex;
+                button.onClick.AddListener(() => 
+                {
+                    if (_animationController != null && !skill.IsOnCooldown && skill.CanUse())
+                    {
+                        _animationController.StartAimingSkill(currentSkillIndex);
+                    }
+                    skill.TryCast();
+                });
                 
                 _skillButtons.Add(new SkillButtonPair { Skill = skill, Button = button });
             }
+            skillIndex++;
         }
     }
 
