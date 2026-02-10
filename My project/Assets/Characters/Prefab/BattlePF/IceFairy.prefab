@@ -224,6 +224,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Erin_newbones 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8150310163089627300, guid: cd9f1d985414f834fa1e4b56bc933a50, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 22100000, guid: 6411870bac82aee4ebf75434631ca74b, type: 2}
     m_RemovedComponents:
     - {fileID: 6752526895471687946, guid: cd9f1d985414f834fa1e4b56bc933a50, type: 3}
     m_RemovedGameObjects: []
