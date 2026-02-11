@@ -6191,11 +6191,6 @@ Transform:
   - {fileID: 325000315}
   m_Father: {fileID: 923371110}
   m_LocalEulerAnglesHint: {x: 0, y: -13.887, z: 0}
---- !u!95 &1507916910 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 1402308208970822031, guid: 4a3afec64ccf658488c6fee9883a2a6c, type: 3}
-  m_PrefabInstance: {fileID: 8378905769554816321}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1570806887
 GameObject:
   m_ObjectHideFlags: 0
@@ -8976,10 +8971,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: WindFairy
       objectReference: {fileID: 0}
-    - target: {fileID: 6854441039156924559, guid: 4a3afec64ccf658488c6fee9883a2a6c, type: 3}
-      propertyPath: _animator
-      value: 
-      objectReference: {fileID: 1507916910}
     - target: {fileID: 7638278398054893215, guid: 4a3afec64ccf658488c6fee9883a2a6c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

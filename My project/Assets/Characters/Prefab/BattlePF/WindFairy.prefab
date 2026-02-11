@@ -213,7 +213,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 1402308208970822031}
-  _dampTime: 0.1
 --- !u!1 &7022846143282896116
 GameObject:
   m_ObjectHideFlags: 0
