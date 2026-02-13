@@ -3,8 +3,8 @@ using UnityEngine;
 public class CharacterAnimationController : MonoBehaviour
 {
     [Header("Components")]
-    [SerializeField] private Animator _animator;
     
+    [SerializeField] private Animator[] _animators;
     private static readonly int IsAimingAttackHash = Animator.StringToHash("IsAimingAttack");
     private static readonly int IsAimingSkillHash = Animator.StringToHash("IsAimingSkill");
     private static readonly int IsSelectingSkillHash = Animator.StringToHash("IsSelectingSkill");
@@ -30,68 +30,103 @@ public class CharacterAnimationController : MonoBehaviour
 
     private void Awake()
     {
-        if (_animator == null)
-            _animator = GetComponentInChildren<Animator>();
-        _animator.SetLayerWeight(1, 0);
-        _animator.SetLayerWeight(2, 1);
+        if (_animators == null || _animators.Length == 0)
+            _animators = GetComponentsInChildren<Animator>();
+            
+        foreach (var anim in _animators)
+        {
+            if (anim == null) continue;
+            anim.SetLayerWeight(1, 0);
+            anim.SetLayerWeight(2, 1);
+        }
     }
     
     public void StartSelectingSkill()
     {
-        if (_animator == null || IsInBlockingState()) return;
+        if (_animators == null || _animators.Length == 0 || IsInBlockingState()) return;
 
         CancelAiming();
 
         _currentState = CharacterState.SelectingSkill;
-        _animator.SetBool(IsSelectingSkillHash, true);
+        foreach (var anim in _animators)
+        {
+            if (anim != null) anim.SetBool(IsSelectingSkillHash, true);
+        }
     }
     
     public void StartAimingBasicAttack()
     {
-        if (_animator == null || IsInBlockingState()) return;
+        if (_animators == null || _animators.Length == 0 || IsInBlockingState()) return;
 
         CancelAiming();
 
         _currentState = CharacterState.AimingBasic;
-        _animator.SetBool(IsAimingAttackHash, true);
+        foreach (var anim in _animators)
+        {
+            if (anim != null) anim.SetBool(IsAimingAttackHash, true);
+        }
     }
     
     public void StartAimingSkill(int skillIndex)
     {
-        if (_animator == null || IsInBlockingState()) return;
+        if (_animators == null || _animators.Length == 0 || IsInBlockingState()) return;
 
         CancelAiming();
 
         _currentState = CharacterState.AimingSkill;
-        _animator.SetInteger(SkillIndexHash, skillIndex);
-        _animator.SetBool(IsAimingSkillHash, true);
+        foreach (var anim in _animators)
+        {
+            if (anim != null)
+            {
+                anim.SetInteger(SkillIndexHash, skillIndex);
+                anim.SetBool(IsAimingSkillHash, true);
+            }
+        }
     }
     
     public void ExecuteAction()
     {
-        if (_animator == null) return;
+        if (_animators == null || _animators.Length == 0) return;
 
         if (_currentState == CharacterState.AimingBasic)
         {
             _currentState = CharacterState.Attacking;
-            _animator.SetTrigger(TriggerActionHash);
-            _animator.SetBool(IsAimingAttackHash, false);
+            foreach (var anim in _animators)
+            {
+                if (anim != null)
+                {
+                    anim.SetTrigger(TriggerActionHash);
+                    anim.SetBool(IsAimingAttackHash, false);
+                }
+            }
         }
         else if (_currentState == CharacterState.AimingSkill)
         {
             _currentState = CharacterState.CastingSkill;
-            _animator.SetTrigger(TriggerActionHash);
-            _animator.SetBool(IsAimingSkillHash, false);
+            foreach (var anim in _animators)
+            {
+                if (anim != null)
+                {
+                    anim.SetTrigger(TriggerActionHash);
+                    anim.SetBool(IsAimingSkillHash, false);
+                }
+            }
         }
     }
     
     public void CancelAiming()
     {
-        if (_animator == null) return;
+        if (_animators == null) return;
 
-        _animator.SetBool(IsAimingAttackHash, false);
-        _animator.SetBool(IsAimingSkillHash, false);
-        _animator.SetBool(IsSelectingSkillHash, false);
+        foreach (var anim in _animators)
+        {
+            if (anim != null)
+            {
+                anim.SetBool(IsAimingAttackHash, false);
+                anim.SetBool(IsAimingSkillHash, false);
+                anim.SetBool(IsSelectingSkillHash, false);
+            }
+        }
         
         if (_currentState == CharacterState.AimingBasic || 
             _currentState == CharacterState.AimingSkill ||
@@ -103,18 +138,24 @@ public class CharacterAnimationController : MonoBehaviour
 
     public void TakeDamage()
     {
-        if (_animator == null) return;
+        if (_animators == null) return;
 
         CancelAiming();
 
         _currentState = CharacterState.TakingDamage;
-        _animator.SetTrigger(HitTriggerHash);
+        foreach (var anim in _animators)
+        {
+            if (anim != null) anim.SetTrigger(HitTriggerHash);
+        }
     }
 
     public void SetLowHealth(bool isLow)
     {
-        if (_animator == null) return;
-        _animator.SetBool(LowHealthBoolHash, isLow);
+        if (_animators == null) return;
+        foreach (var anim in _animators)
+        {
+            if (anim != null) anim.SetBool(LowHealthBoolHash, isLow);
+        }
     }
     
     public void OnActionFinished()
