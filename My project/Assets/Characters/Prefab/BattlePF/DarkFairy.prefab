@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 8385497353404031230}
   - component: {fileID: 4965132932237365395}
   - component: {fileID: 9142447978254960397}
+  - component: {fileID: 6649544555447096212}
   m_Layer: 0
   m_Name: DarkFairy
   m_TagString: Character
@@ -247,6 +248,19 @@ MonoBehaviour:
   _damageAmount: 80
   _hpCostPercentage: 0.4
   _attackBuffDuration: 2
+--- !u!114 &6649544555447096212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 631245095205771022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b44c363d29ce2c44aaf95ec27e57c3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 7846463537846147109}
 --- !u!1001 &2372844271403305805
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -307,6 +321,11 @@ PrefabInstance:
 --- !u!4 &4180485970986140255 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1939389649599498514, guid: add306863ba457d4697caf312d4da50c, type: 3}
+  m_PrefabInstance: {fileID: 2372844271403305805}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &7846463537846147109 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5479249384452346728, guid: add306863ba457d4697caf312d4da50c, type: 3}
   m_PrefabInstance: {fileID: 2372844271403305805}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &9021294165487725563
