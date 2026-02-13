@@ -164,6 +164,14 @@ public class SkillTargetSystem : MonoBehaviour
     {
         if (!_isTargetingEnemy && !_isTargetingAlly) return;
 
+        if (OrderController.Order.currentUnit.gObject != null)
+        {
+            var animController = OrderController.Order.currentUnit.gObject.GetComponent<CharacterAnimationController>();
+            if (animController != null)
+            {
+                animController.ExecuteAction();
+            }
+        }
         TargetSelected?.Invoke(_target);
         StopTargeting();
     }
