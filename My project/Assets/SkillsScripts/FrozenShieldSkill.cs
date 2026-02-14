@@ -92,6 +92,10 @@ public class FrozenShieldSkill : BasicSkill
             return;
 
         _currentTarget = target;
+        if (_particleSystem != null)
+        {
+            _particleSystem.Play();
+        }
         ApplyFrozenShield();
     }
 

@@ -64,6 +64,11 @@ public class InfinteDarkness : BasicSkill
         TurnUnit caster = GetCurrentUnit();
         if (caster == null) return;
 
+        if (_particleSystem != null)
+        {
+            _particleSystem.Play();
+        }
+
         int hpCost = Mathf.RoundToInt(caster.stats.maxHealth * _hpCostPercentage);
         caster.stats.TakeDamage(hpCost);
 

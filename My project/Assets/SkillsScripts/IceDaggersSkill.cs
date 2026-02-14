@@ -91,6 +91,10 @@ public class IceDaggersSkill : BasicSkill
             return;
 
         _currentTarget = target;
+        if (_particleSystem != null)
+        {
+            _particleSystem.Play();
+        }
         ApplyWaterFlow();
     }
 

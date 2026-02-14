@@ -90,6 +90,10 @@ public class HailOfStonesSkill : BasicSkill
             return;
 
         _currentTarget = target;
+        if (_particleSystem != null)
+        {
+            _particleSystem.Play();
+        }
         ApplyHailOfStones();
     }
     private void ApplyHailOfStones()

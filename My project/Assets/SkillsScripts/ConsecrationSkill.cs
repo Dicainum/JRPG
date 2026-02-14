@@ -64,6 +64,11 @@ public class ConsecrationSkill : BasicSkill
         TurnUnit caster = GetCurrentUnit();
         if (caster == null) return;
 
+        if (_particleSystem != null)
+        {
+            _particleSystem.Play();
+        }
+
         var stacksBuff = caster.gObject.GetComponent<DarkAndLightStacksBuff>();
         if (stacksBuff != null)
         {

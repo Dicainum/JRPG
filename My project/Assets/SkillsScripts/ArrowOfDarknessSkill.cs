@@ -85,6 +85,10 @@ public class ArrowOfDarknessSkill : BasicSkill
         if (currentUnit == null || currentUnit.stats.actions <= 0)
             return;
 
+        if (_particleSystem != null)
+        {
+            _particleSystem.Play();
+        }
         target.stats.TakeDamage(_damage);
 
         var buff = GetComponent<DarkAndLightStacksBuff>();

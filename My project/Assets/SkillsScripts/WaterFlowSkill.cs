@@ -91,6 +91,10 @@ public class WaterFlowSkill : BasicSkill
             return;
 
         _currentTarget = target;
+        if (_particleSystem != null)
+        {
+            _particleSystem.Play();
+        }
         ApplyWaterFlow();
     }
 

@@ -65,6 +65,11 @@ public class PurificationLight : BasicSkill
             }
         }
 
+        if (_particleSystem != null)
+        {
+            _particleSystem.Play();
+        }
+
         UseAction();
         StartCooldown();
 

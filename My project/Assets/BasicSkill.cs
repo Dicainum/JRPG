@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 public class BasicSkill : MonoBehaviour
@@ -6,6 +7,7 @@ public class BasicSkill : MonoBehaviour
     protected TurnUnit _currentUnit;
     protected SkillTargetSystem _skillTargetSystem;
     protected OrderController _myOrderController;
+    public ParticleSystem _particleSystem;
     public string skillName;
     public string skillDescription;
     public float delayBeforeCamMove = 2f;
@@ -107,14 +109,25 @@ public class BasicSkill : MonoBehaviour
 
     protected void UseAction()
     {
-        _currentUnit.stats.actions -= 1;
-        OrderController orderController = OrderController.Order ?? _myOrderController;
-        orderController?.OnActionPerformed?.Invoke(_currentUnit);
+        StartCoroutine(UseActionRoutine());
+    }
+    private IEnumerator UseActionRoutine()
+    {
+        yield return new WaitForSeconds(delayBeforeCamMove);
 
-        if (_currentUnit.stats.actions <= 0)
+        if (_currentUnit == null) _currentUnit = GetCurrentUnit();
+
+        if (_currentUnit != null)
         {
-            _currentUnit.stats.actions = _currentUnit.stats.baseActions;
-            orderController?.NextTurn();
+            _currentUnit.stats.actions -= 1;
+            OrderController orderController = OrderController.Order ?? _myOrderController;
+            orderController?.OnActionPerformed?.Invoke(_currentUnit);
+
+            if (_currentUnit.stats.actions <= 0)
+            {
+                _currentUnit.stats.actions = _currentUnit.stats.baseActions;
+                orderController?.NextTurn();
+            }
         }
     }
 

@@ -62,12 +62,13 @@ public class WindForceSkill : BasicSkill
         }
         if (_skillTargetSystem != null)
         {
-            _skillTargetSystem.StartTargetingAlly(); //
+            _skillTargetSystem.StartTargetingAlly();
         }
         else
         {
             Debug.LogError("SkillTargetSystem not found");
         }
+        Debug.Log("casting");
     }
 
     private void OnTargetCanceled()
@@ -81,6 +82,7 @@ public class WindForceSkill : BasicSkill
 
     private void OnTargetSelected(TurnUnit target)
     {
+        Debug.Log("TargetSelectted");
         if (target == null || !target.IsAlive)
             return;
 
@@ -89,6 +91,10 @@ public class WindForceSkill : BasicSkill
             return;
 
         _currentTarget = target;
+        if (_particleSystem != null)
+        {
+            _particleSystem.Play();
+        }
         ApplyWindForce();
     }
 

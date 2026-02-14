@@ -36,6 +36,11 @@ public class Hellfire : BasicSkill
         TurnUnit caster = GetCurrentUnit();
         if (caster == null) return;
 
+        if (_particleSystem != null)
+        {
+            _particleSystem.Play();
+        }
+
         ExecuteHellfire(caster, target);
 
         UseAction();

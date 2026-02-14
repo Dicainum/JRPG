@@ -182,10 +182,11 @@ public class SkillTargetSystem : MonoBehaviour
         {
             delay = _currentSkill.delayBeforeCamMove;
         }
-        StartCoroutine(ConfirmTargetRoutine(delay, _target));
+        TargetSelected?.Invoke(_target);
+        StartCoroutine(ConfirmTargetRoutine(delay));
     }
 
-    private IEnumerator ConfirmTargetRoutine(float delay, TurnUnit selectedTarget)
+    private IEnumerator ConfirmTargetRoutine(float delay)
     {
         _isTargetingEnemy = false;
         _isTargetingAlly = false;
@@ -194,7 +195,6 @@ public class SkillTargetSystem : MonoBehaviour
         {
             yield return new WaitForSeconds(delay);
         }
-        TargetSelected?.Invoke(selectedTarget);
         StopTargeting();
     }
 

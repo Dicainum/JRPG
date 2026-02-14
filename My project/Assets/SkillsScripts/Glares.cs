@@ -47,6 +47,11 @@ public class Glares : BasicSkill
         TurnUnit caster = GetCurrentUnit();
         if (caster == null) return;
 
+        if (_particleSystem != null)
+        {
+            _particleSystem.Play();
+        }
+
         HandleStackConversion(caster);
 
         ApplyMultiHitDamage(target);
