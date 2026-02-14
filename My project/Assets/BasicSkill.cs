@@ -8,6 +8,7 @@ public class BasicSkill : MonoBehaviour
     protected OrderController _myOrderController;
     public string skillName;
     public string skillDescription;
+    public float delayBeforeCamMove = 2f;
     [SerializeField] protected int _damage = 1;
     [SerializeField] protected int _boost = 1;
     private int _defaultBoost;
@@ -90,6 +91,10 @@ public class BasicSkill : MonoBehaviour
     {
         if (!_inCooldown && CanUse())
         {
+            if (_skillTargetSystem != null)
+            {
+                _skillTargetSystem.SetCurrentSkill(this);
+            }
             Cast();
             StartCooldown();
         }

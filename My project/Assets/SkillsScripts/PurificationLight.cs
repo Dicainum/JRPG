@@ -38,6 +38,7 @@ public class PurificationLight : BasicSkill
             }
         }
 
+        _skillTargetSystem.SetCurrentSkill(this);
         _skillTargetSystem.TargetSelected += OnTargetSelected;
         _skillTargetSystem.TargetCanceled += OnTargetingCanceled;
         

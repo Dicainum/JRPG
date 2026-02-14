@@ -46,6 +46,10 @@ public class HailOfStonesSkill : BasicSkill
         {
             return;
         }
+        if (_skillTargetSystem != null)
+        {
+            _skillTargetSystem.SetCurrentSkill(this);
+        }
         Debug.Log("HailOfStones");
         Cast();
     }

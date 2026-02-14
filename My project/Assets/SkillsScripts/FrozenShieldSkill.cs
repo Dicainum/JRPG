@@ -48,6 +48,10 @@ public class FrozenShieldSkill : BasicSkill
         {
             return;
         }
+        if (_skillTargetSystem != null)
+        {
+            _skillTargetSystem.SetCurrentSkill(this);
+        }
         Debug.Log("Wind Force");
         Cast();
     }

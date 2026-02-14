@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -32,6 +33,7 @@ public class SkillTargetSystem : MonoBehaviour
     public System.Action<TurnUnit> TargetSelected;
     public System.Action TargetCanceled;
     public System.Action TargetStarted;
+    private BasicSkill _currentSkill;
 
     private void OnEnable()
     {
@@ -136,8 +138,6 @@ public class SkillTargetSystem : MonoBehaviour
 
         if (confirmInput.action.WasPressedThisFrame())
         {
-            TargetSelected?.Invoke(_target);
-            StopTargeting();
         }
     }
 
@@ -160,6 +160,10 @@ public class SkillTargetSystem : MonoBehaviour
         _enemyTargets.Sort((a, b) => a.stats.index.CompareTo(b.stats.index));
         _allyTargets.Sort((a, b) => a.stats.index.CompareTo(b.stats.index));
     }
+    public void SetCurrentSkill(BasicSkill skill)
+    {
+        _currentSkill = skill;
+    }
     private void OnConfirmPressed(InputAction.CallbackContext ctx)
     {
         if (!_isTargetingEnemy && !_isTargetingAlly) return;
@@ -172,7 +176,25 @@ public class SkillTargetSystem : MonoBehaviour
                 animController.ExecuteAction();
             }
         }
-        TargetSelected?.Invoke(_target);
+        float delay = 0f;
+        Debug.Log(_currentSkill.delayBeforeCamMove);
+        if (_currentSkill != null)
+        {
+            delay = _currentSkill.delayBeforeCamMove;
+        }
+        StartCoroutine(ConfirmTargetRoutine(delay, _target));
+    }
+
+    private IEnumerator ConfirmTargetRoutine(float delay, TurnUnit selectedTarget)
+    {
+        _isTargetingEnemy = false;
+        _isTargetingAlly = false;
+        aim.SetActive(false);
+        if (delay > 0)
+        {
+            yield return new WaitForSeconds(delay);
+        }
+        TargetSelected?.Invoke(selectedTarget);
         StopTargeting();
     }
 
@@ -203,6 +225,7 @@ public class SkillTargetSystem : MonoBehaviour
         }
 
         StopTargeting();
+        _currentSkill = null;
     }
 
     public void StartTargeting()
@@ -251,5 +274,6 @@ public class SkillTargetSystem : MonoBehaviour
         _isTargetingEnemy = false;
         _isTargetingAlly = false;
         aim.SetActive(false);
+        _currentSkill = null;
     }
 }

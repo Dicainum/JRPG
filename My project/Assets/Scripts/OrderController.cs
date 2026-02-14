@@ -200,11 +200,11 @@ public class OrderController : MonoBehaviour
             foreach (var u in turnQueue)
                 nextNames += $"{u.stats.characterName} > ";
             nextNames = nextNames.TrimEnd(' ', '>');
-            Debug.Log($"<color=red>Следующие:</color> {nextNames}");
+            Debug.Log($"Следующие: {nextNames}");
         }
         else
         {
-            Debug.Log("<color=red>Очередь пуста — пересчет после завершения хода</color>");
+            Debug.Log("Очередь пуста - пересчет после завершения хода");
         }
     }
 
@@ -216,7 +216,7 @@ public class OrderController : MonoBehaviour
         OnTurnEnded?.Invoke(currentUnit);
         isProcessingTurn = false;
 
-        Debug.Log($"<color=green>Ход завершен:</color> {currentUnit.stats.characterName}");
+        Debug.Log($"Ход завершен: {currentUnit.stats.characterName}");
 
 
         const float MIN_SPEED = 0.0001f;
@@ -234,7 +234,7 @@ public class OrderController : MonoBehaviour
         }
         else
         {
-            // если умер — удаляем
+            // если умер - удаляем
             if (timeToAct.ContainsKey(currentUnit))
                 timeToAct.Remove(currentUnit);
         }

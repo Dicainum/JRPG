@@ -29,6 +29,7 @@ public class Glares : BasicSkill
 
         if (_skillTargetSystem != null)
         {
+            _skillTargetSystem.SetCurrentSkill(this);
             _skillTargetSystem.TargetSelected += OnTargetSelected;
             _skillTargetSystem.TargetCanceled += OnTargetCanceled;
             _skillTargetSystem.StartTargeting();

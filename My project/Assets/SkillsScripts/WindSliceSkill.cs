@@ -58,6 +58,10 @@ public class WindSliceSkill : BasicSkill
             Debug.Log("No actions left");
             return;
         }
+        if (_skillTargetSystem != null)
+        {
+            _skillTargetSystem.SetCurrentSkill(this);
+        }
         Debug.Log("wind slice");
         Cast();
     }

@@ -47,6 +47,10 @@ public class IceDaggersSkill : BasicSkill
         {
             return;
         }
+        if (_skillTargetSystem != null)
+        {
+            _skillTargetSystem.SetCurrentSkill(this);
+        }
         Debug.Log("Ice Daggers");
         Cast();
     }
