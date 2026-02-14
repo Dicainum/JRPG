@@ -9009,11 +9009,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2468727080582501105, guid: 4a3afec64ccf658488c6fee9883a2a6c, type: 3}
       propertyPath: simulationSpeed
-      value: 0.7
+      value: 1.8
       objectReference: {fileID: 0}
     - target: {fileID: 3872707502750619390, guid: 4a3afec64ccf658488c6fee9883a2a6c, type: 3}
       propertyPath: simulationSpeed
-      value: 0.7
+      value: 1.8
       objectReference: {fileID: 0}
     - target: {fileID: 4555873813909871860, guid: 4a3afec64ccf658488c6fee9883a2a6c, type: 3}
       propertyPath: m_LocalScale.x
@@ -9029,7 +9029,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6153375135404834656, guid: 4a3afec64ccf658488c6fee9883a2a6c, type: 3}
       propertyPath: simulationSpeed
-      value: 0.7
+      value: 1.8
       objectReference: {fileID: 0}
     - target: {fileID: 7638278398054893215, guid: 4a3afec64ccf658488c6fee9883a2a6c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9089,15 +9089,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8738280729744036272, guid: 4a3afec64ccf658488c6fee9883a2a6c, type: 3}
       propertyPath: simulationSpeed
-      value: 0.7
+      value: 1.8
       objectReference: {fileID: 0}
     - target: {fileID: 8914693019598523749, guid: 4a3afec64ccf658488c6fee9883a2a6c, type: 3}
       propertyPath: simulationSpeed
-      value: 0.7
+      value: 1.8
       objectReference: {fileID: 0}
     - target: {fileID: 8928693674801770287, guid: 4a3afec64ccf658488c6fee9883a2a6c, type: 3}
       propertyPath: simulationSpeed
-      value: 0.7
+      value: 1.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
