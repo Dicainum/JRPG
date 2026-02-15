@@ -111,5 +111,6 @@ public class HailOfStonesSkill : BasicSkill
         }
 
         UseAction();
+        StartCooldown();
     }
 }

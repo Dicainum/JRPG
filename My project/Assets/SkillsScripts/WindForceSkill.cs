@@ -51,6 +51,7 @@ public class WindForceSkill : BasicSkill
         }
         Debug.Log("Wind Force");
         Cast();
+        StartCooldown();
     }
 
     protected override void Cast()
@@ -113,5 +114,6 @@ public class WindForceSkill : BasicSkill
         }
 
         UseAction();
+        StartCooldown();
     }
 }

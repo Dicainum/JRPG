@@ -137,5 +137,6 @@ public class IceDaggersSkill : BasicSkill
         }
 
         UseAction();
+        StartCooldown();
     }
 }

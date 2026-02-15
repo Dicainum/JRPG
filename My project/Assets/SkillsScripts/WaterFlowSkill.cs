@@ -144,5 +144,6 @@ public class WaterFlowSkill : BasicSkill
         }
 
         UseAction();
+        StartCooldown();
     }
 }

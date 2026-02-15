@@ -148,7 +148,6 @@ public class WindSliceSkill : BasicSkill
 
         skillUsed?.Invoke(currentUnit);
         
-        _inCooldown = true;
         _turnsLeft = _cooldownTime;
         if (_skillTargetSystem != null)
         {
@@ -157,5 +156,6 @@ public class WindSliceSkill : BasicSkill
         }
 
         UseAction();
+        StartCooldown();
     } 
 }
