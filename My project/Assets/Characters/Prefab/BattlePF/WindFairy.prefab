@@ -184,7 +184,7 @@ MonoBehaviour:
   _damage: 0
   _boost: 20
   _damageType: 2
-  _cooldownTime: 0
+  _cooldownTime: 2
 --- !u!114 &7479903016007031233
 MonoBehaviour:
   m_ObjectHideFlags: 0

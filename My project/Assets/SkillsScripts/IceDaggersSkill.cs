@@ -3,16 +3,12 @@ using UnityEngine;
 
 public class IceDaggersSkill : BasicSkill
 {
-    private const int _baseDamage = 30;
     private TurnUnit _currentTarget;
     private List<TurnUnit> _damagedTargets = new List<TurnUnit>();
 
     protected override void OnAwake()
     {
         base.OnAwake();
-        skillName = "Ice Daggers";
-        skillDescription = "Наносит $_damage$ урона льдом. Накладывает эффект 'Заморозка'.";
-        _damage = _baseDamage;
     }
     protected override void OnEnable()
     {

@@ -4,16 +4,11 @@ using UnityEngine;
 public class Hellfire : BasicSkill
 {
     [Header("Hellfire Settings")]
-    [SerializeField] private int _burnDamage = 10;
-    [SerializeField] private int _hellfireDamage = 30;
     [SerializeField] private float _critMultiplier = 1.5f;
 
     protected override void OnAwake()
     {
         base.OnAwake();
-        skillName = "Hellfire";
-        skillDescription = "Deals fire damage. If Frozen, crits and hits all.";
-        _damage = _hellfireDamage;
     }
 
     public override void TryCast()
@@ -82,7 +77,7 @@ public class Hellfire : BasicSkill
         {
             if (!t.IsAlive) continue;
 
-            int dmg = _hellfireDamage;
+            int dmg = _damage;
             if (isFrozen)
             {
                 dmg = Mathf.RoundToInt(dmg * _critMultiplier);

@@ -5,8 +5,6 @@ public class PurificationLight : BasicSkill
 {
     private void Awake()
     {
-        skillName = "Purification Light";
-        skillDescription = "Deals medium light damage. If the target has buffs, deals additional pure damage and removes one random buff. Grants one stack of Light.";
         _cooldownTime = 2;
     }
 
@@ -73,12 +71,12 @@ public class PurificationLight : BasicSkill
         UseAction();
         StartCooldown();
 
-        target.stats.TakeDamage(20);
+        target.stats.TakeDamage(_damage);
 
         var buffs = target.gObject.GetComponents<BasicBuff>().Where(b => !(b is DarkAndLightStacksBuff)).ToList();
         if (buffs.Count > 0)
         {
-            target.stats.TakeDamage(10);
+            target.stats.TakeDamage(_damage);
 
             // Remove one random buff
             var buffToRemove = buffs[Random.Range(0, buffs.Count)];

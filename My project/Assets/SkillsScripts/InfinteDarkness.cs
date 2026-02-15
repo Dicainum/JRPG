@@ -4,16 +4,12 @@ using UnityEngine;
 public class InfinteDarkness : BasicSkill
 {
     [Header("Infinite Darkness Settings")]
-    [SerializeField] private int _damageAmount = 80;
     [SerializeField] private float _hpCostPercentage = 0.4f;
     [SerializeField] private int _attackBuffDuration = 2;
 
     protected override void OnAwake()
     {
         base.OnAwake();
-        skillName = "Infinite Darkness";
-        skillDescription = "Requires 3 Light Stacks & >50% HP. Costs 40% HP. Consumes Light Stacks. Deals massive AoE damage and buffs Attack.";
-        _damage = _damageAmount;
     }
 
     public override bool CanUse()
@@ -82,7 +78,7 @@ public class InfinteDarkness : BasicSkill
         foreach (var t in targets)
         {
             if (!t.IsAlive) continue;
-            t.stats.TakeDamage(_damageAmount);
+            t.stats.TakeDamage(_damage);
         }
 
         var atkBuff = caster.gObject.GetComponent<AttackBuff>();

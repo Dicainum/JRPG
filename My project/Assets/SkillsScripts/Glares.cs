@@ -9,8 +9,6 @@ public class Glares : BasicSkill
     protected override void OnAwake()
     {
         base.OnAwake();
-        skillName = "Glares";
-        skillDescription = $"Наносит светом {_hitCount} ударов малого урона. Если стаков тьмы больше, чем света, преобразует все стаки тьмы в свет.";
         _damage = _damagePerHit * _hitCount; 
     }
 

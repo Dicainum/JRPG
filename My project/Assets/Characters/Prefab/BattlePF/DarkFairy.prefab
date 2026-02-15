@@ -105,8 +105,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bc491596b53c734f93bc8f75280a9b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particleSystem: {fileID: 0}
   skillName: 
   skillDescription: 
+  delayBeforeCamMove: 2
   _damage: 1
   _boost: 1
   _damageType: 8
@@ -160,14 +162,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eda729f00c87fba448795cb43b55a2ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillName: 
-  skillDescription: 
-  _damage: 1
+  _particleSystem: {fileID: 0}
+  skillName: Hellfire
+  skillDescription: Deals $damage$ fire damage. If target is frozen, crits and hits
+    all enemies.
+  delayBeforeCamMove: 2
+  _damage: 30
   _boost: 1
   _damageType: 128
   _cooldownTime: 0
-  _burnDamage: 10
-  _hellfireDamage: 30
   _critMultiplier: 1.5
 --- !u!114 &827882782629974884
 MonoBehaviour:
@@ -181,9 +184,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68459ad52bbcc234bac9d98c778db50c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillName: 
-  skillDescription: 
-  _damage: 1
+  _particleSystem: {fileID: 0}
+  skillName: Purification Light
+  skillDescription: Deals $damage$ light damage. If the target has buffs, deals additional
+    pure damage and removes one random buff. Grants one stack of Light.
+  delayBeforeCamMove: 2
+  _damage: 20
   _boost: 1
   _damageType: 4
   _cooldownTime: 0
@@ -199,8 +205,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68ca9c01f3e4d6f48aaf785b1d5eed9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillName: 
-  skillDescription: 
+  _particleSystem: {fileID: 0}
+  skillName: Glares
+  skillDescription: Deals $_hitCount$ light hits for $_damagePerHit$ damage. If there
+    are more Darkness stacks than Light, converts all Darkness stacks to Light.
+  delayBeforeCamMove: 2
   _damage: 1
   _boost: 1
   _damageType: 4
@@ -219,13 +228,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d92c3114b9daf44ebffb977d5c130fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillName: 
-  skillDescription: 
-  _damage: 1
+  _particleSystem: {fileID: 0}
+  skillName: Consecration
+  skillDescription: Requires 3 Dark Stacks. Consumes stacks to deal Pure damage to
+    all enemies and apply a Mark. Mark deals Light damage when hit by ally.
+  delayBeforeCamMove: 2
+  _damage: 15
   _boost: 1
   _damageType: 4
   _cooldownTime: 0
-  _pureDamage: 20
   _markDamagePercent: 0.5
 --- !u!114 &9142447978254960397
 MonoBehaviour:
@@ -239,13 +250,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42a90ee6ef2d36742b5930c398d6c214, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillName: 
-  skillDescription: 
-  _damage: 1
+  _particleSystem: {fileID: 0}
+  skillName: Infinite Darkness
+  skillDescription: Requires 3 Light Stacks & >50% HP. Costs 40% HP. Consumes Light
+    Stacks. Deals massive AoE damage and buffs Attack.
+  delayBeforeCamMove: 2
+  _damage: 80
   _boost: 1
   _damageType: 8
   _cooldownTime: 0
-  _damageAmount: 80
   _hpCostPercentage: 0.4
   _attackBuffDuration: 2
 --- !u!114 &6649544555447096212

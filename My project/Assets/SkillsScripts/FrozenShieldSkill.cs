@@ -11,8 +11,6 @@ public class FrozenShieldSkill : BasicSkill
     protected override void OnAwake()
     {
         base.OnAwake();
-        skillName = "Frozen Shield";
-        skillDescription = "Дарует щит союзнику или себе на $_boost$. Накладывает эффект 'Разрез ветра'.";
         _boost = _baseShield;
     }
     protected override void OnEnable()
@@ -108,18 +106,18 @@ public class FrozenShieldSkill : BasicSkill
 
         _currentTarget.stats.ChangeShield(_boost);
 
-        foreach (var damagedTarget in _damagedTargets)
-        {
-            if (damagedTarget != null && damagedTarget.IsAlive)
-            {
-                WindCut windCut = damagedTarget.gObject.GetComponent<WindCut>();
-                if (windCut == null)
-                {
-                    windCut = damagedTarget.gObject.AddComponent<WindCut>();
-                }
-                windCut.ApplyDebuff(damagedTarget, currentUnit);
-            }
-        }
+//        foreach (var damagedTarget in _damagedTargets)
+//        {
+//           if (damagedTarget != null && damagedTarget.IsAlive)
+//            {
+//                WindCut windCut = damagedTarget.gObject.GetComponent<WindCut>();
+//                if (windCut == null)
+//                {
+//                    windCut = damagedTarget.gObject.AddComponent<WindCut>();
+//                }
+//                windCut.ApplyDebuff(damagedTarget, currentUnit);
+//            }
+//      }
 
         if (_skillTargetSystem != null)
         {

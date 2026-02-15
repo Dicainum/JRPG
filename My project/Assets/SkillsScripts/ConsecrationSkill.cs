@@ -3,15 +3,11 @@ using UnityEngine;
 
 public class ConsecrationSkill : BasicSkill
 {
-    [SerializeField] private int _pureDamage = 20;
     [SerializeField] private float _markDamagePercent = 0.5f;
 
     protected override void OnAwake()
     {
         base.OnAwake();
-        skillName = "Consecration";
-        skillDescription = "Requires 3 Dark Stacks. Consumes stacks to deal Pure damage to all enemies and apply a Mark. Mark deals Light damage when hit by ally.";
-        _damage = _pureDamage;
     }
 
     public override bool CanUse()
@@ -86,7 +82,7 @@ public class ConsecrationSkill : BasicSkill
         {
             if (!t.IsAlive) continue;
 
-            t.stats.TakeDamage(_pureDamage);
+            t.stats.TakeDamage(_damage);
 
             var mark = t.gObject.GetComponent<ConsecrationMarkDebuff>();
             if (mark == null)
