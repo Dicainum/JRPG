@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class PoseSample : MonoBehaviour
 {
-    public AnimationClip clip;
-    public float timeInSeconds;
+    [SerializeField] private AnimationClip clip;
+    [SerializeField] private float timeInSeconds;
 
-    void Start()
+    private void Start()
     {
         if (clip != null)
         {

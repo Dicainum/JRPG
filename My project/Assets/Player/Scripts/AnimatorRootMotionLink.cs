@@ -5,7 +5,7 @@ public class AnimatorRootMotionLink : MonoBehaviour
     private PlayerControlller _rootController;
     private Animator _animator;
 
-    void Awake()
+    private void Awake()
     {
         _animator = GetComponent<Animator>();
         _rootController = GetComponentInParent<PlayerControlller>();
