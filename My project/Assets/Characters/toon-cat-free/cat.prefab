@@ -208,6 +208,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2
   lifeDistance: 40
+  fadeDistance: 4
 --- !u!95 &-235190180584054097
 Animator:
   serializedVersion: 7
