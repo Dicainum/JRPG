@@ -90,10 +90,6 @@ public class HailOfStonesSkill : BasicSkill
             return;
 
         _currentTarget = target;
-        if (_particleSystem != null)
-        {
-            _particleSystem.Play();
-        }
         ApplyHailOfStones();
     }
     private void ApplyHailOfStones()
@@ -112,5 +108,16 @@ public class HailOfStonesSkill : BasicSkill
 
         UseAction();
         StartCooldown();
+    }
+    
+    public void SpawnVFX()
+    {
+        if (_particleSystem != null)
+        {
+            Vector3 targetPosition = new Vector3(_currentTarget.gObject.transform.position.x, _particleSystem.gameObject.transform.position.y, _currentTarget.gObject.transform.position.z);
+            Vector3 vfxPosition = targetPosition;
+            _particleSystem.gameObject.transform.position = vfxPosition;
+            _particleSystem.Play();
+        }
     }
 }

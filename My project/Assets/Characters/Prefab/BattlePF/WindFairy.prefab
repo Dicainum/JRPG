@@ -198,7 +198,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 489aa5fabbef6834d8bb2577c94a249b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _particleSystem: {fileID: 0}
+  _particleSystem: {fileID: 6596270121769692980}
   skillName: Hail of Stones
   skillDescription: "\u041D\u0430\u043D\u043E\u0441\u0438\u0442 $_damage$ \u0444\u0438\u0437\u0438\u0447\u0435\u0441\u043A\u043E\u0433\u043E
     \u0443\u0440\u043E\u043D\u0430 \u043F\u043E \u043E\u0434\u043D\u043E\u0439 \u0446\u0435\u043B\u0438."
@@ -253,6 +253,7 @@ Transform:
   m_Children:
   - {fileID: 2181807396974463901}
   - {fileID: 3899141493507604874}
+  - {fileID: 5717081941545948771}
   m_Father: {fileID: 7638278398054893215}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1156254255601030363
@@ -343,6 +344,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speedBuff: {fileID: 3115731696547351310}
+  _hailOfStones: {fileID: 7479903016007031233}
 --- !u!1001 &7363502463331730960
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -572,4 +574,99 @@ Transform:
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 1463423623920029119, guid: cee3d5644bc78634f9c31992a0edc7d6, type: 3}
   m_PrefabInstance: {fileID: 8273999449880294648}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8930024655340452397
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 7121076374264916093}
+    m_Modifications:
+    - target: {fileID: 3436983697501437143, guid: eb89402821e639343aa5f209272042c0, type: 3}
+      propertyPath: m_BoundingSphereOverride.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3436983697501437143, guid: eb89402821e639343aa5f209272042c0, type: 3}
+      propertyPath: m_BoundingSphereOverride.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3436983697501437143, guid: eb89402821e639343aa5f209272042c0, type: 3}
+      propertyPath: m_BoundingSphereOverride.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3436983697501437143, guid: eb89402821e639343aa5f209272042c0, type: 3}
+      propertyPath: m_BoundingSphereOverride.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3799619303664888910, guid: eb89402821e639343aa5f209272042c0, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.27521
+      objectReference: {fileID: 0}
+    - target: {fileID: 3799619303664888910, guid: eb89402821e639343aa5f209272042c0, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.50055194
+      objectReference: {fileID: 0}
+    - target: {fileID: 3799619303664888910, guid: eb89402821e639343aa5f209272042c0, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.27521
+      objectReference: {fileID: 0}
+    - target: {fileID: 3799619303664888910, guid: eb89402821e639343aa5f209272042c0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3799619303664888910, guid: eb89402821e639343aa5f209272042c0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.23
+      objectReference: {fileID: 0}
+    - target: {fileID: 3799619303664888910, guid: eb89402821e639343aa5f209272042c0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 7.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 3799619303664888910, guid: eb89402821e639343aa5f209272042c0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3799619303664888910, guid: eb89402821e639343aa5f209272042c0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3799619303664888910, guid: eb89402821e639343aa5f209272042c0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3799619303664888910, guid: eb89402821e639343aa5f209272042c0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3799619303664888910, guid: eb89402821e639343aa5f209272042c0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 3799619303664888910, guid: eb89402821e639343aa5f209272042c0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3799619303664888910, guid: eb89402821e639343aa5f209272042c0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8883622231669725626, guid: eb89402821e639343aa5f209272042c0, type: 3}
+      propertyPath: m_Name
+      value: HailOfStones
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: eb89402821e639343aa5f209272042c0, type: 3}
+--- !u!4 &5717081941545948771 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3799619303664888910, guid: eb89402821e639343aa5f209272042c0, type: 3}
+  m_PrefabInstance: {fileID: 8930024655340452397}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &6596270121769692980 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 2334969787137316121, guid: eb89402821e639343aa5f209272042c0, type: 3}
+  m_PrefabInstance: {fileID: 8930024655340452397}
   m_PrefabAsset: {fileID: 0}
