@@ -5,6 +5,7 @@ public class WindForceSkill : BasicSkill
 {
     private const int _baseBoost = 20;
     private TurnUnit _currentTarget;
+    [SerializeField] private float YOffset;
 
     protected override void OnAwake()
     {
@@ -92,10 +93,6 @@ public class WindForceSkill : BasicSkill
             return;
 
         _currentTarget = target;
-        if (_particleSystem != null)
-        {
-            _particleSystem.Play();
-        }
         ApplyWindForce();
     }
 
@@ -115,5 +112,16 @@ public class WindForceSkill : BasicSkill
 
         UseAction();
         StartCooldown();
+    }
+
+    public void SpawnVFX()
+    {
+        if (_particleSystem != null)
+        {
+            Vector3 targetPosition = _currentTarget.gObject.transform.position;
+            Vector3 vfxPosition = targetPosition + Vector3.up * YOffset;
+            _particleSystem.gameObject.transform.position = vfxPosition;
+            _particleSystem.Play();
+        }
     }
 }
