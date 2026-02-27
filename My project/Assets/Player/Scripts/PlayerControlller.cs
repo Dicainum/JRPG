@@ -17,7 +17,7 @@ public class PlayerControlller : MonoBehaviour, ICharacter
     private bool isSprinting = false;
     private float _verticalVelocity;
 
-    void Awake()
+    private void Awake()
     {
         controller = GetComponent<CharacterController>();
         cam = Camera.main.transform;

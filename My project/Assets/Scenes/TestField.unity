@@ -390,12 +390,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 341533615}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ad534c850dc15024d8f48079fea2b57d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   attackHitbox: {fileID: 1055708591}
+  animator: {fileID: 0}
 --- !u!136 &341533619
 CapsuleCollider:
   m_ObjectHideFlags: 0

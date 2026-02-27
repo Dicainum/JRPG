@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerAnimator : MonoBehaviour
@@ -19,6 +20,19 @@ public class PlayerAnimator : MonoBehaviour
             foreach (var anim in animator)
             {
                 anim.SetFloat(speedHash, targetSpeed, 0.1f, Time.deltaTime);
+            }
+        }
+    }
+    internal void SetTrigger(int triggerHash)
+    {
+        if (animator != null)
+        {
+            foreach (var anim in animator)
+            {
+                if (anim != null)
+                {
+                    anim.SetTrigger(triggerHash);
+                }
             }
         }
     }

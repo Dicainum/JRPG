@@ -3,9 +3,13 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     [SerializeField] private GameObject attackHitbox;
-    [SerializeField] private Animator animator;
+    [SerializeField] private PlayerAnimator animator;
 
-    private static readonly int AttackTrigger = Animator.StringToHash("OWAttack);
+    private static readonly int AttackTrigger = Animator.StringToHash("OWAttacking");
+    private void Awake()
+    {
+        if (animator == null) animator = GetComponent<PlayerAnimator>();
+    }
 
     public void HandleAttack()
     {
@@ -22,7 +26,7 @@ public class PlayerAttack : MonoBehaviour
     private System.Collections.IEnumerator ActivateHitbox()
     {
         attackHitbox.SetActive(true);
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.4f);
         attackHitbox.SetActive(false);
     }
 }
