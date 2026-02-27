@@ -7055,6 +7055,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7638278398054893215, guid: 4a3afec64ccf658488c6fee9883a2a6c, type: 3}
   m_PrefabInstance: {fileID: 8378905769554816321}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1855615291 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5076707910120365594, guid: 4a3afec64ccf658488c6fee9883a2a6c, type: 3}
+  m_PrefabInstance: {fileID: 8378905769554816321}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28ef3f377eeb8974b83be9cd41fbe23d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1874893735
 GameObject:
   m_ObjectHideFlags: 0
@@ -9299,6 +9310,14 @@ PrefabInstance:
       propertyPath: simulationSpeed
       value: 1.7
       objectReference: {fileID: 0}
+    - target: {fileID: 7904866422145177799, guid: 4a3afec64ccf658488c6fee9883a2a6c, type: 3}
+      propertyPath: _projectile
+      value: 
+      objectReference: {fileID: 8188785631581521038, guid: f361b4a63be199740b8bc1e80052566e, type: 3}
+    - target: {fileID: 7904866422145177799, guid: 4a3afec64ccf658488c6fee9883a2a6c, type: 3}
+      propertyPath: _baseBattleAttack
+      value: 
+      objectReference: {fileID: 1855615291}
     - target: {fileID: 8271269876293185313, guid: 4a3afec64ccf658488c6fee9883a2a6c, type: 3}
       propertyPath: m_LocalScale.x
       value: 1

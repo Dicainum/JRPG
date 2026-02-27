@@ -10,6 +10,8 @@ public class BattleAttack : MonoBehaviour
     [SerializeField] protected int damageMultiplier = 1;
     [SerializeField] protected float timeToMove = 0.5f;
     [SerializeField] protected float timeToMoveBack = 0.5f;
+    [SerializeField] protected float delayBeforeCamMove = 1f;
+    
     protected Transform[] _targetPositions;
     protected MeleePositionsReference _targetPositionsParent;
     protected int _damage;
@@ -37,7 +39,7 @@ public class BattleAttack : MonoBehaviour
         CalculateTargetPositions();
         _anim = gameObject.GetComponent<Animator>();
         _characterPositions = FindFirstObjectByType<CharacterPositions>();
-        Debug.Log(_characterPositions.charPositions.Count()); 
+        //Debug.Log(_characterPositions.charPositions.Count()); 
     }
 
     protected virtual void MoveToAttackPosition(int index)
@@ -59,7 +61,8 @@ public class BattleAttack : MonoBehaviour
 
     protected virtual void OnDisable()
     { 
-        _orderController.OnOrderUpdated -= FindThisUnit;
+        if (_orderController != null)
+            _orderController.OnOrderUpdated -= FindThisUnit;
     }
 
     protected virtual void OnStart()
@@ -71,17 +74,19 @@ public class BattleAttack : MonoBehaviour
     protected virtual void FindThisUnit(List<TurnUnit> units)
     {
         _orderController = FindFirstObjectByType<OrderController>();
-        Debug.Log(units.Count + " units count");  //it`s 0 but should be 6
+        //Debug.Log(units.Count + " units count");  //it`s 0 but should be 6
 
         if (_orderController != null && units.Count > 0)
         {
+            /*
             foreach (var u in units)
             {
                 Debug.Log($"Unit: {u.stats.name}, GameObject: {u.gObject.name}");
             }
+            */
             _currentUnit = units.Find(u => u.gObject == gameObject);
-            Debug.Log(_currentUnit);
-            Debug.Log(_currentUnit.stats.name + " is currently attacking");
+            //Debug.Log(_currentUnit);
+            //Debug.Log(_currentUnit.stats.name + " is currently attacking");
         }
         else
         {
@@ -110,13 +115,63 @@ public class BattleAttack : MonoBehaviour
     }
     protected virtual void ApplyAttack(TurnUnit target)
     {
-        FindThisUnit(_orderController.units);
-        if (_currentUnitPosition == null)
+        if (_orderController != null)
+            FindThisUnit(_orderController.units);
+            
+        if (_currentUnitPosition == null && _currentUnit != null)
         {
             _currentUnitPosition = _characterPositions.charPositions[_currentUnit.stats.index];
         }
-        Debug.Log(_currentUnit);
-        Attacked?.Invoke(_currentUnit);
+        //Debug.Log(_currentUnit);
+        // Attacked?.Invoke(_currentUnit); // Commented out to prevent double turn progression
+    }
+
+    protected TurnUnit GetCurrentUnit()
+    {
+        if (_currentUnit != null && _currentUnit.gObject == gameObject)
+            return _currentUnit;
+
+        OrderController orderController = OrderController.Order;
+        if (orderController == null)
+        {
+            orderController = _orderController ?? FindFirstObjectByType<OrderController>();
+            if (orderController == null)
+                return null;
+        }
+
+        if (orderController.currentUnit != null && orderController.currentUnit.gObject == gameObject)
+        {
+            _currentUnit = orderController.currentUnit;
+            return _currentUnit;
+        }
+
+        _currentUnit = orderController.units.Find(u => u.gObject == gameObject);
+        return _currentUnit;
+    }
+
+    protected void UseAction()
+    {
+        StartCoroutine(UseActionRoutine());
+    }
+
+    private IEnumerator UseActionRoutine()
+    {
+        yield return new WaitForSeconds(delayBeforeCamMove);
+
+        if (_currentUnit == null) _currentUnit = GetCurrentUnit();
+
+        if (_currentUnit != null)
+        {
+            _currentUnit.stats.actions -= 1;
+            OrderController orderController = OrderController.Order ?? _orderController;
+            orderController?.OnActionPerformed?.Invoke(_currentUnit);
+
+            if (_currentUnit.stats.actions <= 0)
+            {
+                _currentUnit.stats.actions = _currentUnit.stats.baseActions;
+                orderController?.NextTurn();
+            }
+        }
     }
     
 }

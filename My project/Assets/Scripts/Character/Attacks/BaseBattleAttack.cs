@@ -54,6 +54,7 @@ public class BaseBattleAttack : BattleAttack
         baseAttackTarget = null;
         _skillTargetSystem.StopTargeting();
         attackApplied = true;
+        UseAction();
     }
 
     public void MoveBackToPosition()
