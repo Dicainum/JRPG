@@ -177,10 +177,14 @@ public class SkillTargetSystem : MonoBehaviour
             }
         }
         float delay = 0f;
-        Debug.Log(_currentSkill.delayBeforeCamMove);
+        //Debug.Log(_currentSkill.delayBeforeCamMove);
         if (_currentSkill != null)
         {
             delay = _currentSkill.delayBeforeCamMove;
+        }
+        else
+        {
+            delay = 1f;
         }
         TargetSelected?.Invoke(_target);
         StartCoroutine(ConfirmTargetRoutine(delay));
