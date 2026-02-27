@@ -2,31 +2,38 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    [SerializeField] private GameObject attackHitbox;
-    [SerializeField] private PlayerAnimator animator;
+    [SerializeField] private GameObject _attackHitbox;
+    [SerializeField] private PlayerAnimator _playerAnimator;
+    [SerializeField] private float _attackCooldown = 1f;
 
-    private static readonly int AttackTrigger = Animator.StringToHash("OWAttacking");
+    private static readonly int AttackTriggerHash = Animator.StringToHash("OWAttacking");
+
+    private float _nextAttackTime = 0f;
+
     private void Awake()
     {
-        if (animator == null) animator = GetComponent<PlayerAnimator>();
+        if (_playerAnimator == null) _playerAnimator = GetComponent<PlayerAnimator>();
+
+        if (_attackHitbox != null) _attackHitbox.SetActive(false);
     }
 
     public void HandleAttack()
     {
-        Debug.Log($"{name} is attacking");
+        if (Time.time < _nextAttackTime) return;
 
-        if (animator != null)
-        {
-            animator.SetTrigger(AttackTrigger);
-        }
+        _nextAttackTime = Time.time + _attackCooldown;
 
-        StartCoroutine(ActivateHitbox());
+        _playerAnimator?.SetTrigger(AttackTriggerHash);
+    }
+    public void EnableAttackHitbox()
+    {
+        if (_attackHitbox != null) _attackHitbox.SetActive(true);
+
+        _playerAnimator?.PlayActiveVFX();
     }
 
-    private System.Collections.IEnumerator ActivateHitbox()
+    public void DisableAttackHitbox()
     {
-        attackHitbox.SetActive(true);
-        yield return new WaitForSeconds(0.4f);
-        attackHitbox.SetActive(false);
+        if (_attackHitbox != null) _attackHitbox.SetActive(false);
     }
 }

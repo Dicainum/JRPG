@@ -4,34 +4,57 @@ using UnityEngine;
 public class PlayerAnimator : MonoBehaviour
 {
     [Header("Components")]
-    [SerializeField] private Animator[] animator;
+    [SerializeField] private Animator[] _animators;
+    
+    [Header("VFX")]
+    [SerializeField] private ParticleSystem[] _attackVFXs;
 
-    private int speedHash;
+    private int _speedHash;
 
     private void Awake()
     {
-        speedHash = Animator.StringToHash("Speed");
+        _speedHash = Animator.StringToHash("Speed");
     }
 
     public void UpdateMovementState(float targetSpeed)
     {
-        if (animator != null)
+        if (_animators == null) return;
+
+        foreach (var anim in _animators)
         {
-            foreach (var anim in animator)
+            if (anim != null && anim.gameObject.activeSelf)
             {
-                anim.SetFloat(speedHash, targetSpeed, 0.1f, Time.deltaTime);
+                anim.SetFloat(_speedHash, targetSpeed, 0.1f, Time.deltaTime);
             }
         }
     }
-    internal void SetTrigger(int triggerHash)
+    public void SetTrigger(int triggerHash)
     {
-        if (animator != null)
+        if (_animators == null) return;
+
+        for (int i = 0; i < _animators.Length; i++)
         {
-            foreach (var anim in animator)
+            var anim = _animators[i];
+            if (anim != null && anim.gameObject.activeSelf)
             {
-                if (anim != null)
+                anim.SetTrigger(triggerHash);
+            }
+        }
+    }
+
+    public void PlayActiveVFX()
+    {
+        if (_animators == null || _attackVFXs == null) return;
+
+        for (int i = 0; i < _animators.Length; i++)
+        {
+            var anim = _animators[i];
+            if (anim != null && anim.gameObject.activeSelf)
+            {
+                if (i < _attackVFXs.Length && _attackVFXs[i] != null)
                 {
-                    anim.SetTrigger(triggerHash);
+                    _attackVFXs[i].Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+                    _attackVFXs[i].Play(true);
                 }
             }
         }
