@@ -1,23 +1,12 @@
 using UnityEngine;
 
-public class DarkFairyAnimationEventHandler : MonoBehaviour
+public class LightFairyAnimationHandler : MonoBehaviour
 {
-    [SerializeField] private ArrowOfDarknessSkill _arrowOfDarknessSkill;
-    [SerializeField] private GameObject _bow;
     [SerializeField] private GameObject _projectile;
     [SerializeField] private BaseBattleAttack _baseBattleAttack;
     [SerializeField] private float _projectileOffset = 1.25f;
-    [SerializeField] private float _maxRayDistance = 50f;
-
-    public void SpawnBow()
-    {
-        _bow.SetActive(true);
-    }
-
-    public void DespawnBow()
-    {
-        _bow.SetActive(false);
-    }
+    [SerializeField] private float _maxRayDistance;
+    
     public void ApplyAttack()
     {
         _baseBattleAttack.ApplyDamage();

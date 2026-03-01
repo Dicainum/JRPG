@@ -120,6 +120,7 @@ MonoBehaviour:
   damageMultiplier: 1
   timeToMove: 1
   timeToMoveBack: 0.5
+  delayBeforeCamMove: 1
   baseAttackTarget:
     stats: {fileID: 0}
     gObject: {fileID: 0}
@@ -345,6 +346,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speedBuff: {fileID: 3115731696547351310}
   _hailOfStones: {fileID: 7479903016007031233}
+  _baseBattleAttack: {fileID: 5076707910120365594}
+  _projectile: {fileID: 8188785631581521038, guid: f361b4a63be199740b8bc1e80052566e, type: 3}
+  _projectileOffset: 1.25
+  _maxRayDistance: 50
 --- !u!1001 &7363502463331730960
 PrefabInstance:
   m_ObjectHideFlags: 0

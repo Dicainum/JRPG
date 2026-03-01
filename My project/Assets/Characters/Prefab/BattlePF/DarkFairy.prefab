@@ -89,6 +89,7 @@ MonoBehaviour:
   damageMultiplier: 1
   timeToMove: 1
   timeToMoveBack: 0.5
+  delayBeforeCamMove: 1
   baseAttackTarget:
     stats: {fileID: 0}
     gObject: {fileID: 0}
@@ -334,13 +335,39 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3728274771781915103, guid: add306863ba457d4697caf312d4da50c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8946372068378343310}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1270516682468807592, guid: add306863ba457d4697caf312d4da50c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 70105784748058570}
   m_SourcePrefab: {fileID: 100100000, guid: add306863ba457d4697caf312d4da50c, type: 3}
 --- !u!4 &1392588023401290386 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3728274771781915103, guid: add306863ba457d4697caf312d4da50c, type: 3}
   m_PrefabInstance: {fileID: 2372844271403305805}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &3553271369130203365 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1270516682468807592, guid: add306863ba457d4697caf312d4da50c, type: 3}
+  m_PrefabInstance: {fileID: 2372844271403305805}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &70105784748058570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3553271369130203365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad64cd0b97392c84f8252c7dea5fae81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _arrowOfDarknessSkill: {fileID: 9143034185897255721}
+  _bow: {fileID: 5367371735429285277}
+  _projectile: {fileID: 8188785631581521038, guid: 69b1e9a94562cd04784adbd028b74cfc, type: 3}
+  _baseBattleAttack: {fileID: 2074994836211506016}
+  _projectileOffset: 1.25
+  _maxRayDistance: 100
 --- !u!4 &4180485970986140255 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1939389649599498514, guid: add306863ba457d4697caf312d4da50c, type: 3}
@@ -415,6 +442,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6b20c8c794b346a48809c303305b6b89, type: 3}
+--- !u!1 &5367371735429285277 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7161389405961627526, guid: 6b20c8c794b346a48809c303305b6b89, type: 3}
+  m_PrefabInstance: {fileID: 2963053678865064475}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8946372068378343310 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6140944378182522261, guid: 6b20c8c794b346a48809c303305b6b89, type: 3}
@@ -496,8 +528,32 @@ PrefabInstance:
     - {fileID: 3884650092312424084, guid: 9e903348dfa88c041917b1bc6c33a019, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8335241408075483461, guid: 9e903348dfa88c041917b1bc6c33a019, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7118901857822298563}
   m_SourcePrefab: {fileID: 100100000, guid: 9e903348dfa88c041917b1bc6c33a019, type: 3}
+--- !u!1 &1053467212528247486 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8335241408075483461, guid: 9e903348dfa88c041917b1bc6c33a019, type: 3}
+  m_PrefabInstance: {fileID: 9021294165487725563}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7118901857822298563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1053467212528247486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 291163b21a5d6ad41973280e9bf2df74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _projectile: {fileID: 8188785631581521038, guid: 116639c16b63fcb4ea1b6ba7602674db, type: 3}
+  _baseBattleAttack: {fileID: 2074994836211506016}
+  _projectileOffset: 1.25
+  _maxRayDistance: 50
 --- !u!4 &5343384290601203555 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3969237579976203416, guid: 9e903348dfa88c041917b1bc6c33a019, type: 3}
