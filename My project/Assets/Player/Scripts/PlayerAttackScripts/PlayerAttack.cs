@@ -19,6 +19,7 @@ public class PlayerAttack : MonoBehaviour
 
     public void HandleAttack()
     {
+        if (!enabled) return;
         if (Time.time < _nextAttackTime) return;
 
         _nextAttackTime = Time.time + _attackCooldown;
