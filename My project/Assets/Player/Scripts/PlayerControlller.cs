@@ -14,6 +14,8 @@ public class PlayerControlller : MonoBehaviour, ICharacter
 
     private CharacterController controller;
     private Transform cam;
+    private PlayerAttack playerAttack;
+
     private bool isSprinting = false;
     private float _verticalVelocity;
 
@@ -21,7 +23,10 @@ public class PlayerControlller : MonoBehaviour, ICharacter
     {
         controller = GetComponent<CharacterController>();
         cam = Camera.main.transform;
+
         if (playerAnimator == null) playerAnimator = GetComponent<PlayerAnimator>();
+
+        playerAttack = GetComponent<PlayerAttack>();
     }
 
     public void SetSpeedBoost(bool active) => isSprinting = active;
@@ -45,43 +50,41 @@ public class PlayerControlller : MonoBehaviour, ICharacter
 
             if (move != Vector3.zero)
             {
-                Quaternion targetRot = Quaternion.LookRotation(move);
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, playerSettings.rotationSpeed * Time.deltaTime);
+                bool canRotate = playerAttack == null || !playerAttack.IsAttacking;
+
+                if (canRotate)
+                {
+                    Quaternion targetRot = Quaternion.LookRotation(move);
+                    transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, playerSettings.rotationSpeed * Time.deltaTime);
+                }
             }
         }
     }
 
     public void OnRootMotionReceived(Vector3 deltaPos, Quaternion deltaRot)
     {
-        if (deltaPos.y > 0.001f)
+        Vector3 finalMove = deltaPos;
+
+        bool isHit = Physics.Raycast(transform.position + Vector3.up * 0.5f, Vector3.down, out RaycastHit hit, Mathf.Infinity, groundLayer);
+
+        float distanceToGround = isHit ? (hit.distance - 0.5f) : Mathf.Infinity;
+
+        if (isHit && distanceToGround <= snapDistance)
         {
-            _verticalVelocity = 0;
-            controller.Move(deltaPos);
-            return;
+            _verticalVelocity = 0f;
+        }
+        else
+        {
+            _verticalVelocity += gravity * Time.deltaTime;
+
+            finalMove.y = deltaPos.y + (_verticalVelocity * Time.deltaTime);
         }
 
-        if (Physics.Raycast(transform.position + Vector3.up * 0.5f, Vector3.down, out RaycastHit hit, snapDistance + 0.5f, groundLayer))
-        {
-            _verticalVelocity = 0;
-
-            Vector3 snapMove = deltaPos;
-            snapMove.y = -(hit.distance - 0.5f) - 0.05f;
-
-            controller.Move(snapMove);
-            return;
-        }
-
-        _verticalVelocity += gravity * Time.deltaTime;
-
-        Vector3 fallMove = deltaPos;
-        fallMove.y += _verticalVelocity * Time.deltaTime;
-
-        controller.Move(fallMove);
+        controller.Move(finalMove);
     }
 
     public void HandleAttack()
     {
-        var attack = GetComponent<PlayerAttack>();
-        if (attack != null) attack.HandleAttack();
+        if (playerAttack != null) playerAttack.HandleAttack();
     }
 }

@@ -18,4 +18,14 @@ public class AnimationEventRedirector : MonoBehaviour
     {
         _rootAttackScript?.DisableAttackHitbox();
     }
+
+    public void RedirectLockRotation()
+    {
+        _rootAttackScript?.LockRotation();
+    }
+
+    public void RedirectUnlockRotation()
+    {
+        _rootAttackScript?.UnlockRotation();
+    }
 }

@@ -7,13 +7,13 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private float _attackCooldown = 1f;
 
     private static readonly int AttackTriggerHash = Animator.StringToHash("OWAttacking");
-
     private float _nextAttackTime = 0f;
+
+    public bool IsAttacking { get; private set; }
 
     private void Awake()
     {
         if (_playerAnimator == null) _playerAnimator = GetComponent<PlayerAnimator>();
-
         if (_attackHitbox != null) _attackHitbox.SetActive(false);
     }
 
@@ -23,13 +23,12 @@ public class PlayerAttack : MonoBehaviour
         if (Time.time < _nextAttackTime) return;
 
         _nextAttackTime = Time.time + _attackCooldown;
-
         _playerAnimator?.SetTrigger(AttackTriggerHash);
     }
+
     public void EnableAttackHitbox()
     {
         if (_attackHitbox != null) _attackHitbox.SetActive(true);
-
         _playerAnimator?.PlayActiveVFX();
     }
 
@@ -37,4 +36,7 @@ public class PlayerAttack : MonoBehaviour
     {
         if (_attackHitbox != null) _attackHitbox.SetActive(false);
     }
+
+    public void LockRotation() => IsAttacking = true;
+    public void UnlockRotation() => IsAttacking = false;
 }
