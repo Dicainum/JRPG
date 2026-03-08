@@ -3,6 +3,10 @@ using System.Collections.Generic;
 
 public class DarkAndLightStacksBuff : BasicBuff
 {
+    [SerializeField] private GameObject _darkFairy;
+    [SerializeField] private GameObject _lightFairy;
+    [SerializeField] private ParticleSystem _darkParticleSystem;
+    [SerializeField] private ParticleSystem _lightParticleSystem;
     public enum Form
     {
         Light,
@@ -151,15 +155,21 @@ public class DarkAndLightStacksBuff : BasicBuff
 
     private void UpdateActiveSkills()
     {
-        if (_skillsUIExporter == null) return;
-
         if (_currentForm == Form.Light)
         {
-            _skillsUIExporter.RefreshSkills(_lightFormSkills);
+            _lightParticleSystem.Play();
+            if (_lightFairy != null) _lightFairy.SetActive(true);
+            if (_darkFairy != null) _darkFairy.SetActive(false);
+
+            if (_skillsUIExporter != null) _skillsUIExporter.RefreshSkills(_lightFormSkills);
         }
         else
         {
-            _skillsUIExporter.RefreshSkills(_darkFormSkills);
+            _darkParticleSystem.Play();
+            if (_lightFairy != null) _lightFairy.SetActive(false);
+            if (_darkFairy != null) _darkFairy.SetActive(true);
+
+            if (_skillsUIExporter != null) _skillsUIExporter.RefreshSkills(_darkFormSkills);
         }
     }
 

@@ -8,7 +8,14 @@ public class DarkFairyAnimationEventHandler : MonoBehaviour
     [SerializeField] private BaseBattleAttack _baseBattleAttack;
     [SerializeField] private float _projectileOffset = 1.25f;
     [SerializeField] private float _maxRayDistance = 50f;
+    private Animator anim;
 
+    private void OnEnable()
+    {
+        anim = GetComponent<Animator>();
+        anim.SetLayerWeight(1, 0);
+        anim.SetLayerWeight(2, 1);
+    }
     public void SpawnBow()
     {
         _bow.SetActive(true);

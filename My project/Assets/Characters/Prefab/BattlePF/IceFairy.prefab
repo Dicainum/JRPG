@@ -97,6 +97,7 @@ MonoBehaviour:
   damageMultiplier: 1
   timeToMove: 1
   timeToMoveBack: 0.5
+  delayBeforeCamMove: 1
   baseAttackTarget:
     stats: {fileID: 0}
     gObject: {fileID: 0}
@@ -251,10 +252,34 @@ PrefabInstance:
     - {fileID: 6752526895471687946, guid: cd9f1d985414f834fa1e4b56bc933a50, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7372986309711934915, guid: cd9f1d985414f834fa1e4b56bc933a50, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 585064255588643332}
   m_SourcePrefab: {fileID: 100100000, guid: cd9f1d985414f834fa1e4b56bc933a50, type: 3}
 --- !u!4 &3403028139436464093 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3005736070846398722, guid: cd9f1d985414f834fa1e4b56bc933a50, type: 3}
   m_PrefabInstance: {fileID: 472729630229665503}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6979843729701380892 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7372986309711934915, guid: cd9f1d985414f834fa1e4b56bc933a50, type: 3}
+  m_PrefabInstance: {fileID: 472729630229665503}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &585064255588643332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6979843729701380892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00a30e8a740a340489d39befeb5a1370, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _projectile: {fileID: 8188785631581521038, guid: 8be96d42b00ca464ea9a556464a4363c, type: 3}
+  _baseBattleAttack: {fileID: 2458569204313890934}
+  _projectileOffset: 1.25
+  _maxRayDistance: 50
