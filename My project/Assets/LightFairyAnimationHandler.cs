@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using DG.Tweening;
 
 public class LightFairyAnimationHandler : MonoBehaviour
 {
@@ -8,6 +9,12 @@ public class LightFairyAnimationHandler : MonoBehaviour
     [SerializeField] private float _projectileOffset = 1.25f;
     [SerializeField] private float _maxRayDistance;
     private Animator anim;
+    private Quaternion _originalRotation;
+
+    private void Start()
+    {
+        _originalRotation = transform.rotation;
+    }
 
     private void OnEnable()
     {
@@ -43,5 +50,10 @@ public class LightFairyAnimationHandler : MonoBehaviour
                 Debug.Log("Hit");
             }
         }
+    }
+    
+    public void ResetRotation()
+    {
+        transform.DORotateQuaternion(_originalRotation, 0.5f);
     }
 }

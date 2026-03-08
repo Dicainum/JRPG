@@ -1,4 +1,5 @@
 using UnityEngine;
+using DG.Tweening;
 
 public class DarkFairyAnimationEventHandler : MonoBehaviour
 {
@@ -9,6 +10,12 @@ public class DarkFairyAnimationEventHandler : MonoBehaviour
     [SerializeField] private float _projectileOffset = 1.25f;
     [SerializeField] private float _maxRayDistance = 50f;
     private Animator anim;
+    private Quaternion _originalRotation;
+
+    private void Start()
+    {
+        _originalRotation = transform.rotation;
+    }
 
     private void OnEnable()
     {
@@ -52,5 +59,10 @@ public class DarkFairyAnimationEventHandler : MonoBehaviour
                 Debug.Log("Hit");
             }
         }
+    }
+    
+    public void ResetRotation()
+    {
+        transform.DORotateQuaternion(_originalRotation, 0.5f);
     }
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using DG.Tweening;
 
 public class SkillTargetSystem : MonoBehaviour
 {
@@ -63,6 +64,7 @@ public class SkillTargetSystem : MonoBehaviour
     
     private void Awake()
     {
+
         // Assign this instance as the singleton
         if (SkillTarget != null && SkillTarget != this)
         {
@@ -75,6 +77,7 @@ public class SkillTargetSystem : MonoBehaviour
     }
     private void FixedUpdate()
     {
+
         if(_isTargetingAlly || _isTargetingEnemy)
         {
             _targeting = true;
@@ -134,10 +137,12 @@ public class SkillTargetSystem : MonoBehaviour
             //Debug.Log("Moving camera");
             _lastTarget = _target;
             cameraController.BattleCameraLookAtTarget(_target.gObject);
+            LookAtTarget(_target);
         }
 
         if (confirmInput.action.WasPressedThisFrame())
         {
+
         }
     }
 
@@ -164,6 +169,7 @@ public class SkillTargetSystem : MonoBehaviour
     {
         _currentSkill = skill;
     }
+
     private void OnConfirmPressed(InputAction.CallbackContext ctx)
     {
         if (!_isTargetingEnemy && !_isTargetingAlly) return;
@@ -188,6 +194,7 @@ public class SkillTargetSystem : MonoBehaviour
         }
         TargetSelected?.Invoke(_target);
         StartCoroutine(ConfirmTargetRoutine(delay));
+
     }
 
     private IEnumerator ConfirmTargetRoutine(float delay)
@@ -244,8 +251,10 @@ public class SkillTargetSystem : MonoBehaviour
             _currentTargetIndex = 0;
             _target = _enemyTargets[_currentTargetIndex];
             cameraController.BattleCameraLookAtTarget(_target.gObject);
+            LookAtTarget(_target);
             aim.SetActive(true);
         }
+
     }
 
     public void StartTargetingAlly()
@@ -260,9 +269,11 @@ public class SkillTargetSystem : MonoBehaviour
             _currentTargetIndex = 0;
             _target = _allyTargets[_currentTargetIndex];
             cameraController.BattleCameraLookAtTarget(_target.gObject);
+            LookAtTarget(_target);
             aim.SetActive(true);
         }
     }
+
 
     private void SaveCameraTransform()
     {
@@ -279,5 +290,14 @@ public class SkillTargetSystem : MonoBehaviour
         _isTargetingAlly = false;
         aim.SetActive(false);
         _currentSkill = null;
+    }
+
+    private void LookAtTarget(TurnUnit target)
+    {
+        var currentUnit = OrderController.Order.currentUnit;
+        if (currentUnit != null && target != null)
+        {
+            currentUnit.gObject.transform.DOLookAt(target.gObject.transform.position, 0.5f, AxisConstraint.Y);
+        }
     }
 }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using DG.Tweening;
 
 public class IceFairyAnimationHandler : MonoBehaviour
 {
@@ -7,6 +8,13 @@ public class IceFairyAnimationHandler : MonoBehaviour
     [SerializeField] private float _projectileOffset = 1.25f;
     [SerializeField] private float _maxRayDistance;
     
+    private Quaternion _originalRotation;
+
+    private void Start()
+    {
+        _originalRotation = transform.rotation;
+    }
+
     public void ApplyAttack()
     {
         _baseBattleAttack.ApplyDamage();
@@ -15,9 +23,10 @@ public class IceFairyAnimationHandler : MonoBehaviour
     public void PlayAttackVfx()
     {
         Vector3 origin = transform.position + Vector3.up * _projectileOffset;
-        Ray ray = new Ray(origin, transform.forward);
+        Vector3 direction = Quaternion.Euler(0, -90, 0) * transform.forward;
+        Ray ray = new Ray(origin, direction);
         
-        Debug.DrawRay(origin, transform.forward * _maxRayDistance, Color.red, 1f);
+        Debug.DrawRay(origin, direction * _maxRayDistance, Color.red, 1f);
 
         RaycastHit hit;
 
@@ -34,5 +43,10 @@ public class IceFairyAnimationHandler : MonoBehaviour
                 Debug.Log("Hit");
             }
         }
+    }
+    
+    public void ResetRotation()
+    {
+        transform.DORotateQuaternion(_originalRotation, 0.5f);
     }
 }

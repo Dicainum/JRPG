@@ -282,4 +282,4 @@ MonoBehaviour:
   _projectile: {fileID: 8188785631581521038, guid: 8be96d42b00ca464ea9a556464a4363c, type: 3}
   _baseBattleAttack: {fileID: 2458569204313890934}
   _projectileOffset: 1.25
-  _maxRayDistance: 50
+  _maxRayDistance: 100

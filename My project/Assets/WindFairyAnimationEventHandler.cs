@@ -1,4 +1,5 @@
 using UnityEngine;
+using DG.Tweening;
 
 public class WindFairyAnimationEventHandler : MonoBehaviour
 {
@@ -8,6 +9,12 @@ public class WindFairyAnimationEventHandler : MonoBehaviour
     [SerializeField] private GameObject _projectile;
     [SerializeField] private float _projectileOffset = 1.25f;
     [SerializeField] private float _maxRayDistance = 50f;
+    private Quaternion _originalRotation;
+
+    private void Start()
+    {
+        _originalRotation = transform.rotation;
+    }
 
     public void PlaySpeedBuffVfx()
     {
@@ -42,5 +49,10 @@ public class WindFairyAnimationEventHandler : MonoBehaviour
                 }
             }
         }
+    }
+    
+    public void ResetRotation()
+    {
+        transform.DORotateQuaternion(_originalRotation, 0.5f);
     }
 }
