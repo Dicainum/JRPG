@@ -3,6 +3,8 @@ using UnityEngine;
 public class ArrowOfDarknessSkill : BasicSkill
 {
     private const int BaseDamage = 45;
+    private TurnUnit _currentTarget;
+
 
     protected override void OnAwake()
     {
@@ -84,7 +86,8 @@ public class ArrowOfDarknessSkill : BasicSkill
         TurnUnit currentUnit = GetCurrentUnit();
         if (currentUnit == null || currentUnit.stats.actions <= 0)
             return;
-
+        _currentTarget = target;
+        SpawnVFX();
         if (_particleSystem != null)
         {
             _particleSystem.Play();
@@ -96,7 +99,6 @@ public class ArrowOfDarknessSkill : BasicSkill
         {
             buff.AddStacks(2, currentUnit, DarkAndLightStacksBuff.StackType.Dark);
         }
-
         UseAction();
         StartCooldown();
 
@@ -105,6 +107,17 @@ public class ArrowOfDarknessSkill : BasicSkill
             _skillTargetSystem.TargetSelected -= OnTargetSelected;
             _skillTargetSystem.TargetCanceled -= OnTargetCanceled;
             _skillTargetSystem.StopTargeting();
+        }
+    }
+    
+    public void SpawnVFX()
+    {
+        if (_particleSystem != null)
+        {
+            Vector3 targetPosition = new Vector3(_currentTarget.gObject.transform.position.x, _particleSystem.gameObject.transform.position.y, _currentTarget.gObject.transform.position.z);
+            Vector3 vfxPosition = targetPosition;
+            _particleSystem.gameObject.transform.position = vfxPosition;
+            _particleSystem.Play();
         }
     }
 }
