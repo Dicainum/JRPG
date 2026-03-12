@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: M_VFX_Character_Showoff_01
-  m_Shader: {fileID: 4800000, guid: 1802aa1671aee6e469568f608a78fe9a, type: 3}
+  m_Shader: {fileID: 4800000, guid: 5175a6f2deac8284ab9a05e078a2b942, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -123,7 +123,6 @@ Material:
     - _ZTestGBuffer: 4
     - _ZTestTransparent: 4
     - _ZWrite: 1
-    - __dirty: 0
     m_Colors:
     - _BaseColor: {r: 0.6603774, g: 0.6603774, b: 0.6603774, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
