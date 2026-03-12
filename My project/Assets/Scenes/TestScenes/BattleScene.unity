@@ -8539,6 +8539,14 @@ PrefabInstance:
       propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4419283654665527211, guid: 02da2573a0d3c9a408842a2aa4467619, type: 3}
+      propertyPath: startDelay.scalar
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4419283654665527211, guid: 02da2573a0d3c9a408842a2aa4467619, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 1.2
+      objectReference: {fileID: 0}
     - target: {fileID: 5185974204778803330, guid: 02da2573a0d3c9a408842a2aa4467619, type: 3}
       propertyPath: playOnAwake
       value: 0
@@ -8583,13 +8591,73 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7118968756198527934, guid: 02da2573a0d3c9a408842a2aa4467619, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7118968756198527934, guid: 02da2573a0d3c9a408842a2aa4467619, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.809
+      objectReference: {fileID: 0}
+    - target: {fileID: 7118968756198527934, guid: 02da2573a0d3c9a408842a2aa4467619, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.54
+      objectReference: {fileID: 0}
+    - target: {fileID: 7118968756198527934, guid: 02da2573a0d3c9a408842a2aa4467619, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7118968756198527934, guid: 02da2573a0d3c9a408842a2aa4467619, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7118968756198527934, guid: 02da2573a0d3c9a408842a2aa4467619, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7118968756198527934, guid: 02da2573a0d3c9a408842a2aa4467619, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7118968756198527934, guid: 02da2573a0d3c9a408842a2aa4467619, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7591056317089109424, guid: 02da2573a0d3c9a408842a2aa4467619, type: 3}
       propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7606290803473886819, guid: 02da2573a0d3c9a408842a2aa4467619, type: 3}
+      propertyPath: startDelay.scalar
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7606290803473886819, guid: 02da2573a0d3c9a408842a2aa4467619, type: 3}
+      propertyPath: SizeModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7606290803473886819, guid: 02da2573a0d3c9a408842a2aa4467619, type: 3}
+      propertyPath: ColorModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7606290803473886819, guid: 02da2573a0d3c9a408842a2aa4467619, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8080401195949624320, guid: 02da2573a0d3c9a408842a2aa4467619, type: 3}
       propertyPath: m_Name
       value: IceFairy
+      objectReference: {fileID: 0}
+    - target: {fileID: 8896384167399421908, guid: 02da2573a0d3c9a408842a2aa4467619, type: 3}
+      propertyPath: lengthInSec
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8896384167399421908, guid: 02da2573a0d3c9a408842a2aa4467619, type: 3}
+      propertyPath: startDelay.scalar
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8896384167399421908, guid: 02da2573a0d3c9a408842a2aa4467619, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
