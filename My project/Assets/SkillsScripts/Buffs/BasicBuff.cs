@@ -40,8 +40,11 @@ public class BasicBuff : MonoBehaviour
 
     protected virtual void OnStart()
     {
-        _turnsLeft = 0;
-        _isActive = false;
+        if (!_isActive) 
+        {
+            _turnsLeft = 0;
+            _isActive = false;
+        }
     }
 
     private void Start()
@@ -78,6 +81,7 @@ public class BasicBuff : MonoBehaviour
                 RemoveBuffEffect();
                 _isActive = false;
                 _buffTarget = null;
+                Destroy(this);
             }
         }
     }

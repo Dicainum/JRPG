@@ -7,6 +7,7 @@ public class FrozenShieldSkill : BasicSkill
     private List<TurnUnit> _damagedTargets = new List<TurnUnit>();
     private const int _baseShield = 20;
     private TurnUnit _currentTarget;
+    [SerializeField] private GameObject _sheildVFX;
 
     protected override void OnAwake()
     {
@@ -95,30 +96,7 @@ public class FrozenShieldSkill : BasicSkill
             _particleSystem.Play();
         }
         ApplyFrozenShield();
-    }
-
-    private void ApplyFrozenShield()
-    {
-        Debug.Log("ShieldApplied");
-        TurnUnit currentUnit = GetCurrentUnit();
-        if (currentUnit == null || _currentTarget == null)
-            return;
-
-        _currentTarget.stats.ChangeShield(_boost);
-
-//        foreach (var damagedTarget in _damagedTargets)
-//        {
-//           if (damagedTarget != null && damagedTarget.IsAlive)
-//            {
-//                WindCut windCut = damagedTarget.gObject.GetComponent<WindCut>();
-//                if (windCut == null)
-//                {
-//                    windCut = damagedTarget.gObject.AddComponent<WindCut>();
-//                }
-//                windCut.ApplyDebuff(damagedTarget, currentUnit);
-//            }
-//      }
-
+        
         if (_skillTargetSystem != null)
         {
             _skillTargetSystem.TargetSelected -= OnTargetSelected;
@@ -127,5 +105,26 @@ public class FrozenShieldSkill : BasicSkill
 
         UseAction();
         StartCooldown();
+    }
+
+    private void ApplyFrozenShield()
+    {
+        Debug.Log("ShieldApplied");
+        TurnUnit currentUnit = GetCurrentUnit();
+        if (currentUnit == null || _currentTarget == null)
+            return;
+        
+        FrozenShieldBuff frozenShieldBuff = _currentTarget.gObject.GetComponent<FrozenShieldBuff>();
+        if (frozenShieldBuff == null)
+        {
+            frozenShieldBuff = _currentTarget.gObject.AddComponent<FrozenShieldBuff>();
+            frozenShieldBuff.Initialize(_boost, _sheildVFX);
+            frozenShieldBuff.ApplyBuff(_currentTarget);
+        }
+        else
+        {
+            frozenShieldBuff.Initialize(_boost, _sheildVFX);
+            frozenShieldBuff.ApplyBuff(_currentTarget);
+        }
     }
 }

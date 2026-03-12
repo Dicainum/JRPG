@@ -8515,6 +8515,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 730271957}
     m_Modifications:
+    - target: {fileID: 409988343886085961, guid: 02da2573a0d3c9a408842a2aa4467619, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1040840017545682684, guid: 02da2573a0d3c9a408842a2aa4467619, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1880567012976523949, guid: 02da2573a0d3c9a408842a2aa4467619, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2594551973547332335, guid: 02da2573a0d3c9a408842a2aa4467619, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4001063597972305743, guid: 02da2573a0d3c9a408842a2aa4467619, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4275725089070490359, guid: 02da2573a0d3c9a408842a2aa4467619, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5185974204778803330, guid: 02da2573a0d3c9a408842a2aa4467619, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5823606363901153560, guid: 02da2573a0d3c9a408842a2aa4467619, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -8553,6 +8581,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5823606363901153560, guid: 02da2573a0d3c9a408842a2aa4467619, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7591056317089109424, guid: 02da2573a0d3c9a408842a2aa4467619, type: 3}
+      propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8080401195949624320, guid: 02da2573a0d3c9a408842a2aa4467619, type: 3}
