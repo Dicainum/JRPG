@@ -104,7 +104,6 @@ public class FrozenShieldSkill : BasicSkill
         }
 
         UseAction();
-        StartCooldown();
     }
 
     private void ApplyFrozenShield()
@@ -126,5 +125,6 @@ public class FrozenShieldSkill : BasicSkill
             frozenShieldBuff.Initialize(_boost, _sheildVFX);
             frozenShieldBuff.ApplyBuff(_currentTarget);
         }
+        StartCooldown();
     }
 }

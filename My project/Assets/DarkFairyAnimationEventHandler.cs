@@ -9,6 +9,7 @@ public class DarkFairyAnimationEventHandler : MonoBehaviour
     [SerializeField] private BaseBattleAttack _baseBattleAttack;
     [SerializeField] private float _projectileOffset = 1.25f;
     [SerializeField] private float _maxRayDistance = 50f;
+    [SerializeField] private GameObject _blackHole;
     private Animator anim;
     private Quaternion _originalRotation;
 
@@ -35,6 +36,11 @@ public class DarkFairyAnimationEventHandler : MonoBehaviour
     public void ApplyAttack()
     {
         _baseBattleAttack.ApplyDamage();
+    }
+
+    public void ActivateBlackHole()
+    {
+        _blackHole.gameObject.SetActive(true);
     }
 
     public void PlayAttackVfx()

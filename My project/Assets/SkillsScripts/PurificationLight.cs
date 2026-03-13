@@ -65,6 +65,7 @@ public class PurificationLight : BasicSkill
 
         if (_particleSystem != null)
         {
+            _particleSystem.gameObject.transform.position = target.gObject.transform.position + Vector3.up;
             _particleSystem.Play();
         }
 

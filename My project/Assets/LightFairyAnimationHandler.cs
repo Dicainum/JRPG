@@ -18,6 +18,7 @@ public class LightFairyAnimationHandler : MonoBehaviour
 
     private void OnEnable()
     {
+        gameObject.transform.localPosition = Vector3.zero;
         anim = GetComponent<Animator>();
         anim.SetLayerWeight(1, 0);
         anim.SetLayerWeight(2, 1);
