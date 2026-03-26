@@ -9,4 +9,6 @@ public class PlayerSettings : ScriptableObject
     [Header("SpeedBoost")]
     public float speedBoostMultiplier = 1f;
     public static ColorSpace colorSpace = ColorSpace.Gamma;
+    [Header("Inventory")]
+    public float Crystals = 0;
 }

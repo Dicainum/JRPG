@@ -9,6 +9,7 @@ public class InputManager : MonoBehaviour
     [Header("Links")]
     public CharacterSwitcher switcher;
     private PlayerInput inputActions;
+    public PlayerInteraction playerInteraction;
     private Vector2 moveInput;
 
     void Awake()
@@ -34,6 +35,7 @@ public class InputManager : MonoBehaviour
             if (switcher != null && switcher.ActiveCharacter != null)
                 switcher.ActiveCharacter.SetSpeedBoost(false);
         };
+        inputActions.Player.Confirm.performed += ctx => OnConfirm();
     }
 
     void OnEnable() => inputActions.Player.Enable();
@@ -49,5 +51,12 @@ public class InputManager : MonoBehaviour
     {
         if (switcher != null && switcher.ActiveCharacter != null)
             switcher.ActiveCharacter.HandleAttack();
+    }
+    private void OnConfirm()
+    {
+        if (playerInteraction != null)
+        {
+            playerInteraction.InteractWithChest();
+        }
     }
 }
