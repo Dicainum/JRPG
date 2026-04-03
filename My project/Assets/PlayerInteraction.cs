@@ -21,6 +21,7 @@ public class PlayerInteraction : MonoBehaviour
         if (other.TryGetComponent(out ChestLogic chest))
         {
             currentChest = chest;
+            currentChest.ShowHint();
         }
     }
 
@@ -28,7 +29,11 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (other.TryGetComponent(out ChestLogic chest))
         {
-            if (currentChest == chest) currentChest = null;
+            if (currentChest == chest)
+            {
+                currentChest.HideHint();
+                currentChest = null;
+            }
         }
     }
 }

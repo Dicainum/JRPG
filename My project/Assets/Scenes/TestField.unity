@@ -824,13 +824,25 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149189599806, guid: 40e75778925f79b4bad7aa00ac479fcc, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1591114748831049971, guid: 40e75778925f79b4bad7aa00ac479fcc, type: 3}
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 2318465593293623109, guid: 40e75778925f79b4bad7aa00ac479fcc, type: 3}
+      propertyPath: chestId
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4740075566064666687, guid: 40e75778925f79b4bad7aa00ac479fcc, type: 3}
       propertyPath: m_Layer
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4740075566064666687, guid: 40e75778925f79b4bad7aa00ac479fcc, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4980396581455561492, guid: 40e75778925f79b4bad7aa00ac479fcc, type: 3}
       propertyPath: m_LocalScale.x
@@ -900,34 +912,13 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: 5644766120566633696, guid: 40e75778925f79b4bad7aa00ac479fcc, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5644766120768100782, guid: 40e75778925f79b4bad7aa00ac479fcc, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 254304464}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 40e75778925f79b4bad7aa00ac479fcc, type: 3}
 --- !u!4 &216244689 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4980396581455561492, guid: 40e75778925f79b4bad7aa00ac479fcc, type: 3}
   m_PrefabInstance: {fileID: 216244688}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &254304462 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5644766120768100782, guid: 40e75778925f79b4bad7aa00ac479fcc, type: 3}
-  m_PrefabInstance: {fileID: 216244688}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &254304464
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 254304462}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bc27d618731f5941823cd7ecd1aa2de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  crystalsAmount: 15
 --- !u!1 &341533615
 GameObject:
   m_ObjectHideFlags: 0
@@ -1143,11 +1134,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84853ffa64fd5744eb4f3739ce81b746, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &410294020 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5644766120768100782, guid: 40e75778925f79b4bad7aa00ac479fcc, type: 3}
-  m_PrefabInstance: {fileID: 899105526}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &459522582
 GameObject:
   m_ObjectHideFlags: 0
@@ -2218,6 +2204,18 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 2318465593293623109, guid: 40e75778925f79b4bad7aa00ac479fcc, type: 3}
+      propertyPath: chestId
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633406291664690377, guid: 40e75778925f79b4bad7aa00ac479fcc, type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633406291664690377, guid: 40e75778925f79b4bad7aa00ac479fcc, type: 3}
+      propertyPath: m_ProvidesContacts
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4740075566064666687, guid: 40e75778925f79b4bad7aa00ac479fcc, type: 3}
       propertyPath: m_Layer
       value: 3
@@ -2290,29 +2288,13 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: 5644766120566633696, guid: 40e75778925f79b4bad7aa00ac479fcc, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5644766120768100782, guid: 40e75778925f79b4bad7aa00ac479fcc, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 899105529}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 40e75778925f79b4bad7aa00ac479fcc, type: 3}
 --- !u!4 &899105527 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4980396581455561492, guid: 40e75778925f79b4bad7aa00ac479fcc, type: 3}
   m_PrefabInstance: {fileID: 899105526}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &899105529
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 410294020}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bc27d618731f5941823cd7ecd1aa2de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  crystalsAmount: 10
 --- !u!1 &904303279 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7372986309711934915, guid: cd9f1d985414f834fa1e4b56bc933a50, type: 3}
