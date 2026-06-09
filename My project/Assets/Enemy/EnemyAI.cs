@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class EnemyAI : MonoBehaviour
 {
@@ -37,6 +38,11 @@ public class EnemyAI : MonoBehaviour
     private Coroutine aggroTimer;
     private bool attackCorutineStarted = false;
 
+    [Header("Scene Transition")]
+    [SerializeField] private string _battleSceneName = "BattleScene";
+    [SerializeField] private float _delayBeforeLoad = 0.3f;
+    private bool _isTransitioning = false;
+
     private void Awake()
     {
         target = GameObject.FindGameObjectWithTag("Player").transform;
@@ -45,6 +51,8 @@ public class EnemyAI : MonoBehaviour
 
     private void Update()
     {
+        if (_isTransitioning) return;
+
         if (isStunned)
         {
             agent.SetDestination(transform.position);
@@ -180,6 +188,8 @@ public class EnemyAI : MonoBehaviour
 
     private void AttackTarget()
     {
+        if (_isTransitioning) return;
+
         Debug.Log("Player attacked");
         agent.SetDestination(transform.position);
         transform.LookAt(target);
@@ -189,6 +199,19 @@ public class EnemyAI : MonoBehaviour
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
+
+        StartCoroutine(LoadBattleSceneWithDelay());
+    }
+    private IEnumerator LoadBattleSceneWithDelay()
+    {
+        _isTransitioning = true;
+        agent.isStopped = true;
+
+        // GetComponent<Animator>().SetTrigger("Attack");
+
+        yield return new WaitForSeconds(_delayBeforeLoad);
+
+        SceneManager.LoadScene(_battleSceneName);
     }
 
     private void ResetAttack()
@@ -197,7 +220,7 @@ public class EnemyAI : MonoBehaviour
     }
     public void OnAttacked()
     {
-        if (isStunned) return;
+        if (isStunned || _isTransitioning) return;
 
         Debug.Log($"{name} stunned by player attack");
         isStunned = true;

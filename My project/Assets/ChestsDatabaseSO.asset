@@ -12,5 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f555fe3329be81449b9ac2289f4a2aeb, type: 3}
   m_Name: ChestsDatabaseSO
   m_EditorClassIdentifier: 
-  openedChests:
-  - 0
+  openedChests: []

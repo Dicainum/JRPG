@@ -8,9 +8,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/VillageScene.unity
     guid: 7b052adf6e738084a98de06e35872369
-  - enabled: 0
-    path: Assets/Scenes/TestField.unity
+  - enabled: 1
+    path: Assets/Scenes/DungeonScene.unity
     guid: 8124e5870f4fd4c779e7a5f994e84ad1
+  - enabled: 1
+    path: Assets/Scenes/TestScenes/BattleScene.unity
+    guid: 0f51dc8e96bef7147a0c51ba62123563
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 63ce64dd5917e7443a020099b03b2b12, type: 3}
   m_UseUCBPForAssetBundles: 0
