@@ -2553,6 +2553,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   enemyId: 3
+  enemiesDatabase: {fileID: 11400000, guid: 85c37cb7b5f85bd4db0810c3f3af18f4, type: 2}
   waypoints:
   - {fileID: 688544792}
   - {fileID: 1035808757}
@@ -3162,6 +3163,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   enemyId: 2
+  enemiesDatabase: {fileID: 11400000, guid: 85c37cb7b5f85bd4db0810c3f3af18f4, type: 2}
   waypoints:
   - {fileID: 1936512861}
   - {fileID: 1383643363}
@@ -3676,6 +3678,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   enemyId: 1
+  enemiesDatabase: {fileID: 11400000, guid: 85c37cb7b5f85bd4db0810c3f3af18f4, type: 2}
   waypoints:
   - {fileID: 1815471227}
   - {fileID: 78811238}
@@ -6340,6 +6343,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   enemyId: 
+  enemiesDatabase: {fileID: 0}
   waypoints:
   - {fileID: 1815471227}
   - {fileID: 78811238}

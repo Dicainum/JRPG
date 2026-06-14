@@ -31,7 +31,10 @@ public class OrderController : MonoBehaviour
 
     [Header("Settings")] [SerializeField] private int previewLength = 10;
     [SerializeField] private float turnThreshold = 100f;
-    
+
+    [Header("Databases")]
+    public EnemiesDatabase enemiesDatabase;
+
     private void Awake()
     {
         // Assign this instance as the singleton
@@ -311,6 +314,17 @@ public class OrderController : MonoBehaviour
         yield return new WaitForSeconds(2.5f);
 
         GameDataManager.isReturningFromBattle = true;
+
+        if (enemiesDatabase != null && !string.IsNullOrEmpty(GameDataManager.currentEnemyId))
+        {
+            if (!enemiesDatabase.defeatedEnemies.Contains(GameDataManager.currentEnemyId))
+            {
+                enemiesDatabase.defeatedEnemies.Add(GameDataManager.currentEnemyId);
+                Debug.Log($"<color=green>Враг {GameDataManager.currentEnemyId} записан в базу как мертвый!</color>");
+            }
+        }
+
+        DG.Tweening.DOTween.KillAll();
 
         UnityEngine.SceneManagement.SceneManager.LoadScene(GameDataManager.dungeonSceneName);
     }

@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdfa0a8793ecc914893ec402775c6b16, type: 3}
   m_Name: EnemiesDatabase
   m_EditorClassIdentifier: 
-  deadEnemyIds: []
+  defeatedEnemies: []

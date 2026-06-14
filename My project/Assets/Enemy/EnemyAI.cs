@@ -12,6 +12,7 @@ public class EnemyAI : MonoBehaviour
 
     [Header("Persistence")]
     public string enemyId;
+    public EnemiesDatabase enemiesDatabase;
 
     [Header("Patroling")]
     [SerializeField] private Transform[] waypoints;
@@ -48,6 +49,12 @@ public class EnemyAI : MonoBehaviour
 
     private void Awake()
     {
+        if (enemiesDatabase != null && enemiesDatabase.defeatedEnemies.Contains(enemyId))
+        {
+            gameObject.SetActive(false);
+            return;
+        }
+
         target = GameObject.FindGameObjectWithTag("Player").transform;
         agent = GetComponent<NavMeshAgent>();
     }
@@ -220,7 +227,10 @@ public class EnemyAI : MonoBehaviour
         {
             GameDataManager.playerDungeonPosition = target.position;
             GameDataManager.dungeonSceneName = SceneManager.GetActiveScene().name;
-            Debug.Log($"<color=cyan>[BattleManager] Состояние данжа сохранено. Позиция: {target.position}</color>");
+
+            GameDataManager.currentEnemyId = enemyId;
+
+            Debug.Log($"<color=cyan>[BattleManager] Состояние данжа сохранено. Позиция: {target.position}, Враг: {enemyId}</color>");
         }
         else
         {

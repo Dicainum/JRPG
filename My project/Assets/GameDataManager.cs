@@ -7,7 +7,5 @@ public static class GameDataManager
     public static Vector3 playerDungeonPosition;
     public static string dungeonSceneName = "DungeonScene";
 
-    public static string currentFightingEnemyId = "";
-
-    public static List<string> deadEnemyIds = new List<string>();
+    public static string currentEnemyId = "";
 }
