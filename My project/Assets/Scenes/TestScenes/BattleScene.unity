@@ -3794,6 +3794,7 @@ MonoBehaviour:
   _loadingUIController: {fileID: 520389220}
   previewLength: 10
   turnThreshold: 100
+  enemiesDatabase: {fileID: 11400000, guid: 85c37cb7b5f85bd4db0810c3f3af18f4, type: 2}
 --- !u!4 &841006432
 Transform:
   m_ObjectHideFlags: 0

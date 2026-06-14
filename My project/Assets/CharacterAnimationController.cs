@@ -16,6 +16,7 @@ public class CharacterAnimationController : MonoBehaviour
     private static readonly int SkillIndexHash = Animator.StringToHash("SkillIndex");
     private static readonly int HitTriggerHash = Animator.StringToHash("TriggerHit");
     private static readonly int LowHealthBoolHash = Animator.StringToHash("IsLowHealth");
+    private static readonly int DeathTriggerHash = Animator.StringToHash("TriggerDeath");
 
     public enum CharacterState
     {
@@ -135,6 +136,18 @@ public class CharacterAnimationController : MonoBehaviour
 
         _currentState = CharacterState.TakingDamage;
         foreach (var anim in _animators) anim.SetTrigger(HitTriggerHash);
+    }
+
+    public void TriggerDeath()
+    {
+        CancelAiming();
+
+        _currentState = CharacterState.Dead;
+
+        foreach (var anim in _animators)
+        {
+            anim.SetTrigger(DeathTriggerHash);
+        }
     }
 
     public void SetLowHealth(bool isLow)

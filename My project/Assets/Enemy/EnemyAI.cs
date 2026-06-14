@@ -10,6 +10,9 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private Transform target;
     [SerializeField] private LayerMask Ground, Player;
 
+    [Header("Persistence")]
+    public string enemyId;
+
     [Header("Patroling")]
     [SerializeField] private Transform[] waypoints;
     private int currentWaypointIndex = 0;
@@ -156,7 +159,6 @@ public class EnemyAI : MonoBehaviour
                 waitCoroutine = StartCoroutine(PatrolPause());
         }
     }
-
     private IEnumerator PatrolPause()
     {
         isWaiting = true;
@@ -190,7 +192,7 @@ public class EnemyAI : MonoBehaviour
     {
         if (_isTransitioning) return;
 
-        Debug.Log("Player attacked");
+        Debug.Log("Enemy initiated attack on player!");
         agent.SetDestination(transform.position);
         transform.LookAt(target);
 
@@ -200,14 +202,35 @@ public class EnemyAI : MonoBehaviour
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
 
-        StartCoroutine(LoadBattleSceneWithDelay());
+        InitiateBattleTransition();
     }
-    private IEnumerator LoadBattleSceneWithDelay()
-    {
-        _isTransitioning = true;
-        agent.isStopped = true;
 
-        // GetComponent<Animator>().SetTrigger("Attack");
+    private void InitiateBattleTransition()
+    {
+        if (_isTransitioning) return;
+        _isTransitioning = true;
+
+        SaveDungeonState();
+        StartCoroutine(LoadBattleSceneRoutine());
+    }
+
+    private void SaveDungeonState()
+    {
+        if (target != null)
+        {
+            GameDataManager.playerDungeonPosition = target.position;
+            GameDataManager.dungeonSceneName = SceneManager.GetActiveScene().name;
+            Debug.Log($"<color=cyan>[BattleManager] Состояние данжа сохранено. Позиция: {target.position}</color>");
+        }
+        else
+        {
+            Debug.LogError("<color=red>[BattleManager] Критическая ошибка: Target не назначен! Позиция не сохранена.</color>");
+        }
+    }
+
+    private IEnumerator LoadBattleSceneRoutine()
+    {
+        agent.isStopped = true;
 
         yield return new WaitForSeconds(_delayBeforeLoad);
 
@@ -222,13 +245,14 @@ public class EnemyAI : MonoBehaviour
     {
         if (isStunned || _isTransitioning) return;
 
-        Debug.Log($"{name} stunned by player attack");
+        Debug.Log($"{name} stunned by player stealth attack! Player gets advantage.");
         isStunned = true;
         agent.isStopped = true;
 
         if (alertIcon) alertIcon.SetActive(false);
-
         alreadyAttacked = false;
+
+        InitiateBattleTransition();
     }
 
     private void OnDrawGizmosSelected()

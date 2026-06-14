@@ -287,5 +287,31 @@ public class OrderController : MonoBehaviour
         battleAttack.Attacked += UseAction;
         Debug.Log($"Initialized BattleAttack for {unit.stats.characterName}");
     }
+    public void CheckWinCondition()
+    {
+        int aliveEnemies = 0;
 
+        foreach (var unit in units)
+        {
+            if (unit.gObject.CompareTag("Enemy") && unit.IsAlive)
+            {
+                aliveEnemies++;
+            }
+        }
+
+        if (aliveEnemies <= 0)
+        {
+            Debug.Log("<color=green>Все враги повержены! Возвращаемся в данж...</color>");
+            StartCoroutine(EndBattleRoutine());
+        }
+    }
+
+    private System.Collections.IEnumerator EndBattleRoutine()
+    {
+        yield return new WaitForSeconds(2.5f);
+
+        GameDataManager.isReturningFromBattle = true;
+
+        UnityEngine.SceneManagement.SceneManager.LoadScene(GameDataManager.dungeonSceneName);
+    }
 }

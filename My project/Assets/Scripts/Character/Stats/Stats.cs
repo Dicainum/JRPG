@@ -51,11 +51,13 @@ public class Stats : MonoBehaviour
         health -= damageTaken;
         OnDamageTaken?.Invoke(damageTaken);
 
-        GetComponentInChildren<CharacterAnimationController>()?.TakeDamage();
-
         if (health <= 0)
         {
             Death();
+        }
+        else
+        {
+            GetComponentInChildren<CharacterAnimationController>()?.TakeDamage();
         }
 
         UpdateUI();
@@ -94,8 +96,15 @@ public class Stats : MonoBehaviour
 
     private void Death()
     {
-        Debug.Log(gameObject.name + "is dead");
+        isAlive = false;
+        Debug.Log(gameObject.name + " is dead");
+        GetComponentInChildren<CharacterAnimationController>()?.TriggerDeath();
         UpdateUI();
+
+        if (isEnemy && OrderController.Order != null)
+        {
+            OrderController.Order.CheckWinCondition();
+        }
     }
 
     protected virtual void UpdateUI()

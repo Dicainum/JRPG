@@ -1260,6 +1260,7 @@ GameObject:
   - component: {fileID: 341533618}
   - component: {fileID: 341533617}
   - component: {fileID: 341533622}
+  - component: {fileID: 341533624}
   - component: {fileID: 341533623}
   m_Layer: 6
   m_Name: PlayerRoot
@@ -1433,6 +1434,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &341533624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 341533615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97c6f5d8407bfdc49b25038c3e26e1f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &358275827 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6833601674980779412, guid: bac34fcc19a533349a5a87580cbea8eb, type: 3}
@@ -2539,6 +2552,7 @@ MonoBehaviour:
   Player:
     serializedVersion: 2
     m_Bits: 64
+  enemyId: 3
   waypoints:
   - {fileID: 688544792}
   - {fileID: 1035808757}
@@ -3147,6 +3161,7 @@ MonoBehaviour:
   Player:
     serializedVersion: 2
     m_Bits: 64
+  enemyId: 2
   waypoints:
   - {fileID: 1936512861}
   - {fileID: 1383643363}
@@ -3660,6 +3675,7 @@ MonoBehaviour:
   Player:
     serializedVersion: 2
     m_Bits: 64
+  enemyId: 1
   waypoints:
   - {fileID: 1815471227}
   - {fileID: 78811238}
@@ -5183,8 +5199,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1354207475}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.009749367, y: 0.98529565, z: -0.060184382, w: 0.15960968}
-  m_LocalPosition: {x: -0.66214734, y: 2.41, z: -1.9602492}
+  m_LocalRotation: {x: 0.028065834, y: 0.8051444, z: -0.03822364, w: 0.59117997}
+  m_LocalPosition: {x: -2.3760083, y: 2.41, z: -3.0162873}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5661,8 +5677,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1617955954}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.00974937, y: 0.9852957, z: -0.06018439, w: 0.1596097}
-  m_LocalPosition: {x: 85.41857, y: -10.405891, z: -17.164246}
+  m_LocalRotation: {x: 0.028065832, y: 0.8051444, z: -0.03822364, w: 0.59117997}
+  m_LocalPosition: {x: 83.70471, y: -10.405891, z: -18.220285}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6323,6 +6339,7 @@ MonoBehaviour:
   Player:
     serializedVersion: 2
     m_Bits: 64
+  enemyId: 
   waypoints:
   - {fileID: 1815471227}
   - {fileID: 78811238}
