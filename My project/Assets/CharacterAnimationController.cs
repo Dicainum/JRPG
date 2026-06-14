@@ -154,8 +154,8 @@ public class CharacterAnimationController : MonoBehaviour
             anim.SetBool(IsSelectingSkillHash, false);
         }
     }
-    
-    private bool IsInBlockingState()
+
+    public bool IsInBlockingState()
     {
         return _currentState == CharacterState.TakingDamage 
             || _currentState == CharacterState.Dead

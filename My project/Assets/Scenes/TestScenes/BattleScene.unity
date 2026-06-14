@@ -1368,9 +1368,12 @@ GameObject:
   m_Component:
   - component: {fileID: 294329949}
   - component: {fileID: 294329952}
+  - component: {fileID: 294329956}
   - component: {fileID: 294329951}
   - component: {fileID: 294329950}
   - component: {fileID: 294329953}
+  - component: {fileID: 294329955}
+  - component: {fileID: 294329954}
   m_Layer: 0
   m_Name: character_3
   m_TagString: Enemy
@@ -1487,7 +1490,7 @@ MonoBehaviour:
   damage: 10
   maxHealth: 0
   baseSpeed: 0
-  baseDamage: 0
+  baseDamage: 10
   startShield: 0
   isAlive: 1
   isStunned: 0
@@ -1499,6 +1502,63 @@ MonoBehaviour:
   actions: 0
   baseAttack: {fileID: 0}
   _stats: {fileID: 0}
+--- !u!114 &294329954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 294329948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9ab99284cd85c34aaa52b9a60996f29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageMultiplier: 1
+  timeToMove: 0.5
+  timeToMoveBack: 0.5
+  delayBeforeCamMove: 1
+  baseAttackTarget:
+    stats: {fileID: 0}
+    gObject: {fileID: 0}
+  attackApplied: 1
+--- !u!114 &294329955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 294329948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b44c363d29ce2c44aaf95ec27e57c3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animators: []
+  _dampTime: 0.1
+  _minAttackAnimTime: 0.3
+--- !u!95 &294329956
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 294329948}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 55970e306b735b241ac67bb9cb5108a3, type: 3}
+  m_Controller: {fileID: 9100000, guid: 06e5401be79f1384e8fb20ae66f67bbf, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &322030484
 GameObject:
   m_ObjectHideFlags: 0
@@ -5730,7 +5790,7 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -5741,7 +5801,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1294501760}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -6070,7 +6130,10 @@ GameObject:
   - component: {fileID: 1399080674}
   - component: {fileID: 1399080673}
   - component: {fileID: 1399080672}
+  - component: {fileID: 1399080678}
   - component: {fileID: 1399080675}
+  - component: {fileID: 1399080677}
+  - component: {fileID: 1399080676}
   m_Layer: 0
   m_Name: character_2
   m_TagString: Enemy
@@ -6187,7 +6250,7 @@ MonoBehaviour:
   damage: 10
   maxHealth: 0
   baseSpeed: 0
-  baseDamage: 0
+  baseDamage: 10
   startShield: 0
   isAlive: 1
   isStunned: 0
@@ -6199,6 +6262,63 @@ MonoBehaviour:
   actions: 0
   baseAttack: {fileID: 0}
   _stats: {fileID: 0}
+--- !u!114 &1399080676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1399080670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9ab99284cd85c34aaa52b9a60996f29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageMultiplier: 1
+  timeToMove: 0.5
+  timeToMoveBack: 0.5
+  delayBeforeCamMove: 1
+  baseAttackTarget:
+    stats: {fileID: 0}
+    gObject: {fileID: 0}
+  attackApplied: 1
+--- !u!114 &1399080677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1399080670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b44c363d29ce2c44aaf95ec27e57c3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animators: []
+  _dampTime: 0.1
+  _minAttackAnimTime: 0.3
+--- !u!95 &1399080678
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1399080670}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 55970e306b735b241ac67bb9cb5108a3, type: 3}
+  m_Controller: {fileID: 9100000, guid: 06e5401be79f1384e8fb20ae66f67bbf, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1431859969
 GameObject:
   m_ObjectHideFlags: 0
@@ -6773,7 +6893,10 @@ GameObject:
   - component: {fileID: 1653744562}
   - component: {fileID: 1653744561}
   - component: {fileID: 1653744560}
+  - component: {fileID: 1653744566}
   - component: {fileID: 1653744563}
+  - component: {fileID: 1653744565}
+  - component: {fileID: 1653744564}
   m_Layer: 0
   m_Name: character_1
   m_TagString: Enemy
@@ -6890,7 +7013,7 @@ MonoBehaviour:
   damage: 10
   maxHealth: 0
   baseSpeed: 0
-  baseDamage: 0
+  baseDamage: 10
   startShield: 0
   isAlive: 1
   isStunned: 0
@@ -6902,6 +7025,63 @@ MonoBehaviour:
   actions: 0
   baseAttack: {fileID: 0}
   _stats: {fileID: 0}
+--- !u!114 &1653744564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1653744558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9ab99284cd85c34aaa52b9a60996f29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageMultiplier: 1
+  timeToMove: 0.5
+  timeToMoveBack: 0.5
+  delayBeforeCamMove: 1
+  baseAttackTarget:
+    stats: {fileID: 0}
+    gObject: {fileID: 0}
+  attackApplied: 1
+--- !u!114 &1653744565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1653744558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b44c363d29ce2c44aaf95ec27e57c3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animators: []
+  _dampTime: 0.1
+  _minAttackAnimTime: 0.3
+--- !u!95 &1653744566
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1653744558}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 55970e306b735b241ac67bb9cb5108a3, type: 3}
+  m_Controller: {fileID: 9100000, guid: 06e5401be79f1384e8fb20ae66f67bbf, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1659896898
 GameObject:
   m_ObjectHideFlags: 0
@@ -7766,7 +7946,7 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -7777,7 +7957,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1942296338}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -8553,7 +8733,7 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -8564,7 +8744,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2106453045}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

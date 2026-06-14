@@ -51,6 +51,8 @@ public class Stats : MonoBehaviour
         health -= damageTaken;
         OnDamageTaken?.Invoke(damageTaken);
 
+        GetComponentInChildren<CharacterAnimationController>()?.TakeDamage();
+
         if (health <= 0)
         {
             Death();
