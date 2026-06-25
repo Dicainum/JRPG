@@ -117,7 +117,7 @@ public class CharacterAnimationController : MonoBehaviour
         foreach (var anim in _animators)
         {
             anim.SetBool(IsAimingAttackHash, false);
-            anim.SetBool(IsAimingSkillHash, false);
+            //anim.SetBool(IsAimingSkillHash, false);
             anim.SetBool(IsSelectingSkillHash, false);
         }
         
